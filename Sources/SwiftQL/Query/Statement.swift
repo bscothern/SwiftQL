@@ -1,5 +1,5 @@
 //
-//  EndTransaction.swift
+//  Statement.swift
 //  SwiftQL
 //
 //  Created by Braden Scothern on 1/30/20.
@@ -14,4 +14,8 @@ import SQLite3
 
 public protocol Statement {
     var statement: String { get }
+}
+
+public protocol _Substatement {
+    var substatement: String { get }
 }

@@ -13,12 +13,12 @@ import SQLite3
 #endif
 
 /// https://sqlite.org/lang_conflict.html
-public enum ConflictClause: String, Statement {
+public enum ConflictClause: String, _Substatement {
     case rollback = "ROLLBACK"
     case abort = "ABORT"
     case fail = "FAIL"
     case ignore = "IGNORE"
     case replace = "REPLACE"
     
-    public var statement: String { "ON CONFLICT \(rawValue)" }
+    public var substatement: String { " ON CONFLICT \(rawValue)" }
 }

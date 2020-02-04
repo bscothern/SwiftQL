@@ -11,3 +11,7 @@ import SwiftQLLinux
 #else
 import SQLite3
 #endif
+
+#warning("IMPLIMENT")
+struct BeginTransaction {
+}
