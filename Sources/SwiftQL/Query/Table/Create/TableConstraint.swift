@@ -12,11 +12,11 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-public protocol TableConstraintProtocol: Substatement {}
+public protocol TableConstraintSubstatement: Substatement {}
 
 public struct TableConstraint: Substatement {
     public var substatement: String {
-        name.map { " CONSTRAINT \($0)" } ?? ""
+        name.map { "CONSTRAINT \($0)" } ?? ""
     }
 
     @usableFromInline let name: String?
@@ -28,31 +28,31 @@ public struct TableConstraint: Substatement {
 
     #warning("Don't take Strings directly.")
     @inlinable
-    public func primaryKey(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintProtocol {
+    public func primaryKey(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintSubstatement {
         TableConstraintPrimaryKeyOrUnique(type: .primaryKey, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
     }
 
     #warning("Don't take Strings directly.")
     @inlinable
-    public func unique(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintProtocol {
+    public func unique(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintSubstatement {
         TableConstraintPrimaryKeyOrUnique(type: .unique, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
     }
 
     #warning("TODO")
     @inlinable
-    public func check() -> some TableConstraintProtocol {
+    public func check() -> some TableConstraintSubstatement {
         TableConstraintCheck(self)
     }
 
     #warning("Don't take Strings directly.")
     @inlinable
-    public func foreignKey(_ foreignKey: ForeignKeyClauseSubstatement, columns: [String]) -> some TableConstraintProtocol {
+    public func foreignKey(_ foreignKey: ForeignKeyClauseSubstatement, columns: [String]) -> some TableConstraintSubstatement {
         TableConstraintForeignKey(columns: columns, foreignKey: foreignKey, appendingTo: self)
     }
 }
 
 @usableFromInline
-struct TableConstraintPrimaryKeyOrUnique: TableConstraintProtocol {
+struct TableConstraintPrimaryKeyOrUnique: TableConstraintSubstatement {
     @usableFromInline
     enum Classification: String {
         case primaryKey = "PRIMARY KEY"
@@ -81,7 +81,7 @@ struct TableConstraintPrimaryKeyOrUnique: TableConstraintProtocol {
 }
 
 @usableFromInline
-struct TableConstraintCheck: TableConstraintProtocol {
+struct TableConstraintCheck: TableConstraintSubstatement {
     public var substatement: String {
         let expression = ""
         return "\(base.substatement) CHECK (\(expression))"
@@ -96,7 +96,7 @@ struct TableConstraintCheck: TableConstraintProtocol {
 }
 
 @usableFromInline
-struct TableConstraintForeignKey: TableConstraintProtocol {
+struct TableConstraintForeignKey: TableConstraintSubstatement {
     public var substatement: String {
         let columns = self.columns.joined(separator: ", ")
         let foreignKey = self.foreignKey.substatement

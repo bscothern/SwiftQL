@@ -21,44 +21,50 @@ public struct CreateTable: Statement {
         let ifNotExists = !self.ifNotExists ? "" : " IF NOT EXISTS"
         let schemaName = self.schemaName.map { " \($0)." } ?? " "
         let name = "\(self.name)"
-        return "CREATE\(isTemporary) TABLE\(ifNotExists)\(schemaName)\(name)\(base.substatement)"
+        return "CREATE\(isTemporary) TABLE\(ifNotExists)\(schemaName)\(name)\(content.spacedSubstatement)"
     }
 
     @usableFromInline let name: String
     @usableFromInline let schemaName: String?
     @usableFromInline let isTemporary: Bool
     @usableFromInline let ifNotExists: Bool
-    @usableFromInline let base: _CreateTable
+    @usableFromInline let content: CreateTableContent
 
     @usableFromInline
-    init(name: String, schemaName: String?, isTemporary: Bool, ifNotExists: Bool, base: _CreateTable) {
+    init(name: String, schemaName: String?, isTemporary: Bool, ifNotExists: Bool, content: CreateTableContent) {
         self.name = name
         self.schemaName = schemaName
         self.isTemporary = isTemporary
         self.ifNotExists = ifNotExists
-        self.base = base
+        self.content = content
     }
 
     @inlinable
-    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], constraints: [TableConstraintProtocol]) {
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column]) {
         //swiftlint:disable:previous attributes
-        self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, base: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder, constraints: constraints))
+        self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder(), constraints: []))
+    }
+
+    @inlinable
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], @PassThroughBuilder<TableConstraintSubstatement> constraints constraintsBuilder: () -> [TableConstraintSubstatement]) {
+        //swiftlint:disable:previous attributes
+        self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder(), constraints: constraintsBuilder()))
     }
 
     @inlinable
     public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, as select: Select) {
-        self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, base: CreateTableAsSelectStatement(select))
+        self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableAsSelectStatement(select))
     }
 }
 
 @usableFromInline
-protocol _CreateTable: Substatement {}
+protocol CreateTableContent: Substatement {}
 
 @usableFromInline
-struct CreateTableWithColumnDefinitions: _CreateTable {
+struct CreateTableWithColumnDefinitions: CreateTableContent {
     @usableFromInline let withoutRowID: Bool
     @usableFromInline let columns: [Column]
-    @usableFromInline let constraints: [TableConstraintProtocol]
+    @usableFromInline let constraints: [TableConstraintSubstatement]
 
     @usableFromInline var substatement: String {
         let columns = self.columns.lazy
@@ -71,20 +77,19 @@ struct CreateTableWithColumnDefinitions: _CreateTable {
             constraints = ", \(constraints)"
         }
         let withoutRowID = !self.withoutRowID ? "" : " WITHOUT ROWID"
-        return " (\(columns)\(constraints))\(withoutRowID)"
+        return "(\(columns)\(constraints))\(withoutRowID)"
     }
 
     @usableFromInline
-    init(withoutRowID: Bool, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], constraints: [TableConstraintProtocol]) {
-        //swiftlint:disable:previous attributes
+    init(withoutRowID: Bool, columns columnBuilder: [Column], constraints: [TableConstraintSubstatement]) {
         self.withoutRowID = withoutRowID
-        self.columns = columnBuilder()
+        self.columns = columnBuilder
         self.constraints = constraints
     }
 }
 
 @usableFromInline
-struct CreateTableAsSelectStatement: _CreateTable {
+struct CreateTableAsSelectStatement: CreateTableContent {
     @usableFromInline var substatement: String {
         "AS \(select.statement)"
     }

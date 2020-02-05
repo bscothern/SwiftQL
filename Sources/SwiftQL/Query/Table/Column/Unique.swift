@@ -12,16 +12,19 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-public struct Unique: ColumnConstraint {
-    @usableFromInline let onConflict: ConflictClause?
-
-    @inlinable public var substatement: String {
-        let onConflictStatement = onConflict?.substatement ?? ""
-        return " UNIQUE\(onConflictStatement)"
+@usableFromInline
+struct Unique: ColumnConstraintSubstatement {
+    @usableFromInline var substatement: String {
+        let onConflictStatement = onConflict?.spacedSubstatement ?? ""
+        return "\(base.substatement) UNIQUE\(onConflictStatement)"
     }
 
-    @inlinable
-    public init(onConflict: ConflictClause? = nil) {
+    @usableFromInline let onConflict: ConflictClause?
+    @usableFromInline let base: ColumnConstraint
+
+    @usableFromInline
+    init(onConflict: ConflictClause?, appendedTo base: ColumnConstraint) {
         self.onConflict = onConflict
+        self.base = base
     }
 }

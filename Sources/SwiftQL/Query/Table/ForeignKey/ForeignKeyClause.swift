@@ -20,7 +20,7 @@ public protocol ForeignKeyClauseSubstatementExtendable: ForeignKeyClauseSubstate
 public struct ForeignKeyClause: ForeignKeyClauseSubstatementExtendable {
     public var substatement: String {
         let columnNames = self.columnNames.map { " (\($0.joined(separator: ", ")))" } ?? ""
-        return " REFERENCES \(tableName)\(columnNames)"
+        return "REFERENCES \(tableName)\(columnNames)"
     }
 
     @usableFromInline let tableName: String

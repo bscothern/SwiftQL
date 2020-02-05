@@ -19,3 +19,9 @@ public protocol Statement {
 public protocol Substatement {
     var substatement: String { get }
 }
+
+extension Substatement {
+    public var spacedSubstatement: String {
+        " \(substatement)"
+    }
+}

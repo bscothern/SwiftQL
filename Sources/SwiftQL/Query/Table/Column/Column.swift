@@ -16,19 +16,19 @@ import SQLite3
 public struct Column: Substatement {
     @usableFromInline let name: String
     @usableFromInline let type: DataType?
-    @usableFromInline let constraints: [ColumnConstraint]
+    @usableFromInline let constraints: [ColumnConstraintSubstatement]
 
     @inlinable public var substatement: String { "" }
 
-    @inlinable
-    public init(name: String, type: DataType?, constraints: [ColumnConstraint]) {
+    @usableFromInline
+    init(name: String, type: DataType?, constraints: [ColumnConstraintSubstatement]) {
         self.name = name
         self.type = type
         self.constraints = constraints
     }
 
     @inlinable
-    public init(name: String, type: DataType, @PassThroughBuilder<ColumnConstraint> _ constraintsBuilder: () -> [ColumnConstraint]) {
+    public init(name: String, type: DataType, @PassThroughBuilder<ColumnConstraintSubstatement> constraints constraintsBuilder: () -> [ColumnConstraintSubstatement]) {
         //swiftlint:disable:previous attributes
         self.init(name: name, type: type, constraints: constraintsBuilder())
     }

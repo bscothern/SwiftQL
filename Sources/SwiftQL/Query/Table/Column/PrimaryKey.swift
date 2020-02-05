@@ -12,22 +12,25 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-public struct PrimaryKey: ColumnConstraint {
-    @usableFromInline let ascending: Bool?
-    @usableFromInline let onConflict: ConflictClause?
-    @usableFromInline let autoIncrement: Bool
-
-    @inlinable public var substatement: String {
+@usableFromInline
+struct PrimaryKey: ColumnConstraintSubstatement {
+    @usableFromInline var substatement: String {
         let ascendingStatement = ascending.map { $0 ? " ASC" : " DESC" } ?? ""
         let onConflictStatement = onConflict?.substatement ?? ""
         let autoIncrementStatement = autoIncrement ? " AUTOINCREMENT" : ""
-        return " PRIMARY KEY\(ascendingStatement)\(onConflictStatement)\(autoIncrementStatement)"
+        return "\(base.substatement) PRIMARY KEY\(ascendingStatement)\(onConflictStatement)\(autoIncrementStatement)"
     }
 
-    @inlinable
-    public init(ascending: Bool? = nil, onConflict: ConflictClause? = nil, autoIncrement: Bool = false) {
+    @usableFromInline let ascending: Bool?
+    @usableFromInline let onConflict: ConflictClause?
+    @usableFromInline let autoIncrement: Bool
+    @usableFromInline let base: ColumnConstraint
+
+    @usableFromInline
+    init(ascending: Bool?, onConflict: ConflictClause?, autoIncrement: Bool, appendedTo base: ColumnConstraint) {
         self.ascending = ascending
         self.onConflict = onConflict
         self.autoIncrement = autoIncrement
+        self.base = base
     }
 }
