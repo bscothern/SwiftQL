@@ -13,17 +13,18 @@ import SQLite3
 #endif
 
 public struct PrimaryKey: ColumnConstraint {
-    let ascending: Bool?
-    let onConflict: ConflictClause?
-    let autoIncrement: Bool
-    
-    public var substatement: String {
+    @usableFromInline let ascending: Bool?
+    @usableFromInline let onConflict: ConflictClause?
+    @usableFromInline let autoIncrement: Bool
+
+    @inlinable public var substatement: String {
         let ascendingStatement = ascending.map { $0 ? " ASC" : " DESC" } ?? ""
         let onConflictStatement = onConflict?.substatement ?? ""
         let autoIncrementStatement = autoIncrement ? " AUTOINCREMENT" : ""
         return " PRIMARY KEY\(ascendingStatement)\(onConflictStatement)\(autoIncrementStatement)"
     }
 
+    @inlinable
     public init(ascending: Bool? = nil, onConflict: ConflictClause? = nil, autoIncrement: Bool = false) {
         self.ascending = ascending
         self.onConflict = onConflict

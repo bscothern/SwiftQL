@@ -13,7 +13,7 @@ import SQLite3
 #endif
 
 @_functionBuilder
-public struct PassThroughBuilder<T> {
+public enum PassThroughBuilder<T> {
     @inlinable
     public static func buildBlock(_ components: T...) -> [T] {
         components

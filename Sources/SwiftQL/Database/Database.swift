@@ -24,7 +24,7 @@ public final class Database {
 
     // MARK: Internal
     @usableFromInline var handle: OpaquePointer?
-    
+
     // MARK: - Init
     /// Creates a `Database` using the provided filename.
     ///
@@ -32,7 +32,7 @@ public final class Database {
     init(fileName: String) {
         self.fileName = fileName
     }
-    
+
     // MARK: - Deinit
     deinit {
         sqlite3_close_v2(handle)
@@ -46,11 +46,11 @@ public extension Database {
         case alreadyOpen
         case alreadyClosed
     }
-    
+
     struct SQLiteError: Swift.Error {
         public let code: CInt
         public let description: String
-        
+
         init(code: CInt, handle: OpaquePointer?) {
             self.code = code
             description = .init(cString: sqlite3_errmsg(handle))
@@ -80,7 +80,7 @@ public extension Database {
         }
         return self
     }
-    
+
     /// One of the valid modes that a database can be opened in.
     enum OpenMode: CInt, CaseIterable {
         public var rawValue: CInt {
@@ -93,7 +93,7 @@ public extension Database {
                 return SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE
             }
         }
-        
+
         /// The database is opened in read-only mode.
         /// If the database does not already exist, an error is returned.
         case readOnly
@@ -112,23 +112,23 @@ public extension Database {
 
         /// The filename can be interpreted as a URI if this flag is set.
         public static let uri = Self(rawValue: SQLITE_OPEN_URI)
-        
+
         /// The database will be opened as an in-memory database.
         /// The database is named by the "filename" argument for the purposes of cache-sharing, if shared cache mode is enabled, but the "filename" is otherwise ignored.
         public static let memory = Self(rawValue: SQLITE_OPEN_MEMORY)
-        
+
         /// The new database connection will use the "multi-thread" threading mode.
         /// This means that separate threads are allowed to use SQLite at the same time, as long as each thread is using a different database connection.
         public static let noMutex = Self(rawValue: SQLITE_OPEN_NOMUTEX)
-        
+
         /// The new database connection will use the "serialized" threading mode.
         /// This means the multiple threads can safely attempt to use the same database connection at the same time.
         /// (Mutexes will block any actual concurrency, but in this mode there is no harm in trying.)
         public static let fullMutex = Self(rawValue: SQLITE_OPEN_FULLMUTEX)
-        
+
         /// The database is opened shared cache enabled, overriding the default shared cache setting provided by sqlite3_enable_shared_cache().
         public static let sharedCache = Self(rawValue: SQLITE_OPEN_SHAREDCACHE)
-        
+
         /// The database is opened shared cache disabled, overriding the default shared cache setting provided by sqlite3_enable_shared_cache().
         public static let privateCache = Self(rawValue: SQLITE_OPEN_PRIVATECACHE)
 
@@ -142,7 +142,7 @@ public extension Database {
     }
 }
 
-// MARK:- Close
+// MARK: - Close
 public extension Database {
     /// Attempt to close the `Database`.
     ///

@@ -13,13 +13,14 @@ import SQLite3
 #endif
 
 public struct NotNull: ColumnConstraint {
-    let onConflict: ConflictClause?
-    
-    public var substatement: String {
+    @usableFromInline let onConflict: ConflictClause?
+
+    @inlinable public var substatement: String {
         let onConflictStatement = onConflict?.substatement ?? ""
         return " NOT NULL\(onConflictStatement)"
     }
-    
+
+    @inlinable
     public init(onConflict: ConflictClause? = nil) {
         self.onConflict = onConflict
     }

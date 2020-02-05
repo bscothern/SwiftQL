@@ -18,32 +18,32 @@ public struct TableConstraint: Substatement {
     public var substatement: String {
         name.map { " CONSTRAINT \($0)" } ?? ""
     }
-    
+
     @usableFromInline let name: String?
-    
+
     @inlinable
     public init(name: String? = nil) {
         self.name = name
     }
-    
+
     #warning("Don't take Strings directly.")
     @inlinable
     public func primaryKey(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintProtocol {
         TableConstraintPrimaryKeyOrUnique(type: .primaryKey, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
     }
-    
+
     #warning("Don't take Strings directly.")
     @inlinable
     public func unique(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintProtocol {
         TableConstraintPrimaryKeyOrUnique(type: .unique, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
     }
-    
+
     #warning("TODO")
     @inlinable
     public func check() -> some TableConstraintProtocol {
         TableConstraintCheck(self)
     }
-    
+
     #warning("Don't take Strings directly.")
     @inlinable
     public func foreignKey(_ foreignKey: ForeignKeyClauseSubstatement, columns: [String]) -> some TableConstraintProtocol {
@@ -58,19 +58,19 @@ struct TableConstraintPrimaryKeyOrUnique: TableConstraintProtocol {
         case primaryKey = "PRIMARY KEY"
         case unique = "UNIQUE"
     }
-    
+
     public var substatement: String {
         let classification = self.classification.rawValue
         let indexedColumns = self.indexedColumns.joined(separator: ", ")
         let onConflict = self.onConflict?.substatement ?? ""
         return "\(base.substatement) \(classification) (\(indexedColumns))\(onConflict)"
     }
-    
+
     @usableFromInline let classification: Classification
     @usableFromInline let indexedColumns: [String]
     @usableFromInline let onConflict: ConflictClause?
     @usableFromInline let base: TableConstraint
-    
+
     @usableFromInline
     init(type classification: Classification, indexedColumns: [String], onConflict: ConflictClause?, appendingTo base: TableConstraint) {
         self.classification = classification
@@ -86,9 +86,9 @@ struct TableConstraintCheck: TableConstraintProtocol {
         let expression = ""
         return "\(base.substatement) CHECK (\(expression))"
     }
-    
+
     @usableFromInline let base: TableConstraint
-    
+
     @usableFromInline
     init(_ base: TableConstraint) {
         self.base = base
@@ -102,11 +102,11 @@ struct TableConstraintForeignKey: TableConstraintProtocol {
         let foreignKey = self.foreignKey.substatement
         return "\(base.substatement) FOREIGN KEY (\(columns)) \(foreignKey)"
     }
-    
+
     @usableFromInline let columns: [String]
     @usableFromInline let foreignKey: ForeignKeyClauseSubstatement
     @usableFromInline let base: TableConstraint
-    
+
     @usableFromInline
     init(columns: [String], foreignKey: ForeignKeyClauseSubstatement, appendingTo base: TableConstraint) {
         self.columns = columns

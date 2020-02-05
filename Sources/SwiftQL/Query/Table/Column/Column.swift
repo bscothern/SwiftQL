@@ -14,19 +14,22 @@ import SQLite3
 
 /// https://www.sqlite.org/syntax/column-def.html
 public struct Column: Substatement {
-    let name: String
-    let type: DataType?
-    let constraints: [ColumnConstraint]
-    
-    public var substatement: String { "" }
-    
+    @usableFromInline let name: String
+    @usableFromInline let type: DataType?
+    @usableFromInline let constraints: [ColumnConstraint]
+
+    @inlinable public var substatement: String { "" }
+
+    @inlinable
     public init(name: String, type: DataType?, constraints: [ColumnConstraint]) {
         self.name = name
         self.type = type
         self.constraints = constraints
     }
-    
+
+    @inlinable
     public init(name: String, type: DataType, @PassThroughBuilder<ColumnConstraint> _ constraintsBuilder: () -> [ColumnConstraint]) {
+        //swiftlint:disable:previous attributes
         self.init(name: name, type: type, constraints: constraintsBuilder())
     }
 }
