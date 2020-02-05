@@ -12,36 +12,42 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-public protocol TableConstraintProtocol: _Substatement {}
+public protocol TableConstraintProtocol: Substatement {}
 
-public struct TableConstraint: _Substatement {
+public struct TableConstraint: Substatement {
     public var substatement: String {
         name.map { " CONSTRAINT \($0)" } ?? ""
     }
     
     @usableFromInline let name: String?
     
+    @inlinable
     public init(name: String? = nil) {
         self.name = name
     }
     
     #warning("Don't take Strings directly.")
+    @inlinable
     public func primaryKey(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintProtocol {
-        TableConstraintPrimaryKeyOrUnique(type: .primaryKey, with: self, indexedColumns: indexedColumns, onConflict: onConflict)
+        TableConstraintPrimaryKeyOrUnique(type: .primaryKey, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
     }
     
     #warning("Don't take Strings directly.")
+    @inlinable
     public func unique(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintProtocol {
-        TableConstraintPrimaryKeyOrUnique(type: .unique, with: self, indexedColumns: indexedColumns, onConflict: onConflict)
+        TableConstraintPrimaryKeyOrUnique(type: .unique, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
     }
     
+    #warning("TODO")
+    @inlinable
     public func check() -> some TableConstraintProtocol {
         TableConstraintCheck(self)
     }
     
     #warning("Don't take Strings directly.")
-    public func foreignKey(columns: [String], foreignKey: ForeignKey) -> some TableConstraintProtocol {
-        TableConstraintForeignKey(self)
+    @inlinable
+    public func foreignKey(_ foreignKey: ForeignKeyClauseSubstatement, columns: [String]) -> some TableConstraintProtocol {
+        TableConstraintForeignKey(columns: columns, foreignKey: foreignKey, appendingTo: self)
     }
 }
 
@@ -60,17 +66,17 @@ struct TableConstraintPrimaryKeyOrUnique: TableConstraintProtocol {
         return "\(base.substatement) \(classification) (\(indexedColumns))\(onConflict)"
     }
     
-    @usableFromInline let base: TableConstraint
     @usableFromInline let classification: Classification
     @usableFromInline let indexedColumns: [String]
     @usableFromInline let onConflict: ConflictClause?
+    @usableFromInline let base: TableConstraint
     
     @usableFromInline
-    init(type classification: Classification, with base: TableConstraint, indexedColumns: [String], onConflict: ConflictClause?) {
-        self.base = base
+    init(type classification: Classification, indexedColumns: [String], onConflict: ConflictClause?, appendingTo base: TableConstraint) {
         self.classification = classification
         self.indexedColumns = indexedColumns
         self.onConflict = onConflict
+        self.base = base
     }
 }
 
@@ -92,13 +98,19 @@ struct TableConstraintCheck: TableConstraintProtocol {
 @usableFromInline
 struct TableConstraintForeignKey: TableConstraintProtocol {
     public var substatement: String {
-        "\(base.substatement) FOREIGN KEY"
+        let columns = self.columns.joined(separator: ", ")
+        let foreignKey = self.foreignKey.substatement
+        return "\(base.substatement) FOREIGN KEY (\(columns)) \(foreignKey)"
     }
     
+    @usableFromInline let columns: [String]
+    @usableFromInline let foreignKey: ForeignKeyClauseSubstatement
     @usableFromInline let base: TableConstraint
     
     @usableFromInline
-    init(_ base: TableConstraint) {
+    init(columns: [String], foreignKey: ForeignKeyClauseSubstatement, appendingTo base: TableConstraint) {
+        self.columns = columns
+        self.foreignKey = foreignKey
         self.base = base
     }
 }

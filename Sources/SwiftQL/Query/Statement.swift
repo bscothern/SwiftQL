@@ -16,6 +16,6 @@ public protocol Statement {
     var statement: String { get }
 }
 
-public protocol _Substatement {
+public protocol Substatement {
     var substatement: String { get }
 }

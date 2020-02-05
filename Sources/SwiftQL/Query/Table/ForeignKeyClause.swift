@@ -14,10 +14,10 @@ import SQLite3
 
 // https://www.sqlite.org/syntax/foreign-key-clause.html
 
-public protocol ForeignKeyClauseProtocol: _Substatement {}
-public protocol ForeignKeyClauseExtendable: ForeignKeyClauseProtocol {}
+public protocol ForeignKeyClauseSubstatement: Substatement {}  
+public protocol ForeignKeyClauseSubstatementExtendable: ForeignKeyClauseSubstatement {}
 
-public struct ForeignKeyClause: ForeignKeyClauseExtendable {
+public struct ForeignKeyClause: ForeignKeyClauseSubstatementExtendable {
     public var substatement: String {
         let columnNames = self.columnNames.map { " (\($0.joined(separator: ", ")))" } ?? ""
         return " REFERENCES \(tableName)\(columnNames)"
@@ -32,32 +32,32 @@ public struct ForeignKeyClause: ForeignKeyClauseExtendable {
     }
 }
 
-public extension ForeignKeyClauseExtendable {
-    func onDelete(_ action: ForeignKeyClause.OnAction) -> some ForeignKeyClauseExtendable {
+public extension ForeignKeyClauseSubstatementExtendable {
+    func onDelete(_ action: ForeignKeyClause.OnAction) -> some ForeignKeyClauseSubstatementExtendable {
         ForeignKeyClauseOn(.delete, action: action, appendedTo: self)
     }
     
-    func onUpdate(_ action: ForeignKeyClause.OnAction) -> some ForeignKeyClauseExtendable {
+    func onUpdate(_ action: ForeignKeyClause.OnAction) -> some ForeignKeyClauseSubstatementExtendable {
         ForeignKeyClauseOn(.update, action: action, appendedTo: self)
     }
     
-    func match(_ name: String) -> some ForeignKeyClauseExtendable {
+    func match(_ name: String) -> some ForeignKeyClauseSubstatementExtendable {
         ForeignKeyClauseMatch(name: name, appendedTo: self)
     }
     
-    func notDeferrable() -> some ForeignKeyClauseProtocol {
+    func notDeferrable() -> some ForeignKeyClauseSubstatement {
         ForeignKeyClauseDeferrable(not: true, clause: nil, appendedTo: self)
     }
     
-    func notDeferrable(_ clause: ForeignKeyClause.DeferrableClause) -> some ForeignKeyClauseProtocol {
+    func notDeferrable(_ clause: ForeignKeyClause.DeferrableClause) -> some ForeignKeyClauseSubstatement {
         ForeignKeyClauseDeferrable(not: true, clause: clause, appendedTo: self)
     }
     
-    func defferable() -> some ForeignKeyClauseProtocol {
+    func defferable() -> some ForeignKeyClauseSubstatement {
         ForeignKeyClauseDeferrable(not: false, clause: nil, appendedTo: self)
     }
     
-    func defferable(_ clause: ForeignKeyClause.DeferrableClause) -> some ForeignKeyClauseProtocol {
+    func defferable(_ clause: ForeignKeyClause.DeferrableClause) -> some ForeignKeyClauseSubstatement {
         ForeignKeyClauseDeferrable(not: false, clause: clause, appendedTo: self)
     }
 }
@@ -73,7 +73,7 @@ public extension ForeignKeyClause {
 }
 
 @usableFromInline
-struct ForeignKeyClauseOn: ForeignKeyClauseExtendable {
+struct ForeignKeyClauseOn: ForeignKeyClauseSubstatementExtendable {
     @usableFromInline
     enum Category: String {
         case delete = "DELETE"
@@ -88,10 +88,10 @@ struct ForeignKeyClauseOn: ForeignKeyClauseExtendable {
     
     @usableFromInline let category: Category
     @usableFromInline let action: ForeignKeyClause.OnAction
-    @usableFromInline let base: ForeignKeyClauseProtocol
+    @usableFromInline let base: ForeignKeyClauseSubstatement
     
     @usableFromInline
-    init(_ category: Category, action: ForeignKeyClause.OnAction, appendedTo base: ForeignKeyClauseProtocol) {
+    init(_ category: Category, action: ForeignKeyClause.OnAction, appendedTo base: ForeignKeyClauseSubstatement) {
         self.category = category
         self.action = action
         self.base = base
@@ -99,16 +99,16 @@ struct ForeignKeyClauseOn: ForeignKeyClauseExtendable {
 }
 
 @usableFromInline
-struct ForeignKeyClauseMatch: ForeignKeyClauseExtendable {
+struct ForeignKeyClauseMatch: ForeignKeyClauseSubstatementExtendable {
     @usableFromInline var substatement: String {
         return "\(base.substatement) MATCH \(name)"
     }
     
     @usableFromInline let name: String
-    @usableFromInline let base: ForeignKeyClauseProtocol
+    @usableFromInline let base: ForeignKeyClauseSubstatement
     
     @usableFromInline
-    init(name: String, appendedTo base: ForeignKeyClauseExtendable) {
+    init(name: String, appendedTo base: ForeignKeyClauseSubstatementExtendable) {
         self.name = name
         self.base = base
     }
@@ -122,7 +122,7 @@ public extension ForeignKeyClause {
 }
 
 @usableFromInline
-struct ForeignKeyClauseDeferrable: ForeignKeyClauseProtocol {
+struct ForeignKeyClauseDeferrable: ForeignKeyClauseSubstatement {
     @usableFromInline var substatement: String {
         let not = self.not ? " NOT" : ""
         let clause = self.clause.map { " \($0.rawValue)" } ?? ""
@@ -131,13 +131,12 @@ struct ForeignKeyClauseDeferrable: ForeignKeyClauseProtocol {
     
     @usableFromInline let not: Bool
     @usableFromInline let clause: ForeignKeyClause.DeferrableClause?
-    @usableFromInline let base: ForeignKeyClauseExtendable
+    @usableFromInline let base: ForeignKeyClauseSubstatementExtendable
     
     @usableFromInline
-    init(not: Bool, clause: ForeignKeyClause.DeferrableClause?, appendedTo base: ForeignKeyClauseExtendable) {
+    init(not: Bool, clause: ForeignKeyClause.DeferrableClause?, appendedTo base: ForeignKeyClauseSubstatementExtendable) {
         self.not = not
         self.clause = clause
         self.base = base
     }
 }
-

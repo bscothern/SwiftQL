@@ -19,4 +19,4 @@ import SQLite3
 #warning("Support (Generated Always) As")
 
 /// https://www.sqlite.org/syntax/column-constraint.html
-public protocol ColumnConstraint: _Substatement {}
+public protocol ColumnConstraint: Substatement {}

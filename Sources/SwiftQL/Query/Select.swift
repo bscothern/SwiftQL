@@ -13,5 +13,6 @@ import SQLite3
 #endif
 
 #warning("IMPLIMENT")
-struct Select {
+public struct Select: Statement {
+    public var statement: String { "" }
 }

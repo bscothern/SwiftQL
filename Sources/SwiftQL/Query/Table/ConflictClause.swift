@@ -13,7 +13,7 @@ import SQLite3
 #endif
 
 /// https://sqlite.org/lang_conflict.html
-public enum ConflictClause: String, _Substatement {
+public enum ConflictClause: String, Substatement {
     case rollback = "ROLLBACK"
     case abort = "ABORT"
     case fail = "FAIL"

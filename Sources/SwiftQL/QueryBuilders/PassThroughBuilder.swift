@@ -13,8 +13,9 @@ import SQLite3
 #endif
 
 @_functionBuilder
-struct PassThroughBuilder<T> {
-    static func buildBlock(_ components: T...) -> [T] {
+public struct PassThroughBuilder<T> {
+    @inlinable
+    public static func buildBlock(_ components: T...) -> [T] {
         components
     }
 }

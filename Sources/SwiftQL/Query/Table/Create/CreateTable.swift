@@ -12,46 +12,46 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("Support schema-name")
-#warning("Support AS select-stmt")
-
 /// Allows the creation of a table.
 ///
 /// https://www.sqlite.org/lang_createtable.html
 public struct CreateTable: Statement {
-    public var statement: String {
+    @inlinable public var statement: String {
         let isTemporary = !self.isTemporary ? "" : " TEMP"
         let ifNotExists = !self.ifNotExists ? "" : " IF NOT EXISTS"
-        let schemaName = ""
-        let name = " \(self.name)"
+        let schemaName = self.schemaName.map { " \($0)." } ?? " "
+        let name = "\(self.name)"
         return "CREATE\(isTemporary) TABLE\(ifNotExists)\(schemaName)\(name)\(base.substatement)"
     }
-    
+
     @usableFromInline let name: String
+    @usableFromInline let schemaName: String?
     @usableFromInline let isTemporary: Bool
     @usableFromInline let ifNotExists: Bool
     @usableFromInline let base: _CreateTable
     
     @usableFromInline
-    init(name: String, isTemporary: Bool, ifNotExists: Bool, base: _CreateTable) {
+    init(name: String, schemaName: String?, isTemporary: Bool, ifNotExists: Bool, base: _CreateTable) {
         self.name = name
+        self.schemaName = schemaName
         self.isTemporary = isTemporary
         self.ifNotExists = ifNotExists
         self.base = base
     }
-    
-    public init(name: String, isTemporary: Bool = false, ifNotExists: Bool, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], constraints: [TableConstraintProtocol]) {
-        self.init(name: name, isTemporary: isTemporary, ifNotExists: ifNotExists, base: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder, constraints: constraints))
+
+    @inlinable
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], constraints: [TableConstraintProtocol]) {
+        self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, base: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder, constraints: constraints))
     }
     
-    public init(name: String, isTemporary: Bool = false, ifNotExists: Bool, selectStatement: Void) {
-        self.init(name: name, isTemporary: isTemporary, ifNotExists: ifNotExists, base: CreateTableAsSelectStatement())
+    @inlinable
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, as select: Select) {
+        self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, base: CreateTableAsSelectStatement(select))
     }
 }
 
-#warning("Move to other files")
 @usableFromInline
-protocol _CreateTable: _Substatement {}
+protocol _CreateTable: Substatement {}
 
 @usableFromInline
 struct CreateTableWithColumnDefinitions: _CreateTable {
@@ -84,5 +84,13 @@ struct CreateTableWithColumnDefinitions: _CreateTable {
 
 @usableFromInline
 struct CreateTableAsSelectStatement: _CreateTable {
-    @usableFromInline var substatement: String { "" }
+    @usableFromInline var substatement: String {
+        "AS \(select.statement)"
+    }
+    @usableFromInline let select: Select
+    
+    @usableFromInline
+    init(_ select: Select) {
+        self.select = select
+    }
 }

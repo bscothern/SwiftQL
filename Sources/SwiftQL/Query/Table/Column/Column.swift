@@ -13,7 +13,7 @@ import SQLite3
 #endif
 
 /// https://www.sqlite.org/syntax/column-def.html
-public struct Column: _Substatement {
+public struct Column: Substatement {
     let name: String
     let type: DataType?
     let constraints: [ColumnConstraint]
