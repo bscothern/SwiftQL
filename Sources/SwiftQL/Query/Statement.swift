@@ -13,16 +13,16 @@ import SQLite3
 #endif
 
 public protocol Statement {
-    var statement: String { get }
+    var _statement: String { get }
 }
 
 public protocol Substatement {
-    var substatement: String { get }
+    var _substatement: String { get }
 }
 
 extension Substatement {
     @inlinable
-    public var spacedSubstatement: String {
-        " \(substatement)"
+    public var _spacedSubstatement: String {
+        " \(_substatement)"
     }
 }

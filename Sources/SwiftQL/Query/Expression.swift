@@ -15,5 +15,5 @@ import SQLite3
 #warning("IMPLIMENT")
 public struct Expression: Substatement {
     @inlinable
-    public var substatement: String { "" }
+    public var _substatement: String { "" }
 }

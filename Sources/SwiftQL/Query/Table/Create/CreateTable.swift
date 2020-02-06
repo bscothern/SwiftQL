@@ -17,12 +17,12 @@ import SQLite3
 /// https://www.sqlite.org/lang_createtable.html
 public struct CreateTable: Statement {
     @inlinable
-    public var statement: String {
+    public var _statement: String {
         let isTemporary = self.isTemporary ? " TEMP" : ""
         let ifNotExists = !self.ifNotExists ? " IF NOT EXISTS" : ""
         let schemaName = self.schemaName.map { "\($0)." } ?? ""
         let name = "\(self.name)"
-        return "CREATE\(isTemporary) TABLE\(ifNotExists) \(schemaName)\(name)\(content.spacedSubstatement)"
+        return "CREATE\(isTemporary) TABLE\(ifNotExists) \(schemaName)\(name)\(content._spacedSubstatement)"
     }
 
     @usableFromInline
@@ -82,12 +82,12 @@ struct CreateTableWithColumnDefinitions: CreateTableContent {
     let constraints: [TableConstraintSubstatement]
 
     @usableFromInline
-    var substatement: String {
+    var _substatement: String {
         let columns = self.columns.lazy
-            .map { $0.substatement }
+            .map { $0._substatement }
             .joined(separator: ", ")
         var constraints = self.constraints.lazy
-            .map { $0.substatement }
+            .map { $0._substatement }
             .joined(separator: ", ")
         if !constraints.isEmpty {
             constraints = ", \(constraints)"
@@ -107,8 +107,8 @@ struct CreateTableWithColumnDefinitions: CreateTableContent {
 @usableFromInline
 struct CreateTableAsSelectStatement: CreateTableContent {
     @usableFromInline
-    var substatement: String {
-        "AS \(select.statement)"
+    var _substatement: String {
+        "AS \(select._statement)"
     }
     
     @usableFromInline
@@ -118,4 +118,32 @@ struct CreateTableAsSelectStatement: CreateTableContent {
     init(_ select: Select) {
         self.select = select
     }
+}
+
+func foo() {
+CreateTable(name: "foo", ifNotExists: true, columns: {
+    Column(name: "i", type: .int) {
+        ColumnConstraint()
+            .primaryKey(ascending: true, autoIncrement: true)
+        ColumnConstraint()
+            .notNull()
+    }
+    Column(name: "j", type: .text) {
+        ColumnConstraint()
+            .primaryKey(ascending: true, autoIncrement: true)
+        ColumnConstraint()
+            .notNull()
+    }
+}, constraints: {
+    TableConstraint()
+        .check()
+    TableConstraint()
+        .foreignKey(
+            ForeignKeyClause(tableName: "a")
+                .match("a")
+                .onDelete(.setNull)
+                .defferable(),
+            columns: ["a"]
+        )
+})
 }

@@ -15,9 +15,9 @@ import SQLite3
 @usableFromInline
 struct NotNull: ColumnConstraintSubstatement {
     @usableFromInline
-    var substatement: String {
-        let onConflictStatement = onConflict?.spacedSubstatement ?? ""
-        return "\(base.substatement) NOT NULL\(onConflictStatement)"
+    var _substatement: String {
+        let onConflictStatement = onConflict?._spacedSubstatement ?? ""
+        return "\(base._substatement) NOT NULL\(onConflictStatement)"
     }
 
     @usableFromInline

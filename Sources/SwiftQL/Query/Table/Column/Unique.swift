@@ -15,9 +15,9 @@ import SQLite3
 @usableFromInline
 struct Unique: ColumnConstraintSubstatement {
     @usableFromInline
-    var substatement: String {
-        let onConflictStatement = onConflict?.spacedSubstatement ?? ""
-        return "\(base.substatement) UNIQUE\(onConflictStatement)"
+    var _substatement: String {
+        let onConflictStatement = onConflict?._spacedSubstatement ?? ""
+        return "\(base._substatement) UNIQUE\(onConflictStatement)"
     }
 
     @usableFromInline

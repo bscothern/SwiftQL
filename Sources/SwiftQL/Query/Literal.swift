@@ -17,11 +17,11 @@ import Foundation
 #endif
 
 public struct Literal: Substatement {
-    public let substatement: String
+    public let _substatement: String
 
     @usableFromInline
     init(_ substatement: String) {
-        self.substatement = substatement
+        self._substatement = substatement
     }
 
     @inlinable

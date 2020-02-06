@@ -24,10 +24,10 @@ public struct Column: Substatement {
     let constraints: [ColumnConstraintSubstatement]
 
     @inlinable
-    public var substatement: String {
+    public var _substatement: String {
         let type = self.type.map { " \($0.rawValue)" } ?? ""
         let constraints = self.constraints.lazy
-            .map { $0.spacedSubstatement }
+            .map { $0._spacedSubstatement }
             .joined(separator: ",")
         return "\(name)\(type)\(constraints)"
     }

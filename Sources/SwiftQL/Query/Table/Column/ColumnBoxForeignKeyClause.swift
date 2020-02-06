@@ -15,7 +15,7 @@ import SQLite3
 @usableFromInline
 struct ColumnBoxForeignKeyClause: ColumnConstraintSubstatement {
     @usableFromInline
-    var substatement: String { "\(base.substatement) \(foreignKeyClause.substatement)" }
+    var _substatement: String { "\(base._substatement) \(foreignKeyClause._substatement)" }
 
     @usableFromInline
     let foreignKeyClause: ForeignKeyClause
