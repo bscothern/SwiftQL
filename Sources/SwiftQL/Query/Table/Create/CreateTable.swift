@@ -18,11 +18,11 @@ import SQLite3
 public struct CreateTable: Statement {
     @inlinable
     public var statement: String {
-        let isTemporary = !self.isTemporary ? "" : " TEMP"
-        let ifNotExists = !self.ifNotExists ? "" : " IF NOT EXISTS"
-        let schemaName = self.schemaName.map { " \($0)." } ?? " "
+        let isTemporary = self.isTemporary ? " TEMP" : ""
+        let ifNotExists = !self.ifNotExists ? " IF NOT EXISTS" : ""
+        let schemaName = self.schemaName.map { "\($0)." } ?? ""
         let name = "\(self.name)"
-        return "CREATE\(isTemporary) TABLE\(ifNotExists)\(schemaName)\(name)\(content.spacedSubstatement)"
+        return "CREATE\(isTemporary) TABLE\(ifNotExists) \(schemaName)\(name)\(content.spacedSubstatement)"
     }
 
     @usableFromInline
