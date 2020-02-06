@@ -24,7 +24,13 @@ public struct Column: Substatement {
     let constraints: [ColumnConstraintSubstatement]
 
     @inlinable
-    public var substatement: String { "" }
+    public var substatement: String {
+        let type = self.type.map { " \($0.rawValue)" } ?? ""
+        let constraints = self.constraints.lazy
+            .map { $0.spacedSubstatement }
+            .joined(separator: ",")
+        return "\(name)\(type)\(constraints)"
+    }
 
     @usableFromInline
     init(name: String, type: DataType?, constraints: [ColumnConstraintSubstatement]) {

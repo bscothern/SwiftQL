@@ -92,7 +92,7 @@ struct CreateTableWithColumnDefinitions: CreateTableContent {
         if !constraints.isEmpty {
             constraints = ", \(constraints)"
         }
-        let withoutRowID = !self.withoutRowID ? "" : " WITHOUT ROWID"
+        let withoutRowID = self.withoutRowID ? " WITHOUT ROWID" : ""
         return "(\(columns)\(constraints))\(withoutRowID)"
     }
 
