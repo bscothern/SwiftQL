@@ -12,8 +12,6 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("Support (Generated Always) As")
-
 /// https://www.sqlite.org/syntax/column-constraint.html
 public protocol ColumnConstraintSubstatement: Substatement {}
 
@@ -121,15 +119,24 @@ extension ColumnConstraint {
     public static func foreignKeyClause(_ foreignKeyClause: ForeignKeyClause) -> some ColumnConstraintSubstatement {
         Self().foreignKeyClause(foreignKeyClause)
     }
-
+    
     @inlinable
-    public func `as`() {
-        #warning("TODO")
-        fatalError("TODO")
+    public func generatedAlwaysAs(_ expression: Expression, attribute: AsExpressionAttribute? = nil) -> some ColumnConstraintSubstatement {
+        ColumnAsExpression(generatedAlways: true, expression: expression, attribute: attribute, appendedTo: self)
     }
 
     @inlinable
-    public static func `as`() {
-        Self().as()
+    public static func generatedAlwaysAs(_ expression: Expression, attribute: AsExpressionAttribute? = nil) -> some ColumnConstraintSubstatement {
+        Self().generatedAlwaysAs(expression, attribute: attribute)
+    }
+
+    @inlinable
+    public func `as`(_ expression: Expression, attribute: AsExpressionAttribute? = nil) -> some ColumnConstraintSubstatement {
+        ColumnAsExpression(generatedAlways: false, expression: expression, attribute: attribute, appendedTo: self)
+    }
+
+    @inlinable
+    public static func `as`(_ expression: Expression, attribute: AsExpressionAttribute? = nil) -> some ColumnConstraintSubstatement {
+        Self().as(expression, attribute: attribute)
     }
 }

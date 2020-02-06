@@ -12,8 +12,8 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-public extension ColumnConstraint {
-    enum CollateFunction: String {
+extension ColumnConstraint {
+    public enum CollateFunction: String {
         case binary = "BINARY"
         case noCase = "NOCASE"
         case rTrim = "RTRIM"

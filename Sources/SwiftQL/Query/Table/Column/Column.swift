@@ -35,7 +35,6 @@ public struct Column: Substatement {
 
     @inlinable
     public init(name: String, type: DataType, @PassThroughBuilder<ColumnConstraintSubstatement> constraints constraintsBuilder: () -> [ColumnConstraintSubstatement]) {
-        //swiftlint:disable:previous attributes
         self.init(name: name, type: type, constraints: constraintsBuilder())
     }
 }
