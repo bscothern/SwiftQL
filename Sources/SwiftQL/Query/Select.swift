@@ -14,5 +14,6 @@ import SQLite3
 
 #warning("IMPLIMENT")
 public struct Select: Statement {
+    @inlinable
     public var statement: String { "" }
 }

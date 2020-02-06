@@ -14,10 +14,14 @@ import SQLite3
 
 @usableFromInline
 struct ColumnBoxForeignKeyClause: ColumnConstraintSubstatement {
-    @usableFromInline var substatement: String { "\(base.substatement) \(foreignKeyClause.substatement)" }
+    @usableFromInline
+    var substatement: String { "\(base.substatement) \(foreignKeyClause.substatement)" }
 
-    @usableFromInline let foreignKeyClause: ForeignKeyClause
-    @usableFromInline let base: ColumnConstraint
+    @usableFromInline
+    let foreignKeyClause: ForeignKeyClause
+    
+    @usableFromInline
+    let base: ColumnConstraint
 
     @usableFromInline
     init(_ foreignKeyClause: ForeignKeyClause, appendedTo base: ColumnConstraint) {

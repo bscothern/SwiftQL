@@ -54,15 +54,21 @@ public struct Literal: Substatement {
     }
     #endif
 
-    @inlinable public static var null: Self { .init("NULL") }
+    @inlinable
+    public static var null: Self { .init("NULL") }
 
-    @inlinable public static var `true`: Self { .init("TRUE") }
+    @inlinable
+    public static var `true`: Self { .init("TRUE") }
 
-    @inlinable public static var `false`: Self { .init("FALSE") }
+    @inlinable
+    public static var `false`: Self { .init("FALSE") }
 
-    @inlinable public static var currentTime: Self { .init("CURRENT_TIME") }
+    @inlinable
+    public static var currentTime: Self { .init("CURRENT_TIME") }
 
-    @inlinable public static var currentData: Self { .init("CURRENT_DATE") }
+    @inlinable
+    public static var currentData: Self { .init("CURRENT_DATE") }
 
-    @inlinable public static var currentTimestamp: Self { .init("CURRENT_TIMESTAMP") }
+    @inlinable
+    public static var currentTimestamp: Self { .init("CURRENT_TIMESTAMP") }
 }

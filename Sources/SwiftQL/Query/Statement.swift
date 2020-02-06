@@ -21,6 +21,7 @@ public protocol Substatement {
 }
 
 extension Substatement {
+    @inlinable
     public var spacedSubstatement: String {
         " \(substatement)"
     }

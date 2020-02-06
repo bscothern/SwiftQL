@@ -20,5 +20,6 @@ public enum ConflictClause: String, Substatement {
     case ignore = "IGNORE"
     case replace = "REPLACE"
 
+    @inlinable
     public var substatement: String { "ON CONFLICT \(rawValue)" }
 }

@@ -14,10 +14,14 @@ import SQLite3
 
 @usableFromInline
 struct Check: ColumnConstraintSubstatement {
-    @usableFromInline var substatement: String { "\(base.substatement) Check (\(expression.substatement))" }
+    @usableFromInline
+    var substatement: String { "\(base.substatement) Check (\(expression.substatement))" }
 
-    @usableFromInline let expression: Expression
-    @usableFromInline let base: ColumnConstraint
+    @usableFromInline
+    let expression: Expression
+
+    @usableFromInline
+    let base: ColumnConstraint
 
     @usableFromInline
     init(_ expression: Expression, appendedTo base: ColumnConstraint) {

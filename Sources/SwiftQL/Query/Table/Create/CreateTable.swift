@@ -16,7 +16,8 @@ import SQLite3
 ///
 /// https://www.sqlite.org/lang_createtable.html
 public struct CreateTable: Statement {
-    @inlinable public var statement: String {
+    @inlinable
+    public var statement: String {
         let isTemporary = !self.isTemporary ? "" : " TEMP"
         let ifNotExists = !self.ifNotExists ? "" : " IF NOT EXISTS"
         let schemaName = self.schemaName.map { " \($0)." } ?? " "
@@ -24,11 +25,20 @@ public struct CreateTable: Statement {
         return "CREATE\(isTemporary) TABLE\(ifNotExists)\(schemaName)\(name)\(content.spacedSubstatement)"
     }
 
-    @usableFromInline let name: String
-    @usableFromInline let schemaName: String?
-    @usableFromInline let isTemporary: Bool
-    @usableFromInline let ifNotExists: Bool
-    @usableFromInline let content: CreateTableContent
+    @usableFromInline
+    let name: String
+    
+    @usableFromInline
+    let schemaName: String?
+    
+    @usableFromInline
+    let isTemporary: Bool
+    
+    @usableFromInline
+    let ifNotExists: Bool
+    
+    @usableFromInline
+    let content: CreateTableContent
 
     @usableFromInline
     init(name: String, schemaName: String?, isTemporary: Bool, ifNotExists: Bool, content: CreateTableContent) {
@@ -62,11 +72,17 @@ protocol CreateTableContent: Substatement {}
 
 @usableFromInline
 struct CreateTableWithColumnDefinitions: CreateTableContent {
-    @usableFromInline let withoutRowID: Bool
-    @usableFromInline let columns: [Column]
-    @usableFromInline let constraints: [TableConstraintSubstatement]
+    @usableFromInline
+    let withoutRowID: Bool
+    
+    @usableFromInline
+    let columns: [Column]
+    
+    @usableFromInline
+    let constraints: [TableConstraintSubstatement]
 
-    @usableFromInline var substatement: String {
+    @usableFromInline
+    var substatement: String {
         let columns = self.columns.lazy
             .map { $0.substatement }
             .joined(separator: ", ")
@@ -90,10 +106,13 @@ struct CreateTableWithColumnDefinitions: CreateTableContent {
 
 @usableFromInline
 struct CreateTableAsSelectStatement: CreateTableContent {
-    @usableFromInline var substatement: String {
+    @usableFromInline
+    var substatement: String {
         "AS \(select.statement)"
     }
-    @usableFromInline let select: Select
+    
+    @usableFromInline
+    let select: Select
 
     @usableFromInline
     init(_ select: Select) {

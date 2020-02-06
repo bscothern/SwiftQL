@@ -14,10 +14,14 @@ import SQLite3
 
 @usableFromInline
 struct Default: ColumnConstraintSubstatement {
-    @usableFromInline var substatement: String { "\(base.substatement) DEFAULT \(content.substatement)" }
+    @usableFromInline
+    var substatement: String { "\(base.substatement) DEFAULT \(content.substatement)" }
 
-    @usableFromInline let content: DefaultContent
-    @usableFromInline let base: ColumnConstraint
+    @usableFromInline
+    let content: DefaultContent
+    
+    @usableFromInline
+    let base: ColumnConstraint
 
     @usableFromInline
     init<Numeral>(_ number: Numeral, appendedTo base: ColumnConstraint) where Numeral: SignedNumeric {
@@ -43,9 +47,11 @@ protocol DefaultContent: Substatement {}
 
 @usableFromInline
 struct DefaultExpression: DefaultContent {
-    @inlinable public var substatement: String { "(\(expression.substatement))" }
+    @inlinable
+    public var substatement: String { "(\(expression.substatement))" }
 
-    @usableFromInline let expression: Expression
+    @usableFromInline
+    let expression: Expression
 
     @usableFromInline
     init(_ expression: Expression) {
@@ -55,9 +61,11 @@ struct DefaultExpression: DefaultContent {
 
 @usableFromInline
 struct DefaultSignedNumber<Numeral>: DefaultContent where Numeral: SignedNumeric {
-    @inlinable public var substatement: String { "\(number)" }
+    @inlinable
+    public var substatement: String { "\(number)" }
 
-    @usableFromInline let number: Numeral
+    @usableFromInline
+    let number: Numeral
 
     @usableFromInline
     init(_ number: Numeral) {
@@ -67,9 +75,11 @@ struct DefaultSignedNumber<Numeral>: DefaultContent where Numeral: SignedNumeric
 
 @usableFromInline
 struct DefaultLiteral: DefaultContent {
-    @inlinable public var substatement: String { literal.substatement }
+    @inlinable
+    public var substatement: String { literal.substatement }
 
-    @usableFromInline let literal: Literal
+    @usableFromInline
+    let literal: Literal
 
     @usableFromInline
     init(_ literal: Literal) {

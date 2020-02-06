@@ -14,11 +14,17 @@ import SQLite3
 
 /// https://www.sqlite.org/syntax/column-def.html
 public struct Column: Substatement {
-    @usableFromInline let name: String
-    @usableFromInline let type: DataType?
-    @usableFromInline let constraints: [ColumnConstraintSubstatement]
+    @usableFromInline
+    let name: String
+    
+    @usableFromInline
+    let type: DataType?
+    
+    @usableFromInline
+    let constraints: [ColumnConstraintSubstatement]
 
-    @inlinable public var substatement: String { "" }
+    @inlinable
+    public var substatement: String { "" }
 
     @usableFromInline
     init(name: String, type: DataType?, constraints: [ColumnConstraintSubstatement]) {

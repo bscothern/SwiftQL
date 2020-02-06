@@ -18,11 +18,13 @@ import SQLite3
 public protocol ColumnConstraintSubstatement: Substatement {}
 
 public struct ColumnConstraint: Substatement {
-    @inlinable public var substatement: String {
+    @inlinable
+    public var substatement: String {
         name.map { "CONSTRAINT \($0)" } ?? ""
     }
 
-    @usableFromInline let name: String?
+    @usableFromInline
+    let name: String?
 
     public init(name: String? = nil) {
         self.name = name

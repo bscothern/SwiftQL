@@ -14,13 +14,17 @@ import SQLite3
 
 @usableFromInline
 struct Unique: ColumnConstraintSubstatement {
-    @usableFromInline var substatement: String {
+    @usableFromInline
+    var substatement: String {
         let onConflictStatement = onConflict?.spacedSubstatement ?? ""
         return "\(base.substatement) UNIQUE\(onConflictStatement)"
     }
 
-    @usableFromInline let onConflict: ConflictClause?
-    @usableFromInline let base: ColumnConstraint
+    @usableFromInline
+    let onConflict: ConflictClause?
+    
+    @usableFromInline
+    let base: ColumnConstraint
 
     @usableFromInline
     init(onConflict: ConflictClause?, appendedTo base: ColumnConstraint) {
