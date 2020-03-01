@@ -16,10 +16,10 @@ import SQLite3
 public struct Column: Substatement {
     @usableFromInline
     let name: String
-    
+
     @usableFromInline
     let type: DataType?
-    
+
     @usableFromInline
     let constraints: [ColumnConstraintSubstatement]
 

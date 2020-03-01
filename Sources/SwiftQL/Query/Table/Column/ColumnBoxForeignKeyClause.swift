@@ -19,7 +19,7 @@ struct ColumnBoxForeignKeyClause: ColumnConstraintSubstatement {
 
     @usableFromInline
     let foreignKeyClause: ForeignKeyClause
-    
+
     @usableFromInline
     let base: ColumnConstraint
 

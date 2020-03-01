@@ -70,13 +70,13 @@ struct TableConstraintPrimaryKeyOrUnique: TableConstraintSubstatement {
 
     @usableFromInline
     let classification: Classification
-    
+
     @usableFromInline
     let indexedColumns: [String]
-    
+
     @usableFromInline
     let onConflict: ConflictClause?
-    
+
     @usableFromInline
     let base: TableConstraint
 
@@ -117,10 +117,10 @@ struct TableConstraintForeignKey: TableConstraintSubstatement {
 
     @usableFromInline
     let columns: [String]
-    
+
     @usableFromInline
     let foreignKey: ForeignKeyClauseSubstatement
-    
+
     @usableFromInline
     let base: TableConstraint
 

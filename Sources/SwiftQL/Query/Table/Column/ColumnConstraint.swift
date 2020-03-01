@@ -74,7 +74,7 @@ extension ColumnConstraint {
     public func foreignKeyClause(_ foreignKeyClause: ForeignKeyClause) -> some ColumnConstraintSubstatement {
         ColumnBoxForeignKeyClause(foreignKeyClause, appendedTo: self)
     }
-    
+
     @inlinable
     public func generatedAlwaysAs(_ expression: Expression, attribute: AsExpressionAttribute? = nil) -> some ColumnConstraintSubstatement {
         ColumnAsExpression(generatedAlways: true, expression: expression, attribute: attribute, appendedTo: self)
@@ -84,5 +84,4 @@ extension ColumnConstraint {
     public func `as`(_ expression: Expression, attribute: AsExpressionAttribute? = nil) -> some ColumnConstraintSubstatement {
         ColumnAsExpression(generatedAlways: false, expression: expression, attribute: attribute, appendedTo: self)
     }
-
 }

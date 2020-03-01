@@ -19,7 +19,7 @@ struct Default: ColumnConstraintSubstatement {
 
     @usableFromInline
     let content: DefaultContent
-    
+
     @usableFromInline
     let base: ColumnConstraint
 

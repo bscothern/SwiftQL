@@ -27,13 +27,13 @@ struct ColumnAsExpression: ColumnConstraintSubstatement {
         let attribute = self.attribute.map { " \($0)" } ?? ""
         return "\(base._substatement)\(generatedAlways) AS (\(expression._substatement))\(attribute)"
     }
-    
+
     @usableFromInline
     let generatedAlways: Bool
-    
+
     @usableFromInline
     let expression: Expression
-    
+
     @usableFromInline
     let attribute: ColumnConstraint.AsExpressionAttribute?
 

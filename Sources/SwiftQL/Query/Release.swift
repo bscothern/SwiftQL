@@ -1,5 +1,5 @@
 //
-//  Savepoint.swift
+//  Release.swift
 //  SwiftQL
 //
 //  Created by Braden Scothern on 1/30/20.
@@ -12,16 +12,15 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
-public struct Savepoint: Statement {
+public struct Release: Statement {
     @inlinable
-    public var _statement: String { "SAVEPOINT \(name)" }
+    public var _statement: String { "RELEASE \(savepoint._statement)" }
 
     @usableFromInline
-    let name: String
+    let savepoint: Savepoint
 
     @inlinable
-    public init(name: String) {
-        self.name = name
+    public init(_ savepoint: Savepoint) {
+        self.savepoint = savepoint
     }
 }

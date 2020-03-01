@@ -27,7 +27,7 @@ struct Collate: ColumnConstraintSubstatement {
 
     @usableFromInline
     let function: ColumnConstraint.CollateFunction
-    
+
     @usableFromInline
     let base: ColumnConstraint
 

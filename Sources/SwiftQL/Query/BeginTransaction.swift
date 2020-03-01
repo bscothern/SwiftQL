@@ -12,6 +12,26 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
-struct BeginTransaction {
+public struct BeginTransaction: Statement {
+    public enum Behavior: String {
+        case deferred = "DEFERRED"
+        case immediate = "IMMEDIATE"
+        case exclusive = "EXCLUSIVE"
+    }
+
+    @inlinable
+    public var _statement: String { "BEGIN \(behavior.map { "\($0.rawValue) "} ?? "")TRANSACTION" }
+
+    @usableFromInline
+    let behavior: Behavior?
+
+    @inlinable
+    public init() {
+        behavior = nil
+    }
+
+    @inlinable
+    public init(_ behavior: Behavior) {
+        self.behavior = behavior
+    }
 }

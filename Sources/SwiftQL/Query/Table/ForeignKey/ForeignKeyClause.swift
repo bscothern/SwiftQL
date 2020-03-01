@@ -26,7 +26,7 @@ public struct ForeignKeyClause: ForeignKeyClauseSubstatementExtendable {
 
     @usableFromInline
     let tableName: String
-    
+
     @usableFromInline
     let columnNames: [String]?
 
@@ -96,13 +96,13 @@ struct ForeignKeyClauseOn: ForeignKeyClauseSubstatementExtendable {
         let action = self.action.rawValue
         return "\(base._substatement) \(category) \(action)"
     }
-    
+
     @usableFromInline
     let category: Category
-    
+
     @usableFromInline
     let action: ForeignKeyClause.OnAction
-    
+
     @usableFromInline
     let base: ForeignKeyClauseSubstatement
 
@@ -122,7 +122,7 @@ struct ForeignKeyClauseMatch: ForeignKeyClauseSubstatementExtendable {
 
     @usableFromInline
     let name: String
-    
+
     @usableFromInline
     let base: ForeignKeyClauseSubstatement
 
@@ -151,10 +151,10 @@ struct ForeignKeyClauseDeferrable: ForeignKeyClauseSubstatement {
 
     @usableFromInline
     let not: Bool
-    
+
     @usableFromInline
     let clause: ForeignKeyClause.DeferrableClause?
-    
+
     @usableFromInline
     let base: ForeignKeyClauseSubstatementExtendable
 

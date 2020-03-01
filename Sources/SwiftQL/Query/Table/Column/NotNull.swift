@@ -22,7 +22,7 @@ struct NotNull: ColumnConstraintSubstatement {
 
     @usableFromInline
     let onConflict: ConflictClause?
-    
+
     @usableFromInline
     let base: ColumnConstraint
 

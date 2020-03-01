@@ -27,16 +27,16 @@ public struct CreateTable: Statement {
 
     @usableFromInline
     let name: String
-    
+
     @usableFromInline
     let schemaName: String?
-    
+
     @usableFromInline
     let isTemporary: Bool
-    
+
     @usableFromInline
     let ifNotExists: Bool
-    
+
     @usableFromInline
     let content: CreateTableContent
 
@@ -74,10 +74,10 @@ protocol CreateTableContent: Substatement {}
 struct CreateTableWithColumnDefinitions: CreateTableContent {
     @usableFromInline
     let withoutRowID: Bool
-    
+
     @usableFromInline
     let columns: [Column]
-    
+
     @usableFromInline
     let constraints: [TableConstraintSubstatement]
 
@@ -110,7 +110,7 @@ struct CreateTableAsSelectStatement: CreateTableContent {
     var _substatement: String {
         "AS \(select._statement)"
     }
-    
+
     @usableFromInline
     let select: Select
 
@@ -118,32 +118,4 @@ struct CreateTableAsSelectStatement: CreateTableContent {
     init(_ select: Select) {
         self.select = select
     }
-}
-
-func foo() {
-CreateTable(name: "foo", ifNotExists: true, columns: {
-    Column(name: "i", type: .int) {
-        ColumnConstraint()
-            .primaryKey(ascending: true, autoIncrement: true)
-        ColumnConstraint()
-            .notNull()
-    }
-    Column(name: "j", type: .text) {
-        ColumnConstraint()
-            .primaryKey(ascending: true, autoIncrement: true)
-        ColumnConstraint()
-            .notNull()
-    }
-}, constraints: {
-    TableConstraint()
-        .check()
-    TableConstraint()
-        .foreignKey(
-            ForeignKeyClause(tableName: "a")
-                .match("a")
-                .onDelete(.setNull)
-                .defferable(),
-            columns: ["a"]
-        )
-})
 }

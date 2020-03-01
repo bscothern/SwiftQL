@@ -24,13 +24,13 @@ struct PrimaryKey: ColumnConstraintSubstatement {
 
     @usableFromInline
     let ascending: Bool?
-    
+
     @usableFromInline
     let onConflict: ConflictClause?
-    
+
     @usableFromInline
     let autoIncrement: Bool
-    
+
     @usableFromInline
     let base: ColumnConstraint
 

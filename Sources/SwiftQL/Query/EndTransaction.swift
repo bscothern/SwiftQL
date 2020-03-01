@@ -12,6 +12,9 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
-struct EndTransaction {
+public struct EndTransaction: Statement {
+    public let _statement: String = "END TRANSACTION"
+
+    @inlinable
+    public init() {}
 }

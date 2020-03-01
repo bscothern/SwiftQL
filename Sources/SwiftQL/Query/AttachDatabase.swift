@@ -12,6 +12,19 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
-struct AttachDatabase {
+public struct AttachDatabase: Statement {
+    @inlinable
+    public var _statement: String { "ATTACH DATABASE \(expression._statement) AS \(schemaName)" }
+
+    @usableFromInline
+    let expression: Expression
+
+    @usableFromInline
+    let schemaName: String
+
+    @inlinable
+    public init(_ expression: Expression, as schemaName: String) {
+        self.expression = expression
+        self.schemaName = schemaName
+    }
 }
