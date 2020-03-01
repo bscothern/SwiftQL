@@ -48,7 +48,7 @@ protocol DefaultContent: Substatement {}
 @usableFromInline
 struct DefaultExpression: DefaultContent {
     @inlinable
-    public var _substatement: String { "(\(expression._substatement))" }
+    public var _substatement: String { "(\(expression._statement))" }
 
     @usableFromInline
     let expression: Expression

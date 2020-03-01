@@ -24,7 +24,13 @@ public struct ColumnConstraint: Substatement {
     @usableFromInline
     let name: String?
 
-    public init(name: String? = nil) {
+    @inlinable
+    public init() {
+        name = nil
+    }
+
+    @inlinable
+    public init(name: String) {
         self.name = name
     }
 }

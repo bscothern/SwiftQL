@@ -13,12 +13,9 @@ import SQLite3
 #endif
 
 #warning("IMPLIMENT")
-public struct Expression: Statement, Substatement {
+public struct Expression: Statement {
     @inlinable
     public var _statement: String { "" }
-
-    @inlinable
-    public var _substatement: String { _statement }
 
     @inlinable
     public init(literal: Literal) {

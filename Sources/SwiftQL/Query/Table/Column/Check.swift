@@ -15,7 +15,7 @@ import SQLite3
 @usableFromInline
 struct Check: ColumnConstraintSubstatement {
     @usableFromInline
-    var _substatement: String { "\(base._substatement) Check (\(expression._substatement))" }
+    var _substatement: String { "\(base._substatement) Check (\(expression._statement))" }
 
     @usableFromInline
     let expression: Expression

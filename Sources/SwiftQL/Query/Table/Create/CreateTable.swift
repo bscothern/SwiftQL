@@ -41,7 +41,7 @@ public struct CreateTable: Statement {
     let content: CreateTableContent
 
     @usableFromInline
-    init(name: String, schemaName: String?, isTemporary: Bool, ifNotExists: Bool, content: CreateTableContent) {
+    init(name: String, schemaName: String?, isTemporary: Bool = false, ifNotExists: Bool = true, content: CreateTableContent) {
         self.name = name
         self.schemaName = schemaName
         self.isTemporary = isTemporary
@@ -50,19 +50,19 @@ public struct CreateTable: Statement {
     }
 
     @inlinable
-    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column]) {
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column]) {
         //swiftlint:disable:previous attributes
         self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder(), constraints: []))
     }
 
     @inlinable
-    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], @PassThroughBuilder<TableConstraintSubstatement> constraints constraintsBuilder: () -> [TableConstraintSubstatement]) {
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], @PassThroughBuilder<TableConstraintSubstatement> constraints constraintsBuilder: () -> [TableConstraintSubstatement]) {
         //swiftlint:disable:previous attributes
         self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder(), constraints: constraintsBuilder()))
     }
 
     @inlinable
-    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool, as select: Select) {
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, as select: Select) {
         self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableAsSelectStatement(select))
     }
 }

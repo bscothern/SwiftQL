@@ -12,6 +12,20 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
-struct DetachDatabase {
+public struct DetachDatabase: Statement {
+    @inlinable
+    public var _statement: String { "DETACH DATABASE\(schemaName.map { " \($0)" } ?? "")"}
+
+    @usableFromInline
+    let schemaName: String?
+
+    @inlinable
+    public init() {
+        schemaName = nil
+    }
+
+    @inlinable
+    public init(schemaName: String) {
+        self.schemaName = schemaName
+    }
 }

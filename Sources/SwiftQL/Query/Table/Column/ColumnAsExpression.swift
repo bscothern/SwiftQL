@@ -25,7 +25,7 @@ struct ColumnAsExpression: ColumnConstraintSubstatement {
     var _substatement: String {
         let generatedAlways = self.generatedAlways ? " GENERATED ALWAYS" : ""
         let attribute = self.attribute.map { " \($0)" } ?? ""
-        return "\(base._substatement)\(generatedAlways) AS (\(expression._substatement))\(attribute)"
+        return "\(base._substatement)\(generatedAlways) AS (\(expression._statement))\(attribute)"
     }
 
     @usableFromInline
