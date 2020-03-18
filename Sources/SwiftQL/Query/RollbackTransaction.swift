@@ -14,7 +14,10 @@ import SQLite3
 
 public struct RollbackTransaction: Statement {
     @inlinable
-    public var _statement: String { "ROLLBACK TRANSACTION\(savepoint.map { " TO \($0._statement)"} ?? "")" }
+    public var _statement: String {
+        let savepoint = self.savepoint.map { " TO \($0)"} ?? ""
+        return "ROLLBACK TRANSACTION\(savepoint)"
+    }
 
     @usableFromInline
     let savepoint: Savepoint?

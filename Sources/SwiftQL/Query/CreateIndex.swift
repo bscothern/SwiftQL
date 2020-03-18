@@ -19,7 +19,7 @@ public struct CreateIndex: Statement {
         let ifNotExists = self.ifNotExists ? "IF NOT EXISTS " : ""
         let schemaName = self.schemaName.map { "\($0)."} ?? ""
         let columns = self.columns.joined(separator: ", ")
-        let `where` = self.where.map { " WHERE \($0._statement)" } ?? ""
+        let `where` = self.where.map { " WHERE \($0)" } ?? ""
         return "CREATE \(isUnique)INDEX \(ifNotExists)\(schemaName)\(name) ON \(tableName) (\(columns))\(`where`)"
     }
 

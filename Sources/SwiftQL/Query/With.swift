@@ -13,5 +13,23 @@ import SQLite3
 #endif
 
 #warning("IMPLIMENT")
-struct With {
+public struct With: Substatement {
+    @inlinable
+    public var _substatement: String {
+        let recursive = self.recursive ? " RECURSIVE" : ""
+        let commonTableExpressions = self.commonTableExpressions.joined(separator: ", ")
+        return "WITH\(recursive) \(commonTableExpressions)"
+    }
+
+    @usableFromInline
+    let recursive: Bool
+
+    @usableFromInline
+    let commonTableExpressions: [String]
+
+    @inlinable
+    public init(recursive: Bool = false, @PassThroughBuilder<String> commonTableExpressions: () -> [String]) {
+        self.recursive = recursive
+        self.commonTableExpressions = commonTableExpressions()
+    }
 }

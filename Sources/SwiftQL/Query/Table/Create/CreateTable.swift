@@ -21,8 +21,8 @@ public struct CreateTable: Statement {
         let isTemporary = self.isTemporary ? " TEMP" : ""
         let ifNotExists = !self.ifNotExists ? " IF NOT EXISTS" : ""
         let schemaName = self.schemaName.map { "\($0)." } ?? ""
-        let name = "\(self.name)"
-        return "CREATE\(isTemporary) TABLE\(ifNotExists) \(schemaName)\(name)\(content._spacedSubstatement)"
+        let name = self.name
+        return "CREATE\(isTemporary) TABLE\(ifNotExists) \(schemaName)\(name) \(content)"
     }
 
     @usableFromInline
@@ -108,7 +108,7 @@ struct CreateTableWithColumnDefinitions: CreateTableContent {
 struct CreateTableAsSelectStatement: CreateTableContent {
     @usableFromInline
     var _substatement: String {
-        "AS \(select._statement)"
+        "AS \(select)"
     }
 
     @usableFromInline

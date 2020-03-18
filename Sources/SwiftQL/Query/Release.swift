@@ -14,7 +14,7 @@ import SQLite3
 
 public struct Release: Statement {
     @inlinable
-    public var _statement: String { "RELEASE \(savepoint._statement)" }
+    public var _statement: String { "RELEASE \(savepoint)" }
 
     @usableFromInline
     let savepoint: Savepoint

@@ -12,7 +12,6 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
 public struct Savepoint: Statement {
     @inlinable
     public var _statement: String { "SAVEPOINT \(name)" }

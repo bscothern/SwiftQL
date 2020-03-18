@@ -14,7 +14,7 @@ import SQLite3
 
 public struct AttachDatabase: Statement {
     @inlinable
-    public var _statement: String { "ATTACH DATABASE \(expression._statement) AS \(schemaName)" }
+    public var _statement: String { "ATTACH DATABASE \(expression) AS \(schemaName)" }
 
     @usableFromInline
     let expression: Expression

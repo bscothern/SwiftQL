@@ -13,5 +13,6 @@ import SQLite3
 #endif
 
 #warning("IMPLIMENT")
-struct Insert {
+public struct Insert: Statement {
+    public var _statement: String { "" }
 }

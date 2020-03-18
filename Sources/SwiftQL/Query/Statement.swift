@@ -19,10 +19,3 @@ public protocol Statement {
 public protocol Substatement {
     var _substatement: String { get }
 }
-
-extension Substatement {
-    @inlinable
-    public var _spacedSubstatement: String {
-        " \(_substatement)"
-    }
-}

@@ -13,5 +13,6 @@ import SQLite3
 #endif
 
 #warning("IMPLIMENT")
-struct Delete {
+public struct Delete: Statement {
+    public var _statement: String { "" }
 }
