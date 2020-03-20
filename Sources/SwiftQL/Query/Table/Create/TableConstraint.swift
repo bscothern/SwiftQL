@@ -28,13 +28,11 @@ public struct TableConstraint: Substatement {
         self.name = name
     }
 
-    #warning("Don't take Strings directly.")
     @inlinable
     public func primaryKey(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintSubstatement {
         TableConstraintPrimaryKeyOrUnique(type: .primaryKey, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
     }
 
-    #warning("Don't take Strings directly.")
     @inlinable
     public func unique(indexedColumns: [String], onConflict: ConflictClause? = nil) -> some TableConstraintSubstatement {
         TableConstraintPrimaryKeyOrUnique(type: .unique, indexedColumns: indexedColumns, onConflict: onConflict, appendingTo: self)
@@ -46,7 +44,6 @@ public struct TableConstraint: Substatement {
         TableConstraintCheck(self)
     }
 
-    #warning("Don't take Strings directly.")
     @inlinable
     public func foreignKey(_ foreignKey: ForeignKeyClauseSubstatement, columns: [String]) -> some TableConstraintSubstatement {
         TableConstraintForeignKey(columns: columns, foreignKey: foreignKey, appendingTo: self)

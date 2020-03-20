@@ -20,10 +20,10 @@ public struct AttachDatabase: Statement {
     let expression: Expression
 
     @usableFromInline
-    let schemaName: String
+    let schemaName: SchemaName
 
     @inlinable
-    public init(_ expression: Expression, as schemaName: String) {
+    public init(_ expression: Expression, as schemaName: SchemaName) {
         self.expression = expression
         self.schemaName = schemaName
     }

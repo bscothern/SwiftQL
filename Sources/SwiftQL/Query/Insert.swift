@@ -12,7 +12,17 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
 public struct Insert: Statement {
-    public var _statement: String { "" }
+    @inlinable
+    public var _statement: String {
+        ""
+    }
+    
+    @usableFromInline
+    let with: With
+    
+//    @inlinable
+//    public init(or: Or? = nil, tableName: TableName, schemaName: SchemaName) {
+//        
+//    }
 }

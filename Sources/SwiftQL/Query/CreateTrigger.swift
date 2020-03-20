@@ -32,7 +32,7 @@ public struct CreateTrigger: Statement {
     let name: String
 
     @usableFromInline
-    let schemaName: String?
+    let schemaName: SchemaName?
 
     @usableFromInline
     let isTemporary: Bool
@@ -47,7 +47,7 @@ public struct CreateTrigger: Statement {
     let action: Action
 
     @usableFromInline
-    let tableName: String
+    let tableName: TableName
 
     @usableFromInline
     let forEachRow: Bool
@@ -59,7 +59,7 @@ public struct CreateTrigger: Statement {
     let transactions: [TriggerTransaction]
 
     #warning("This needs to be cleaned up")
-    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, applicationTime: ApplicationTime?, action: Action, tableName: String, forEachRow: Bool = false, when: Expression, transactions: [TriggerTransaction]) {
+    public init(name: String, schemaName: SchemaName? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, applicationTime: ApplicationTime?, action: Action, tableName: TableName, forEachRow: Bool = false, when: Expression, transactions: [TriggerTransaction]) {
         self.name = name
         self.schemaName = schemaName
         self.isTemporary = isTemporary

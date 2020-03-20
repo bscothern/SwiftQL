@@ -25,12 +25,12 @@ public struct ForeignKeyClause: ForeignKeyClauseSubstatementExtendable {
     }
 
     @usableFromInline
-    let tableName: String
+    let tableName: TableName
 
     @usableFromInline
     let columnNames: [String]?
 
-    public init(tableName: String, columnNames: [String]? = nil) {
+    public init(tableName: TableName, columnNames: [String]? = nil) {
         self.tableName = tableName
         self.columnNames = columnNames
     }

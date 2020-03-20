@@ -25,7 +25,7 @@ public struct DropView {
     }
 
     @inlinable
-    public init(name: String, schemaName: String, ifExists: Bool = true) {
+    public init(name: String, schemaName: SchemaName, ifExists: Bool = true) {
         base = .init(.view, name: name, schemaName: schemaName, ifExists: ifExists)
     }
 }

@@ -22,27 +22,27 @@ public struct Analyze: Statement {
     let substatement: _AnalyzeSubstatement
 
     @inlinable
-    public init(schemaName: String) {
+    public init(schemaName: SchemaName) {
         substatement = _SchemaName(schemaName)
     }
 
     @inlinable
-    public init(tableName: String) {
+    public init(tableName: TableName) {
         substatement = _TableOrIndexName(tableName)
     }
 
     @inlinable
-    public init(indexName: String) {
+    public init(indexName: IndexName) {
         substatement = _TableOrIndexName(indexName)
     }
 
     @inlinable
-    public init(schemaName: String, tableName: String) {
+    public init(schemaName: SchemaName, tableName: TableName) {
         substatement = _SchemaName(schemaName, tableOrIndexName: _TableOrIndexName(tableName))
     }
 
     @inlinable
-    public init(schemaName: String, indexName: String) {
+    public init(schemaName: SchemaName, indexName: IndexName) {
         substatement = _SchemaName(schemaName, tableOrIndexName: _TableOrIndexName(indexName))
     }
 }
@@ -54,7 +54,7 @@ extension Analyze {
     @usableFromInline
     struct _SchemaName: _AnalyzeSubstatement {
         @usableFromInline
-        let schemaName: String
+        let schemaName: SchemaName
 
         @usableFromInline
         let tableOrIndexName: _TableOrIndexName?
@@ -63,7 +63,7 @@ extension Analyze {
         var _substatement: String { "\(schemaName)\(tableOrIndexName.map { ".\($0._substatement)" } ?? "")" }
 
         @usableFromInline
-        init(_ schemaName: String, tableOrIndexName: _TableOrIndexName? = nil) {
+        init(_ schemaName: SchemaName, tableOrIndexName: _TableOrIndexName? = nil) {
             self.schemaName = schemaName
             self.tableOrIndexName = tableOrIndexName
         }
@@ -73,10 +73,10 @@ extension Analyze {
     struct _TableOrIndexName: _AnalyzeSubstatement {
         @usableFromInline
         var _substatement: String
-
+        
         @usableFromInline
-        init(_ value: String) {
-            _substatement = value
+        init(_ value: Substatement) {
+            _substatement = "\(value)"
         }
     }
 }

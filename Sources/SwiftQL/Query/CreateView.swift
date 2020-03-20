@@ -28,7 +28,7 @@ public struct CreateView: Statement {
     let name: String
     
     @usableFromInline
-    let schemaName: String?
+    let schemaName: SchemaName?
     
     @usableFromInline
     let isTemporary: Bool
@@ -43,7 +43,7 @@ public struct CreateView: Statement {
     let select: Select
     
     @inlinable
-    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, columnNames: [String], as select: Select) {
+    public init(name: String, schemaName: SchemaName? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, columnNames: [String], as select: Select) {
         self.name = name
         self.schemaName = schemaName
         self.isTemporary = isTemporary

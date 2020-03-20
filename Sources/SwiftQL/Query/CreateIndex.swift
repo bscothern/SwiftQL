@@ -30,13 +30,13 @@ public struct CreateIndex: Statement {
     let ifNotExists: Bool
 
     @usableFromInline
-    let schemaName: String?
+    let schemaName: SchemaName?
 
     @usableFromInline
     let name: String
 
     @usableFromInline
-    let tableName: String
+    let tableName: TableName
 
     @usableFromInline
     let columns: [String]
@@ -45,12 +45,12 @@ public struct CreateIndex: Statement {
     let `where`: Expression?
 
     @inlinable
-    public init(name: String, on tableName: String, schemaName: String? = nil, columns: String..., isUnique: Bool, ifNotExists: Bool = true, where: Expression? = nil) {
+    public init(name: String, on tableName: TableName, schemaName: SchemaName? = nil, columns: String..., isUnique: Bool, ifNotExists: Bool = true, where: Expression? = nil) {
         self.init(name: name, on: tableName, schemaName: schemaName, columns: columns, isUnique: isUnique, ifNotExists: ifNotExists, where: `where`)
     }
 
     @inlinable
-    public init(name: String, on tableName: String, schemaName: String? = nil, columns: [String], isUnique: Bool, ifNotExists: Bool = true, where: Expression? = nil) {
+    public init(name: String, on tableName: TableName, schemaName: SchemaName? = nil, columns: [String], isUnique: Bool, ifNotExists: Bool = true, where: Expression? = nil) {
         self.isUnique = isUnique
         self.ifNotExists = ifNotExists
         self.schemaName = schemaName

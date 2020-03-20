@@ -31,12 +31,12 @@ public struct Reindex: Statement {
     }
     
     @inlinable
-    public init(schemaName: String? = nil, tableName: String) {
+    public init(schemaName: SchemaName? = nil, tableName: TableName) {
         _statementBase = " \(schemaName.map { "\($0)." } ?? "")\(tableName)"
     }
     
     @inlinable
-    public init(schemaName: String? = nil, indexName: String) {
+    public init(schemaName: SchemaName? = nil, indexName: IndexName) {
         _statementBase = " \(schemaName.map { "\($0)." } ?? "")\(indexName)"
     }
 }

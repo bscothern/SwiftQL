@@ -40,10 +40,10 @@ struct DropStatementBase: Statement {
     let ifExists: Bool
 
     @usableFromInline
-    let schemaName: String?
+    let schemaName: SchemaName?
 
     @usableFromInline
-    init(_ category: Category, name: String, schemaName: String?, ifExists: Bool) {
+    init(_ category: Category, name: String, schemaName: SchemaName?, ifExists: Bool) {
         self.category = category
         self.name = name
         self.ifExists = ifExists

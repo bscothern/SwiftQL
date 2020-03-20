@@ -25,7 +25,7 @@ public struct DropIndex: Statement {
     }
 
     @inlinable
-    public init(name: String, schemaName: String, ifExists: Bool = true) {
+    public init(name: String, schemaName: SchemaName, ifExists: Bool = true) {
         base = .init(.index, name: name, schemaName: schemaName, ifExists: ifExists)
     }
 }

@@ -17,7 +17,7 @@ public struct DetachDatabase: Statement {
     public var _statement: String { "DETACH DATABASE\(schemaName.map { " \($0)" } ?? "")"}
 
     @usableFromInline
-    let schemaName: String?
+    let schemaName: SchemaName?
 
     @inlinable
     public init() {
@@ -25,7 +25,7 @@ public struct DetachDatabase: Statement {
     }
 
     @inlinable
-    public init(schemaName: String) {
+    public init(schemaName: SchemaName) {
         self.schemaName = schemaName
     }
 }

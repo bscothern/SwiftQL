@@ -21,7 +21,7 @@ public struct Vacuum: Statement {
     }
 
     @usableFromInline
-    let schemaName: String?
+    let schemaName: SchemaName?
 
     @usableFromInline
     let fileName: String?
@@ -30,7 +30,7 @@ public struct Vacuum: Statement {
         self.init(schemaName: nil, into: nil)
     }
 
-    public init(schemaName: String?) {
+    public init(schemaName: SchemaName?) {
         self.init(schemaName: schemaName, into: nil)
     }
 
@@ -38,7 +38,7 @@ public struct Vacuum: Statement {
         self.init(schemaName: nil, into: fileName)
     }
 
-    public init(schemaName: String?, into fileName: String?) {
+    public init(schemaName: SchemaName?, into fileName: String?) {
         self.schemaName = schemaName
         self.fileName = fileName
     }

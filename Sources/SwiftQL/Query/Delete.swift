@@ -25,13 +25,13 @@ public struct Delete: Statement {
     let with: With?
     
     @usableFromInline
-    let tableName: String
+    let tableName: TableName
     
     @usableFromInline
     let `where`: Expression?
     
     @inlinable
-    public init(tableName: String, with: With? = nil, where whereExpression: Expression? = nil) {
+    public init(tableName: TableName, with: With? = nil, where whereExpression: Expression? = nil) {
         self.tableName = tableName
         self.with = with
         self.where = whereExpression
