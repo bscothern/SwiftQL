@@ -12,6 +12,31 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
-struct Reindex {
+/// https://www.sqlite.org/lang_reindex.html
+public struct Reindex: Statement {
+    @inlinable
+    public var _statement: String { "REINDEX\(_statementBase)" }
+    
+    @usableFromInline
+    let _statementBase: String
+    
+    @inlinable
+    public init() {
+        _statementBase = ""
+    }
+    
+    @inlinable
+    public init(collationName: String) {
+        _statementBase = " \(collationName)"
+    }
+    
+    @inlinable
+    public init(schemaName: String? = nil, tableName: String) {
+        _statementBase = " \(schemaName.map { "\($0)." } ?? "")\(tableName)"
+    }
+    
+    @inlinable
+    public init(schemaName: String? = nil, indexName: String) {
+        _statementBase = " \(schemaName.map { "\($0)." } ?? "")\(indexName)"
+    }
 }

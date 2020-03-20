@@ -12,7 +12,6 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
 public struct With: Substatement {
     @inlinable
     public var _substatement: String {

@@ -18,7 +18,7 @@ import SQLite3
 public struct CreateTable: Statement {
     @inlinable
     public var _statement: String {
-        let isTemporary = self.isTemporary ? " TEMP" : ""
+        let isTemporary = self.isTemporary ? " TEMPORARY" : ""
         let ifNotExists = !self.ifNotExists ? " IF NOT EXISTS" : ""
         let schemaName = self.schemaName.map { "\($0)." } ?? ""
         let name = self.name

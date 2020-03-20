@@ -7,10 +7,12 @@
 //
 
 extension String.StringInterpolation {
+    @inlinable
     public mutating func appendIntepolation(_ statement: Statement) {
         appendInterpolation(statement._statement)
     }
 
+    @inlinable
     public mutating func appendInterpolation(_ substatement: Substatement) {
         appendInterpolation(substatement._substatement)
     }

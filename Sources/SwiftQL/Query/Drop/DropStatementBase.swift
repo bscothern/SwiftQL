@@ -12,6 +12,7 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
+/// This type is used by `DropIndex`, `DropTable`, `DropTrigger`, and `DropView` to share their common components.
 @usableFromInline
 struct DropStatementBase: Statement {
     @usableFromInline

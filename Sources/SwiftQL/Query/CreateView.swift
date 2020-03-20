@@ -12,6 +12,43 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
-struct CreateView {
+/// https://www.sqlite.org/lang_createview.html
+public struct CreateView: Statement {
+    public var _statement: String {
+        let isTemporary = self.isTemporary ? " TEMPORARY" : ""
+        let ifNotExists = self.ifNotExists ? " IF NOT EXISTS" : ""
+        let schemaName = self.schemaName.map { "\($0)." } ?? ""
+        let name = self.name
+        let columnNames = !self.columnNames.isEmpty ? " (\(self.columnNames.joined(separator: ", ")))" : ""
+        let select = self.select
+        return "CREATE\(isTemporary) VIEW\(ifNotExists) \(schemaName)\(name)\(columnNames) AS \(select)"
+    }
+    
+    @usableFromInline
+    let name: String
+    
+    @usableFromInline
+    let schemaName: String?
+    
+    @usableFromInline
+    let isTemporary: Bool
+    
+    @usableFromInline
+    let ifNotExists: Bool
+    
+    @usableFromInline
+    let columnNames: [String]
+    
+    @usableFromInline
+    let select: Select
+    
+    @inlinable
+    public init(name: String, schemaName: String? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, columnNames: [String], as select: Select) {
+        self.name = name
+        self.schemaName = schemaName
+        self.isTemporary = isTemporary
+        self.ifNotExists = ifNotExists
+        self.columnNames = columnNames
+        self.select = select
+    }
 }
