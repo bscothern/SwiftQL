@@ -24,19 +24,19 @@ public struct Update: UpdateStatement {
             .joined(separator: ", ")
         return "\(with)UPDATE \(or)\(tableName) SET \(set)"
     }
-    
+
     @usableFromInline
     let tableName: TableName
-    
+
     @usableFromInline
     let with: With?
-    
+
     @usableFromInline
     let or: Or?
-    
+
     @usableFromInline
     let set: [(name: String, to: Literal)]
-    
+
     @inlinable
     public init(tableName: TableName, with: With?, or: Or?, @PassThroughBuilder<(name: String, to: Literal)> set: () -> [(name: String, to: Literal)]) {
         self.tableName = tableName
@@ -44,12 +44,11 @@ public struct Update: UpdateStatement {
         self.or = or
         self.set = set()
     }
-    
+
     public func `where`(_ expression: Expression) -> some UpdateStatement {
         UpdateWhere(base: self, expression: expression)
     }
 }
-
 
 @usableFromInline
 struct UpdateWhere: UpdateStatement {
@@ -57,13 +56,13 @@ struct UpdateWhere: UpdateStatement {
     var _statement: String {
         "\(base) WHERE \(expression)"
     }
-    
+
     @usableFromInline
     let base: Update
-    
+
     @usableFromInline
     let expression: Expression
-    
+
     @usableFromInline
     init(base: Update, expression: Expression) {
         self.base = base

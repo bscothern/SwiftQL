@@ -23,25 +23,25 @@ public struct CreateView: Statement {
         let select = self.select
         return "CREATE\(isTemporary) VIEW\(ifNotExists) \(schemaName)\(name)\(columnNames) AS \(select)"
     }
-    
+
     @usableFromInline
     let name: String
-    
+
     @usableFromInline
     let schemaName: SchemaName?
-    
+
     @usableFromInline
     let isTemporary: Bool
-    
+
     @usableFromInline
     let ifNotExists: Bool
-    
+
     @usableFromInline
     let columnNames: [String]
-    
+
     @usableFromInline
     let select: Select
-    
+
     @inlinable
     public init(name: String, schemaName: SchemaName? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, columnNames: [String], as select: Select) {
         self.name = name

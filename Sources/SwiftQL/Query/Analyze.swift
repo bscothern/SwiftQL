@@ -73,7 +73,7 @@ extension Analyze {
     struct _TableOrIndexName: _AnalyzeSubstatement {
         @usableFromInline
         var _substatement: String
-        
+
         @usableFromInline
         init(_ value: Substatement) {
             _substatement = "\(value)"

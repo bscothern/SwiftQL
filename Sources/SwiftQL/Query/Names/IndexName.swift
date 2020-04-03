@@ -9,9 +9,9 @@
 public struct IndexName: Name {
     @inlinable
     public var _substatement: String { value }
-    
+
     public let value: String
-    
+
     @inlinable
     public init(_ value: String) {
         self.value = value

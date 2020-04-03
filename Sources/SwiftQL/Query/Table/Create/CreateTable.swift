@@ -26,10 +26,10 @@ public struct CreateTable: Statement {
     }
 
     @usableFromInline
-    let name: TableName
+    let schemaName: SchemaName?
 
     @usableFromInline
-    let schemaName: SchemaName?
+    let name: TableName
 
     @usableFromInline
     let isTemporary: Bool

@@ -16,25 +16,25 @@ import SQLite3
 public struct Reindex: Statement {
     @inlinable
     public var _statement: String { "REINDEX\(_statementBase)" }
-    
+
     @usableFromInline
     let _statementBase: String
-    
+
     @inlinable
     public init() {
         _statementBase = ""
     }
-    
+
     @inlinable
     public init(collationName: String) {
         _statementBase = " \(collationName)"
     }
-    
+
     @inlinable
     public init(schemaName: SchemaName? = nil, tableName: TableName) {
         _statementBase = " \(schemaName.map { "\($0)." } ?? "")\(tableName)"
     }
-    
+
     @inlinable
     public init(schemaName: SchemaName? = nil, indexName: IndexName) {
         _statementBase = " \(schemaName.map { "\($0)." } ?? "")\(indexName)"

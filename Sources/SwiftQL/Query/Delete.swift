@@ -23,19 +23,19 @@ public struct Delete: Statement {
 
     @usableFromInline
     let with: With?
-    
+
     @usableFromInline
     let tableName: TableName
-    
+
     @usableFromInline
     let `where`: Expression?
-    
+
     @inlinable
     public init(tableName: TableName, with: With? = nil, where whereExpression: Expression? = nil) {
         self.tableName = tableName
         self.with = with
         self.where = whereExpression
     }
-    
+
     // TODO: How to support: Optional LIMIT and ORDER BY clauses ?
 }

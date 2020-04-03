@@ -8,7 +8,7 @@
 
 public struct TableName: Name {
     public let value: String
- 
+
     @inlinable
     public var _substatement: String { value }
 

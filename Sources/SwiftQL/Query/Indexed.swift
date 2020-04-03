@@ -24,7 +24,7 @@ public struct Indexed: Substatement {
     public static func by(_ name: String) -> Self {
         Self("INDEXED BY \(name)")
     }
-    
+
     public static func not() -> Self {
         Self("NOT INDEXED")
     }
