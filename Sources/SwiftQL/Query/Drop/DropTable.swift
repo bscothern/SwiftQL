@@ -20,12 +20,12 @@ public struct DropTable: Statement {
     let base: DropStatementBase
 
     @inlinable
-    public init(name: String, ifExists: Bool = true) {
+    public init(name: TableName, ifExists: Bool = true) {
         base = .init(.table, name: name, schemaName: nil, ifExists: ifExists)
     }
 
     @inlinable
-    public init(name: String, schemaName: SchemaName, ifExists: Bool = true) {
+    public init(name: TableName, schemaName: SchemaName, ifExists: Bool = true) {
         base = .init(.table, name: name, schemaName: schemaName, ifExists: ifExists)
     }
 }

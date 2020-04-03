@@ -20,12 +20,12 @@ public struct DropTrigger: Statement {
     let base: DropStatementBase
 
     @inlinable
-    public init(name: String, ifExists: Bool = true) {
+    public init(name: TriggerName, ifExists: Bool = true) {
         base = .init(.trigger, name: name, schemaName: nil, ifExists: ifExists)
     }
 
     @inlinable
-    public init(name: String, schemaName: SchemaName, ifExists: Bool = true) {
+    public init(name: TriggerName, schemaName: SchemaName, ifExists: Bool = true) {
         base = .init(.trigger, name: name, schemaName: schemaName, ifExists: ifExists)
     }
 }

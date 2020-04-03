@@ -6,23 +6,21 @@
 //  Copyright © 2020 Braden Scothern. All rights reserved.
 //
 
-public struct IndexName {
-    public let value: String
-    
-    @usableFromInline
-    init(value: String) {
-        self.value = value
-    }
-}
-
-extension IndexName: Substatement {
+public struct IndexName: Name {
     @inlinable
     public var _substatement: String { value }
+    
+    public let value: String
+    
+    @inlinable
+    public init(_ value: String) {
+        self.value = value
+    }
 }
 
 extension IndexName: ExpressibleByStringLiteral {
     @inlinable
     public init(stringLiteral: String) {
-        self.init(value: stringLiteral)
+        self.init(stringLiteral)
     }
 }

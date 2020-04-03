@@ -6,23 +6,21 @@
 //  Copyright © 2020 Braden Scothern. All rights reserved.
 //
 
-public struct TableName {
+public struct TableName: Name {
     public let value: String
-    
-    @usableFromInline
-    init(value: String) {
-        self.value = value
-    }
-}
-
-extension TableName: Substatement {
+ 
     @inlinable
     public var _substatement: String { value }
+
+    @inlinable
+    public init(_ value: String) {
+        self.value = value
+    }
 }
 
 extension TableName: ExpressibleByStringLiteral {
     @inlinable
     public init(stringLiteral: String) {
-        self.init(value: stringLiteral)
+        self.init(stringLiteral)
     }
 }

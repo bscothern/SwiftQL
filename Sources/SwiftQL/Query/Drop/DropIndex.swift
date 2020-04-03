@@ -20,12 +20,12 @@ public struct DropIndex: Statement {
     let base: DropStatementBase
 
     @inlinable
-    public init(name: String, ifExists: Bool = true) {
+    public init(name: IndexName, ifExists: Bool = true) {
         base = .init(.index, name: name, schemaName: nil, ifExists: ifExists)
     }
 
     @inlinable
-    public init(name: String, schemaName: SchemaName, ifExists: Bool = true) {
+    public init(name: IndexName, schemaName: SchemaName, ifExists: Bool = true) {
         base = .init(.index, name: name, schemaName: schemaName, ifExists: ifExists)
     }
 }
