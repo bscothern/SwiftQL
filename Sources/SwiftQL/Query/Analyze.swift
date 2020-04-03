@@ -60,7 +60,9 @@ extension Analyze {
         let tableOrIndexName: _TableOrIndexName?
 
         @usableFromInline
-        var _substatement: String { "\(schemaName)\(tableOrIndexName.map { ".\($0._substatement)" } ?? "")" }
+        var _substatement: String {
+            "\(schemaName)\(tableOrIndexName.map { ".\($0._substatement)" } ?? "")"
+        }
 
         @usableFromInline
         init(_ schemaName: SchemaName, tableOrIndexName: _TableOrIndexName? = nil) {

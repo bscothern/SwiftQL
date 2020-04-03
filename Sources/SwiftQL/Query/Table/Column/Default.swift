@@ -15,7 +15,7 @@ import SQLite3
 @usableFromInline
 struct Default: ColumnConstraintSubstatement {
     @usableFromInline
-    var _substatement: String { "\(base._substatement) DEFAULT \(content._substatement)" }
+    var _substatement: String { "\(base) DEFAULT \(content)" }
 
     @usableFromInline
     let content: DefaultContent

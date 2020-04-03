@@ -124,6 +124,5 @@ extension CreateTrigger {
 public protocol TriggerTransaction: Statement {}
 
 extension Update: TriggerTransaction {}
-extension Insert: TriggerTransaction {}
 extension Delete: TriggerTransaction {}
 extension Select: TriggerTransaction {}

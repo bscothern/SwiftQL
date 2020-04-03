@@ -61,8 +61,7 @@ struct TableConstraintPrimaryKeyOrUnique: TableConstraintSubstatement {
     public var _substatement: String {
         let classification = self.classification.rawValue
         let indexedColumns = self.indexedColumns.joined(separator: ", ")
-        let onConflict = self.onConflict?._substatement ?? ""
-        return "\(base._substatement) \(classification) (\(indexedColumns))\(onConflict)"
+        return "\(base) \(classification) (\(indexedColumns))\(onConflict, leadingSpace: true)"
     }
 
     @usableFromInline
@@ -108,7 +107,6 @@ struct TableConstraintForeignKey: TableConstraintSubstatement {
     @inlinable
     public var _substatement: String {
         let columns = self.columns.joined(separator: ", ")
-        let foreignKey = self.foreignKey._substatement
         return "\(base._substatement) FOREIGN KEY (\(columns)) \(foreignKey)"
     }
 

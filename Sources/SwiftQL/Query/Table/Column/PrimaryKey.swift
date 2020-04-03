@@ -17,9 +17,8 @@ struct PrimaryKey: ColumnConstraintSubstatement {
     @usableFromInline
     var _substatement: String {
         let ascendingStatement = ascending.map { $0 ? " ASC" : " DESC" } ?? ""
-        let onConflictStatement = onConflict?._substatement ?? ""
         let autoIncrementStatement = autoIncrement ? " AUTOINCREMENT" : ""
-        return "\(base._substatement) PRIMARY KEY\(ascendingStatement)\(onConflictStatement)\(autoIncrementStatement)"
+        return "\(base._substatement) PRIMARY KEY\(ascendingStatement)\(onConflict, leadingSpace: true)\(autoIncrementStatement)"
     }
 
     @usableFromInline

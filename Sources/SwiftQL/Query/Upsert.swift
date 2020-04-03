@@ -13,5 +13,5 @@ import SQLite3
 #endif
 
 #warning("IMPLIMENT")
-struct Upsert {
+public struct Upsert {
 }

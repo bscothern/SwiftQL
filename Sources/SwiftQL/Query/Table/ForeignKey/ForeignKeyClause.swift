@@ -94,7 +94,7 @@ struct ForeignKeyClauseOn: ForeignKeyClauseSubstatementExtendable {
     @usableFromInline var _substatement: String {
         let category = self.category.rawValue
         let action = self.action.rawValue
-        return "\(base._substatement) \(category) \(action)"
+        return "\(base) \(category) \(action)"
     }
 
     @usableFromInline
@@ -117,7 +117,7 @@ struct ForeignKeyClauseOn: ForeignKeyClauseSubstatementExtendable {
 @usableFromInline
 struct ForeignKeyClauseMatch: ForeignKeyClauseSubstatementExtendable {
     @usableFromInline var _substatement: String {
-        return "\(base._substatement) MATCH \(name)"
+        return "\(base) MATCH \(name)"
     }
 
     @usableFromInline
@@ -146,7 +146,7 @@ struct ForeignKeyClauseDeferrable: ForeignKeyClauseSubstatement {
     var _substatement: String {
         let not = self.not ? " NOT" : ""
         let clause = self.clause.map { " \($0.rawValue)" } ?? ""
-        return "\(base._substatement)\(not) DEFERRABLE\(clause)"
+        return "\(base)\(not) DEFERRABLE\(clause)"
     }
 
     @usableFromInline
