@@ -35,7 +35,7 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 * [X] INDEXED BY
 * [ ] INSERT
 * [ ] keywords
-* [ X ON CONFLICT clause
+* [X] ON CONFLICT clause
 * [ ] PRAGMA
 * [X] REINDEX
 * [X] RELEASE SAVEPOINT
