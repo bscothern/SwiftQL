@@ -15,7 +15,7 @@ import SQLite3
 /// https://www.sqlite.org/syntax/column-def.html
 public struct Column: Substatement {
     @usableFromInline
-    let name: String
+    let name: ColumnName
 
     @usableFromInline
     let type: DataType?
@@ -33,14 +33,14 @@ public struct Column: Substatement {
     }
 
     @usableFromInline
-    init(name: String, type: DataType?, constraints: [ColumnConstraintSubstatement]) {
+    init(name: ColumnName, type: DataType?, constraints: [ColumnConstraintSubstatement]) {
         self.name = name
         self.type = type
         self.constraints = constraints
     }
 
     @inlinable
-    public init(name: String, type: DataType, @PassThroughBuilder<ColumnConstraintSubstatement> constraints constraintsBuilder: () -> [ColumnConstraintSubstatement]) {
+    public init(name: ColumnName, type: DataType, @PassThroughBuilder<ColumnConstraintSubstatement> constraints constraintsBuilder: () -> [ColumnConstraintSubstatement]) {
         self.init(name: name, type: type, constraints: constraintsBuilder())
     }
 }

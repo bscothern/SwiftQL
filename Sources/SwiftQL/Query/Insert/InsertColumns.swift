@@ -10,14 +10,19 @@
 struct InsertColumns: InsertSubstatement {
     @usableFromInline
     var _substatement: String {
-        "\(base)"
+        let columnNames = names.isEmpty ? "" : " (\(names.map(\.value).joined(separator: ", ")))"
+        return "\(base)\(columnNames)"
     }
-    
+
     @usableFromInline
     let base: ColumnEditableInsert
     
     @usableFromInline
-    init(_ base: ColumnEditableInsert) {
+    let names: [ColumnName]
+    
+    @usableFromInline
+    init(_ base: ColumnEditableInsert, names: [ColumnName]) {
         self.base = base
+        self.names = names
     }
 }

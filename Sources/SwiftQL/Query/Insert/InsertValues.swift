@@ -10,15 +10,27 @@
 struct InsertValues: InsertStatement, UpsertableInsert {
     @usableFromInline
     var _statement: String {
-        let values = ""
-        return "\(base) VALUES \(values)"
+        let expressions = self.expressions
+            .map { group -> String in
+                let expressions = group.expressions
+                    .map { "\($0)" }
+                    .joined(separator: ", ")
+                return "(\(expressions))"
+            }
+            .joined(separator: ", ")
+        return "\(base) VALUES \(expressions)"
     }
     
     @usableFromInline
     let base: InsertSubstatement
     
     @usableFromInline
-    init(_ base: InsertSubstatement) {
+    let expressions: [ExpressionGroup]
+    
+    @usableFromInline
+    init(_ base: InsertSubstatement, expressions: [ExpressionGroup]) {
+        precondition(!expressions.isEmpty)
         self.base = base
+        self.expressions = expressions
     }
 }

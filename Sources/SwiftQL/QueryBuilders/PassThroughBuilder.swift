@@ -15,6 +15,11 @@ import SQLite3
 @_functionBuilder
 public enum PassThroughBuilder<T> {
     @inlinable
+    public static func buildBlock(_ components: T) -> [T] {
+        [components]
+    }
+    
+    @inlinable
     public static func buildBlock(_ components: T...) -> [T] {
         components
     }

@@ -55,8 +55,8 @@ public struct Insert: ColumnEditableInsert {
 
 extension ColumnEditableInsert {
     @inlinable
-    public func columns() -> some InsertSubstatement {
-        InsertColumns(self)
+    public func columns(@PassThroughBuilder<ColumnName> names: () -> [ColumnName]) -> some InsertSubstatement {
+        InsertColumns(self, names: names())
     }
 }
 
@@ -69,8 +69,13 @@ extension With {
 
 extension InsertSubstatement {
     @inlinable
-    public func values() -> some (InsertStatement & UpsertableInsert) {
-        InsertValues(self)
+    public func values(@PassThroughBuilder<Expression> expressions: @escaping () -> [Expression]) -> some (InsertStatement & UpsertableInsert) {
+        InsertValues(self, expressions: [.init(expressions())])
+    }
+
+    @inlinable
+    public func values(@PassThroughBuilder<ExpressionGroup> expressions: @escaping () -> [ExpressionGroup]) -> some (InsertStatement & UpsertableInsert) {
+        InsertValues(self, expressions: expressions())
     }
     
     @inlinable
