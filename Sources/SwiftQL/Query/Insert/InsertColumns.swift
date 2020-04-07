@@ -10,14 +10,14 @@
 struct InsertColumns: InsertSubstatement {
     @usableFromInline
     var _substatement: String {
-        ""
+        "\(base)"
     }
     
     @usableFromInline
-    let base: Insert
+    let base: ColumnEditableInsert
     
     @usableFromInline
-    init(_ base: Insert) {
+    init(_ base: ColumnEditableInsert) {
         self.base = base
     }
 }

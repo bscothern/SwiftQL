@@ -39,7 +39,7 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 * [ ] PRAGMA
 * [X] REINDEX
 * [X] RELEASE SAVEPOINT
-* [ ] REPLACE
+* [X] REPLACE
 * [X] ROLLBACK TRANSACTION
 * [X] SAVEPOINT
 * [ ] SELECT

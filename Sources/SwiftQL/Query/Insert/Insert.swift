@@ -13,10 +13,11 @@ import SQLite3
 #endif
 
 public protocol InsertStatement: TriggerTransaction {}
-public protocol UpsertableInsert: Statement {}
 public protocol InsertSubstatement: Substatement {}
+public protocol ColumnEditableInsert: InsertSubstatement {}
+public protocol UpsertableInsert: InsertStatement {}
 
-public struct Insert: InsertSubstatement {
+public struct Insert: ColumnEditableInsert {
     @inlinable
     public var _substatement: String {
         "\(with, trailingSpace: true)"
@@ -50,7 +51,9 @@ public struct Insert: InsertSubstatement {
     public init(or: Or? = nil, schemaName: SchemaName? = nil, tableName: TableName, as alias: TableName? = nil) {
         self.init(with: nil, or: or, schemaName: schemaName, tableName: tableName, as: alias)
     }
-    
+}
+
+extension ColumnEditableInsert {
     @inlinable
     public func columns() -> some InsertSubstatement {
         InsertColumns(self)
