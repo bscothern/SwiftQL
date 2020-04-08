@@ -24,3 +24,5 @@ extension ColumnName: ExpressibleByStringLiteral {
         self.init(stringLiteral)
     }
 }
+
+public typealias IndexedColumnName = ColumnName

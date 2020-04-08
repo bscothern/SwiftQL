@@ -16,6 +16,8 @@ public protocol InsertStatement: TriggerTransaction {}
 public protocol InsertSubstatement: Substatement {}
 public protocol ColumnEditableInsert: InsertSubstatement {}
 public protocol UpsertableInsert: InsertStatement {}
+public protocol InsertOnConflictSubstatement: Substatement {}
+public protocol InsertOnConflictWhereSubstatement: InsertOnConflictSubstatement {}
 
 public struct Insert: ColumnEditableInsert {
     @inlinable
@@ -90,7 +92,31 @@ extension InsertSubstatement {
 }
 
 extension InsertStatement where Self: UpsertableInsert  {
-    public func upsert(_ upsert: Upsert) -> some InsertStatement {
-        InsertUpsert(self, upsert: upsert)
+    @inlinable
+    public func onConflict() -> some InsertOnConflictSubstatement {
+        InsertOnConflict(self, indexedColumns: [])
+    }
+    
+    @inlinable
+    public func onConflict(@PassThroughBuilder<IndexedColumnName> indexedColumns: () -> [IndexedColumnName]) -> some InsertOnConflictWhereSubstatement {
+        InsertOnConflict(self, indexedColumns: indexedColumns())
+    }
+}
+
+extension InsertOnConflictWhereSubstatement {
+    @inlinable
+    public func `where`(_ expression: Expression) -> InsertOnConflictSubstatement {
+        InsertOnConflictWhere(self, expression: expression)
+    }
+}
+
+extension InsertOnConflictSubstatement {
+    @inlinable
+    public func doNothing() -> InsertStatement {
+        InsertUpsert(self, do: .nothing)
+    }
+    
+    @inlinable public func doUpdate() -> InsertStatement {
+        InsertUpsert(self, do: .update)
     }
 }
