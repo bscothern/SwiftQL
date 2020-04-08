@@ -16,7 +16,7 @@ extension String.StringInterpolation {
     public mutating func appendInterpolation(_ substatement: Substatement, leadingSpace: Bool = false, trailingSpace: Bool = false) {
         appendInterpolation("\(leadingSpace ? " " : "")\(substatement._substatement)\(trailingSpace ? " " : "")")
     }
-    
+
     @inlinable
     public mutating func appendIntepolation(_ statement: Statement?, leadingSpace: Bool = false, trailingSpace: Bool = false) {
         appendInterpolation(statement.map { "\(leadingSpace ? " " : "")\($0._statement)\(trailingSpace ? " " : "")" } ?? "")

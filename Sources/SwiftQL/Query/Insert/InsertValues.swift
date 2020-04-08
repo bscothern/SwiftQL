@@ -20,13 +20,13 @@ struct InsertValues: InsertStatement, UpsertableInsert {
             .joined(separator: ", ")
         return "\(base) VALUES \(expressions)"
     }
-    
+
     @usableFromInline
     let base: InsertSubstatement
-    
+
     @usableFromInline
     let expressions: [ExpressionGroup]
-    
+
     @usableFromInline
     init(_ base: InsertSubstatement, expressions: [ExpressionGroup]) {
         precondition(!expressions.isEmpty)

@@ -16,10 +16,10 @@ struct InsertColumns: InsertSubstatement {
 
     @usableFromInline
     let base: ColumnEditableInsert
-    
+
     @usableFromInline
     let names: [ColumnName]
-    
+
     @usableFromInline
     init(_ base: ColumnEditableInsert, names: [ColumnName]) {
         self.base = base

@@ -17,7 +17,7 @@ public struct Replace: ColumnEditableInsert {
     public var _substatement: String {
         "\(insert)"
     }
-    
+
     @usableFromInline
     let insert: Insert
 
@@ -25,7 +25,7 @@ public struct Replace: ColumnEditableInsert {
     init(insert: Insert) {
         self.insert = insert
     }
-    
+
     @inlinable
     public init(schemaName: SchemaName? = nil, tableName: TableName, as alias: TableName? = nil) {
         self.init(insert: .init(with: nil, or: .replace, schemaName: schemaName, tableName: tableName, as: alias))

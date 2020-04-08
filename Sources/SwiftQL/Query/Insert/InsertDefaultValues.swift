@@ -10,10 +10,10 @@
 struct InsertDefaultValues: InsertStatement, UpsertableInsert {
     @usableFromInline
     var _statement: String { "\(base) DEFAULT VALUES" }
-    
+
     @usableFromInline
     let base: InsertSubstatement
-    
+
     @usableFromInline
     init(_ base: InsertSubstatement) {
         self.base = base

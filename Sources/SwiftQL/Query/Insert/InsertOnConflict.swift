@@ -13,13 +13,13 @@ struct InsertOnConflict: InsertOnConflictWhereSubstatement {
         let columns = indexedColumns.isEmpty ? "" : " (\(indexedColumns.map(\.value).joined(separator: ", "))"
         return "\(base)\(columns)"
     }
-    
+
     @usableFromInline
     let base: InsertStatement
-    
+
     @usableFromInline
     let indexedColumns: [IndexedColumnName]
-    
+
     @usableFromInline
     init(_ base: InsertStatement, indexedColumns: [IndexedColumnName]) {
         self.base = base

@@ -10,13 +10,13 @@
 struct InsertSelect: InsertStatement, UpsertableInsert {
     @usableFromInline
     var _statement: String { "\(base) \(select)" }
-    
+
     @usableFromInline
     let base: InsertSubstatement
-    
+
     @usableFromInline
     let select: Select
-    
+
     @usableFromInline
     init(_ base: InsertSubstatement, select: Select) {
         self.base = base

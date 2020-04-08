@@ -36,7 +36,7 @@ public struct Insert: ColumnEditableInsert {
 
     @usableFromInline
     let tableName: TableName
-    
+
     @usableFromInline
     let alias: TableName?
 
@@ -79,24 +79,24 @@ extension InsertSubstatement {
     public func values(@PassThroughBuilder<ExpressionGroup> expressions: @escaping () -> [ExpressionGroup]) -> some (InsertStatement & UpsertableInsert) {
         InsertValues(self, expressions: expressions())
     }
-    
+
     @inlinable
     public func select(_ select: Select) -> some (InsertStatement & UpsertableInsert) {
         InsertSelect(self, select: select)
     }
-    
+
     @inlinable
     public func defaultValues() -> some (InsertStatement & UpsertableInsert) {
         InsertDefaultValues(self)
     }
 }
 
-extension InsertStatement where Self: UpsertableInsert  {
+extension InsertStatement where Self: UpsertableInsert {
     @inlinable
     public func onConflict() -> some InsertOnConflictSubstatement {
         InsertOnConflict(self, indexedColumns: [])
     }
-    
+
     @inlinable
     public func onConflict(@PassThroughBuilder<IndexedColumnName> indexedColumns: () -> [IndexedColumnName]) -> some InsertOnConflictWhereSubstatement {
         InsertOnConflict(self, indexedColumns: indexedColumns())
@@ -115,7 +115,7 @@ extension InsertOnConflictSubstatement {
     public func doNothing() -> InsertStatement {
         InsertUpsert(self, do: .nothing)
     }
-    
+
     @inlinable public func doUpdate() -> InsertStatement {
         InsertUpsert(self, do: .update)
     }

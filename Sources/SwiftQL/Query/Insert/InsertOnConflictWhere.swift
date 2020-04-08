@@ -10,13 +10,13 @@
 struct InsertOnConflictWhere: InsertOnConflictSubstatement {
     @usableFromInline
     var _substatement: String { "\(base) WHERE \(expression)" }
-    
+
     @usableFromInline
     let base: InsertOnConflictWhereSubstatement
-    
+
     @usableFromInline
     let expression: Expression
-    
+
     @usableFromInline
     init(_ base: InsertOnConflictWhereSubstatement, expression: Expression) {
         self.base = base

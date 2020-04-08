@@ -8,7 +8,7 @@
 
 public struct ExpressionGroup {
     public let expressions: [Expression]
-    
+
     @inlinable
     public init(_ expressions: [Expression]) {
         precondition(!expressions.isEmpty)

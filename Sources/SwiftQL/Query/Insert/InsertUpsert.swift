@@ -8,22 +8,21 @@
 
 @usableFromInline
 struct InsertUpsert: InsertStatement {
-    
     @usableFromInline
     enum UpsertAction: String {
         case nothing = "NOTHING"
         case update = "UPDATE SET"
     }
-    
+
     @usableFromInline
     var _statement: String { "\(base) DO \(action.rawValue)" }
-    
+
     @usableFromInline
     let base: InsertOnConflictSubstatement
-    
+
     @usableFromInline
     let action: UpsertAction
-    
+
     @usableFromInline
     init(_ base: InsertOnConflictSubstatement, do action: UpsertAction) {
         self.base = base
