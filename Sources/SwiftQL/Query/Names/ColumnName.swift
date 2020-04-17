@@ -25,4 +25,5 @@ extension ColumnName: ExpressibleByStringLiteral {
     }
 }
 
+/// A `ColumnName` that also is indexed in the database.
 public typealias IndexedColumnName = ColumnName

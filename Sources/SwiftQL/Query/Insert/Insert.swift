@@ -116,7 +116,7 @@ extension InsertOnConflictSubstatement {
         InsertUpsert(self, do: .nothing)
     }
 
-    @inlinable public func doUpdate() -> InsertStatement {
+    @inlinable public func update() -> InsertStatement {
         InsertUpsert(self, do: .update)
     }
 }

@@ -12,6 +12,7 @@ import SwiftQLLinux
 import SQLite3
 #endif
 
+/// https://www.sqlite.org/lang_analyze.html
 public struct Analyze: Statement {
     @inlinable
     public var _statement: String {
