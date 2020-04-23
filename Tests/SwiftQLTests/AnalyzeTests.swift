@@ -1,4 +1,4 @@
-@testable import SwiftQL
+import SwiftQLite
 import XCTest
 
 final class AnalyzeSyntaxTests: XCTestCase {

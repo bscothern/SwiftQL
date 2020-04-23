@@ -9,8 +9,8 @@ var products: [Product] {
     #else
     return [
         .library(
-            name: "SwiftQL",
-            targets: ["SwiftQL"]
+            name: "SwiftQLite",
+            targets: ["SwiftQLite"]
         ),
     ]
     #endif
@@ -23,28 +23,28 @@ var dependencies: [Package.Dependency] {
 var targets: [Target] {
     let sharedTargets: [Target] = [
         .testTarget(
-            name: "SwiftQLTests",
-            dependencies: ["SwiftQL"]
+            name: "SwiftQLiteTests",
+            dependencies: ["SwiftQLite"]
         ),
     ]
 
     #if os(Linux)
     return sharedTargets + [
         .target(
-            name: "SwiftQL",
+            name: "SwiftQLite",
             dependencies: [
-                "SwiftQLLinux"
+                "SwiftQLiteLinux"
             ]
         ),
         .systemLibrary(
-            name: "SwiftQLLinux",
+            name: "SwiftQLiteLinux",
             providers: [.apt(["libsqlite3-dev"])]
         )
     ]
     #else
     return sharedTargets + [
         .target(
-            name: "SwiftQL",
+            name: "SwiftQLite",
             dependencies: []
         ),
     ]
@@ -52,7 +52,7 @@ var targets: [Target] {
 }
 
 let package = Package(
-    name: "SwiftQL",
+    name: "SwiftQLite",
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),

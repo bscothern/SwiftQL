@@ -1,6 +1,6 @@
 //
 //  String.StringInterpolation.swift
-//  SwiftQL
+//  SwiftQLite
 //
 //  Created by Braden Scothern on 3/17/20.
 //  Copyright © 2020 Braden Scothern. All rights reserved.

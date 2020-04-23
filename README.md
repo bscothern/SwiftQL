@@ -1,4 +1,4 @@
-# SwiftQL
+# SwiftQLite
 
 ## Development Notes
 Initial development will be `String` based APIs for simplicity and it will be needed to build type safety on top of since SQLite is a `String` based API anyways.
