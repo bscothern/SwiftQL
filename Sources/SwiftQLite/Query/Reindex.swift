@@ -15,7 +15,7 @@ import SQLite3
 /// https://www.sqlite.org/lang_reindex.html
 public struct Reindex: Statement {
     @inlinable
-    public var _statement: String { "REINDEX\(_statementBase)" }
+    public var statementValue: String { "REINDEX\(_statementBase)" }
 
     @usableFromInline
     let _statementBase: String

@@ -14,7 +14,7 @@ import SQLite3
 
 public struct Savepoint: Statement {
     @inlinable
-    public var _statement: String { "SAVEPOINT \(name)" }
+    public var statementValue: String { "SAVEPOINT \(name)" }
 
     @usableFromInline
     let name: String

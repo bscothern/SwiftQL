@@ -22,10 +22,10 @@ extension ColumnConstraint {
 @usableFromInline
 struct ColumnAsExpression: ColumnConstraintSubstatement {
     @usableFromInline
-    var _substatement: String {
+    var substatementValue: String {
         let generatedAlways = self.generatedAlways ? " GENERATED ALWAYS" : ""
         let attribute = self.attribute.map { " \($0)" } ?? ""
-        return "\(base._substatement)\(generatedAlways) AS (\(expression))\(attribute)"
+        return "\(base.substatementValue)\(generatedAlways) AS (\(expression))\(attribute)"
     }
 
     @usableFromInline

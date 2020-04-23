@@ -9,7 +9,7 @@
 @usableFromInline
 struct InsertDefaultValues: InsertStatement, UpsertableInsert {
     @usableFromInline
-    var _statement: String { "\(base) DEFAULT VALUES" }
+    var statementValue: String { "\(base) DEFAULT VALUES" }
 
     @usableFromInline
     let base: InsertSubstatement

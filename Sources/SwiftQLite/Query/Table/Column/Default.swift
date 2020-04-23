@@ -15,7 +15,7 @@ import SQLite3
 @usableFromInline
 struct Default: ColumnConstraintSubstatement {
     @usableFromInline
-    var _substatement: String { "\(base) DEFAULT \(content)" }
+    var substatementValue: String { "\(base) DEFAULT \(content)" }
 
     @usableFromInline
     let content: DefaultContent
@@ -48,7 +48,7 @@ protocol DefaultContent: Substatement {}
 @usableFromInline
 struct DefaultExpression: DefaultContent {
     @inlinable
-    public var _substatement: String { "(\(expression))" }
+    public var substatementValue: String { "(\(expression))" }
 
     @usableFromInline
     let expression: Expression
@@ -62,7 +62,7 @@ struct DefaultExpression: DefaultContent {
 @usableFromInline
 struct DefaultSignedNumber<Numeral>: DefaultContent where Numeral: SignedNumeric {
     @inlinable
-    public var _substatement: String { "\(number)" }
+    public var substatementValue: String { "\(number)" }
 
     @usableFromInline
     let number: Numeral
@@ -76,7 +76,7 @@ struct DefaultSignedNumber<Numeral>: DefaultContent where Numeral: SignedNumeric
 @usableFromInline
 struct DefaultLiteral: DefaultContent {
     @inlinable
-    public var _substatement: String { literal._substatement }
+    public var substatementValue: String { literal.substatementValue }
 
     @usableFromInline
     let literal: Literal

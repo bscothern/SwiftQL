@@ -20,7 +20,7 @@ public struct BeginTransaction: Statement {
     }
 
     @inlinable
-    public var _statement: String { "BEGIN \(behavior.map { "\($0.rawValue) "} ?? "")TRANSACTION" }
+    public var statementValue: String { "BEGIN \(behavior.map { "\($0.rawValue) "} ?? "")TRANSACTION" }
 
     @usableFromInline
     let behavior: Behavior?

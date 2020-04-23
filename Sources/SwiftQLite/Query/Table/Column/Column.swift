@@ -24,7 +24,7 @@ public struct Column: Substatement {
     let constraints: [ColumnConstraintSubstatement]
 
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         let type = self.type.map { " \($0.rawValue)" } ?? ""
         let constraints = self.constraints.lazy
             .map { " \($0)" }

@@ -14,7 +14,7 @@ import SQLite3
 
 /// https://www.sqlite.org/lang_vacuum.html
 public struct Vacuum: Statement {
-    public var _statement: String {
+    public var statementValue: String {
         let schemaName = self.schemaName.map { " \($0)" } ?? ""
         let fileName = self.fileName.map { " INTO \($0)" } ?? ""
         return "VACUUM\(schemaName)\(fileName)"

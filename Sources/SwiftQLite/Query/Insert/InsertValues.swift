@@ -9,7 +9,7 @@
 @usableFromInline
 struct InsertValues: InsertStatement, UpsertableInsert {
     @usableFromInline
-    var _statement: String {
+    var statementValue: String {
         let expressions = self.expressions
             .map { group -> String in
                 let expressions = group.expressions

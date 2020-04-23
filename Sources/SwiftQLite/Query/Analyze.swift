@@ -15,8 +15,8 @@ import SQLite3
 /// https://www.sqlite.org/lang_analyze.html
 public struct Analyze: Statement {
     @inlinable
-    public var _statement: String {
-        "ANALYZE \(substatement._substatement)"
+    public var statementValue: String {
+        "ANALYZE \(substatement.substatementValue)"
     }
 
     @usableFromInline
@@ -61,8 +61,8 @@ extension Analyze {
         let tableOrIndexName: _TableOrIndexName?
 
         @usableFromInline
-        var _substatement: String {
-            "\(schemaName)\(tableOrIndexName.map { ".\($0._substatement)" } ?? "")"
+        var substatementValue: String {
+            "\(schemaName)\(tableOrIndexName.map { ".\($0.substatementValue)" } ?? "")"
         }
 
         @usableFromInline
@@ -75,11 +75,11 @@ extension Analyze {
     @usableFromInline
     struct _TableOrIndexName: _AnalyzeSubstatement {
         @usableFromInline
-        var _substatement: String
+        var substatementValue: String
 
         @usableFromInline
         init(_ value: Substatement) {
-            _substatement = "\(value)"
+            substatementValue = "\(value)"
         }
     }
 }

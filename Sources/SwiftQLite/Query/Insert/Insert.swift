@@ -21,7 +21,7 @@ public protocol InsertOnConflictWhereSubstatement: InsertOnConflictSubstatement 
 
 public struct Insert: ColumnEditableInsert {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         "\(with, trailingSpace: true)"
     }
 

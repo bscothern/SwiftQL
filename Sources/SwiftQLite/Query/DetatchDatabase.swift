@@ -14,7 +14,7 @@ import SQLite3
 
 public struct DetachDatabase: Statement {
     @inlinable
-    public var _statement: String { "DETACH DATABASE\(schemaName.map { " \($0)" } ?? "")"}
+    public var statementValue: String { "DETACH DATABASE\(schemaName.map { " \($0)" } ?? "")"}
 
     @usableFromInline
     let schemaName: SchemaName?

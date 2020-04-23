@@ -14,11 +14,11 @@ import SQLite3
 
 /// https://www.sqlite.org/lang_indexedby.html
 public struct Indexed: Substatement {
-    public let _substatement: String
+    public let substatementValue: String
 
     @usableFromInline
     init(_ _substatement: String) {
-        self._substatement = _substatement
+        self.substatementValue = _substatement
     }
 
     public static func by(_ name: String) -> Self {

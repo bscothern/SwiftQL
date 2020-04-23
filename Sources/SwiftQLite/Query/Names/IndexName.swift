@@ -8,7 +8,7 @@
 
 public struct IndexName: Name {
     @inlinable
-    public var _substatement: String { value }
+    public var substatementValue: String { value }
 
     public let value: String
 

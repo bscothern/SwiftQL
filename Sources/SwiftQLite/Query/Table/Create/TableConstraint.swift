@@ -16,7 +16,7 @@ public protocol TableConstraintSubstatement: Substatement {}
 
 public struct TableConstraint: Substatement {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         name.map { "CONSTRAINT \($0)" } ?? ""
     }
 
@@ -58,7 +58,7 @@ struct TableConstraintPrimaryKeyOrUnique: TableConstraintSubstatement {
         case unique = "UNIQUE"
     }
 
-    public var _substatement: String {
+    public var substatementValue: String {
         let classification = self.classification.rawValue
         let indexedColumns = self.indexedColumns.joined(separator: ", ")
         return "\(base) \(classification) (\(indexedColumns))\(onConflict, leadingSpace: true)"
@@ -88,9 +88,9 @@ struct TableConstraintPrimaryKeyOrUnique: TableConstraintSubstatement {
 @usableFromInline
 struct TableConstraintCheck: TableConstraintSubstatement {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         let expression = ""
-        return "\(base._substatement) CHECK (\(expression))"
+        return "\(base.substatementValue) CHECK (\(expression))"
     }
 
     @usableFromInline
@@ -105,9 +105,9 @@ struct TableConstraintCheck: TableConstraintSubstatement {
 @usableFromInline
 struct TableConstraintForeignKey: TableConstraintSubstatement {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         let columns = self.columns.joined(separator: ", ")
-        return "\(base._substatement) FOREIGN KEY (\(columns)) \(foreignKey)"
+        return "\(base.substatementValue) FOREIGN KEY (\(columns)) \(foreignKey)"
     }
 
     @usableFromInline

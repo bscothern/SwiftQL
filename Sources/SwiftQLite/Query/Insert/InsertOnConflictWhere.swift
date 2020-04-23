@@ -9,7 +9,7 @@
 @usableFromInline
 struct InsertOnConflictWhere: InsertOnConflictSubstatement {
     @usableFromInline
-    var _substatement: String { "\(base) WHERE \(expression)" }
+    var substatementValue: String { "\(base) WHERE \(expression)" }
 
     @usableFromInline
     let base: InsertOnConflictWhereSubstatement

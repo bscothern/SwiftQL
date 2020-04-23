@@ -15,7 +15,7 @@ struct InsertUpsert: InsertStatement {
     }
 
     @usableFromInline
-    var _statement: String { "\(base) DO \(action.rawValue)" }
+    var statementValue: String { "\(base) DO \(action.rawValue)" }
 
     @usableFromInline
     let base: InsertOnConflictSubstatement

@@ -14,7 +14,7 @@ import SQLite3
 
 public struct CreateIndex: Statement {
     @inlinable
-    public var _statement: String {
+    public var statementValue: String {
         let isUnique = self.isUnique ? "UNIQUE " : ""
         let ifNotExists = self.ifNotExists ? "IF NOT EXISTS " : ""
         let schemaName = self.schemaName.map { "\($0)."} ?? ""

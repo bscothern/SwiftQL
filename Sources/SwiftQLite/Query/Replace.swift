@@ -14,7 +14,7 @@ import SQLite3
 
 public struct Replace: ColumnEditableInsert {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         "\(insert)"
     }
 

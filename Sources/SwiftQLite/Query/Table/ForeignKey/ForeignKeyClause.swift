@@ -19,7 +19,7 @@ public protocol ForeignKeyClauseSubstatementExtendable: ForeignKeyClauseSubstate
 
 public struct ForeignKeyClause: ForeignKeyClauseSubstatementExtendable {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         let columnNames = self.columnNames.map { " (\($0.joined(separator: ", ")))" } ?? ""
         return "REFERENCES \(tableName)\(columnNames)"
     }
@@ -91,7 +91,7 @@ struct ForeignKeyClauseOn: ForeignKeyClauseSubstatementExtendable {
         case update = "UPDATE"
     }
 
-    @usableFromInline var _substatement: String {
+    @usableFromInline var substatementValue: String {
         let category = self.category.rawValue
         let action = self.action.rawValue
         return "\(base) \(category) \(action)"
@@ -116,7 +116,7 @@ struct ForeignKeyClauseOn: ForeignKeyClauseSubstatementExtendable {
 
 @usableFromInline
 struct ForeignKeyClauseMatch: ForeignKeyClauseSubstatementExtendable {
-    @usableFromInline var _substatement: String {
+    @usableFromInline var substatementValue: String {
         return "\(base) MATCH \(name)"
     }
 
@@ -143,7 +143,7 @@ public extension ForeignKeyClause {
 @usableFromInline
 struct ForeignKeyClauseDeferrable: ForeignKeyClauseSubstatement {
     @usableFromInline
-    var _substatement: String {
+    var substatementValue: String {
         let not = self.not ? " NOT" : ""
         let clause = self.clause.map { " \($0.rawValue)" } ?? ""
         return "\(base)\(not) DEFERRABLE\(clause)"

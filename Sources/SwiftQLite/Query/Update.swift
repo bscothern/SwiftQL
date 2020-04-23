@@ -15,7 +15,7 @@ import SQLite3
 public protocol UpdateStatement: Statement {}
 
 public struct Update: UpdateStatement {
-    public var _statement: String {
+    public var statementValue: String {
         let with = self.with.map { "\($0) " } ?? ""
         let or = self.or.map { "OR \($0) " } ?? ""
         let tableName = self.tableName
@@ -53,7 +53,7 @@ public struct Update: UpdateStatement {
 @usableFromInline
 struct UpdateWhere: UpdateStatement {
     @usableFromInline
-    var _statement: String {
+    var statementValue: String {
         "\(base) WHERE \(expression)"
     }
 

@@ -13,7 +13,7 @@ import SQLite3
 #endif
 
 public struct CommitTransaction: Statement {
-    public let _statement: String = "COMMIT TRANSACTION"
+    public let statementValue: String = "COMMIT TRANSACTION"
 
     @inlinable
     public init() {}

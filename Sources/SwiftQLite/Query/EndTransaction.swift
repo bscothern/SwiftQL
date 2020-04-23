@@ -13,7 +13,7 @@ import SQLite3
 #endif
 
 public struct EndTransaction: Statement {
-    public let _statement: String = "END TRANSACTION"
+    public let statementValue: String = "END TRANSACTION"
 
     @inlinable
     public init() {}

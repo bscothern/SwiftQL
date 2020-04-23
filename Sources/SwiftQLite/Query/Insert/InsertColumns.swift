@@ -9,7 +9,7 @@
 @usableFromInline
 struct InsertColumns: InsertSubstatement {
     @usableFromInline
-    var _substatement: String {
+    var substatementValue: String {
         let columnNames = names.isEmpty ? "" : " (\(names.map(\.value).joined(separator: ", ")))"
         return "\(base)\(columnNames)"
     }

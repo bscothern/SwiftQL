@@ -14,7 +14,7 @@ import SQLite3
 
 /// https://www.sqlite.org/lang_createview.html
 public struct CreateView: Statement {
-    public var _statement: String {
+    public var statementValue: String {
         let isTemporary = self.isTemporary ? " TEMPORARY" : ""
         let ifNotExists = self.ifNotExists ? " IF NOT EXISTS" : ""
         let schemaName = self.schemaName.map { "\($0)." } ?? ""

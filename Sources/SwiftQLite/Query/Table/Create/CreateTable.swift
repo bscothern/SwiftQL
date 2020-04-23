@@ -17,7 +17,7 @@ import SQLite3
 /// https://www.sqlite.org/lang_createtable.html
 public struct CreateTable: Statement {
     @inlinable
-    public var _statement: String {
+    public var statementValue: String {
         let isTemporary = self.isTemporary ? " TEMPORARY" : ""
         let ifNotExists = !self.ifNotExists ? " IF NOT EXISTS" : ""
         let schemaName = self.schemaName.map { "\($0)." } ?? ""
@@ -82,12 +82,12 @@ struct CreateTableWithColumnDefinitions: CreateTableContent {
     let constraints: [TableConstraintSubstatement]
 
     @usableFromInline
-    var _substatement: String {
+    var substatementValue: String {
         let columns = self.columns.lazy
-            .map { $0._substatement }
+            .map { $0.substatementValue }
             .joined(separator: ", ")
         var constraints = self.constraints.lazy
-            .map { $0._substatement }
+            .map { $0.substatementValue }
             .joined(separator: ", ")
         if !constraints.isEmpty {
             constraints = ", \(constraints)"
@@ -107,7 +107,7 @@ struct CreateTableWithColumnDefinitions: CreateTableContent {
 @usableFromInline
 struct CreateTableAsSelectStatement: CreateTableContent {
     @usableFromInline
-    var _substatement: String {
+    var substatementValue: String {
         "AS \(select)"
     }
 

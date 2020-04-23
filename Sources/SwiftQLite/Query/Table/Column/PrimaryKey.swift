@@ -15,10 +15,10 @@ import SQLite3
 @usableFromInline
 struct PrimaryKey: ColumnConstraintSubstatement {
     @usableFromInline
-    var _substatement: String {
+    var substatementValue: String {
         let ascendingStatement = ascending.map { $0 ? " ASC" : " DESC" } ?? ""
         let autoIncrementStatement = autoIncrement ? " AUTOINCREMENT" : ""
-        return "\(base._substatement) PRIMARY KEY\(ascendingStatement)\(onConflict, leadingSpace: true)\(autoIncrementStatement)"
+        return "\(base.substatementValue) PRIMARY KEY\(ascendingStatement)\(onConflict, leadingSpace: true)\(autoIncrementStatement)"
     }
 
     @usableFromInline

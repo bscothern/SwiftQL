@@ -23,7 +23,7 @@ extension ColumnConstraint {
 @usableFromInline
 struct Collate: ColumnConstraintSubstatement {
     @usableFromInline
-    var _substatement: String { "\(base) COLLATE \(function.rawValue)" }
+    var substatementValue: String { "\(base) COLLATE \(function.rawValue)" }
 
     @usableFromInline
     let function: ColumnConstraint.CollateFunction

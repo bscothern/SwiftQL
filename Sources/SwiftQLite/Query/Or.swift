@@ -10,7 +10,7 @@ import Foundation
 
 public enum Or: String, Substatement {
     @inlinable
-    public var _substatement: String { rawValue }
+    public var substatementValue: String { rawValue }
 
     case rollback = "ROLLBACK"
     case abort = "ABORT"

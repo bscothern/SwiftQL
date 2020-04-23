@@ -17,7 +17,7 @@ public protocol ColumnConstraintSubstatement: Substatement {}
 
 public struct ColumnConstraint: Substatement {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         name.map { "CONSTRAINT \($0)" } ?? ""
     }
 

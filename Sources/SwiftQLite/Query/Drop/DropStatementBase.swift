@@ -24,7 +24,7 @@ struct DropStatementBase: Statement {
     }
 
     @usableFromInline
-    var _statement: String {
+    var statementValue: String {
         let ifExists = self.ifExists ? "IF EXISTS " : ""
         let schemaName = self.schemaName.map { "\($0)." } ?? ""
         return "DROP \(category.rawValue) \(ifExists)\(schemaName)\(name)"

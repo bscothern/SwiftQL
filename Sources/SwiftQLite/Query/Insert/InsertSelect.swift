@@ -9,7 +9,7 @@
 @usableFromInline
 struct InsertSelect: InsertStatement, UpsertableInsert {
     @usableFromInline
-    var _statement: String { "\(base) \(select)" }
+    var statementValue: String { "\(base) \(select)" }
 
     @usableFromInline
     let base: InsertSubstatement

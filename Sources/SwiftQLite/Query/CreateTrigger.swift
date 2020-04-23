@@ -14,7 +14,7 @@ import SQLite3
 
 public struct CreateTrigger: Statement {
     @inlinable
-    public var _statement: String {
+    public var statementValue: String {
         let isTemporary = self.isTemporary ? " TEMP" : ""
         let ifNotExists = self.ifNotExists ? " IF NOT EXISTS" : ""
         let schemaName = self.schemaName.map { "\($0)." } ?? ""
@@ -80,7 +80,7 @@ extension CreateTrigger {
         case insteadOf
 
         @inlinable
-        public var _substatement: String {
+        public var substatementValue: String {
             switch self {
             case .before:
                 return "BEFORE"
@@ -95,11 +95,11 @@ extension CreateTrigger {
 
 extension CreateTrigger {
     public struct Action: Substatement {
-        public let _substatement: String
+        public let substatementValue: String
 
         @usableFromInline
         init(_ substatement: String) {
-            self._substatement = substatement
+            self.substatementValue = substatement
         }
 
         public static func delete() -> Self {

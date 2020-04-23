@@ -14,7 +14,7 @@ import SQLite3
 
 public struct With: Substatement {
     @inlinable
-    public var _substatement: String {
+    public var substatementValue: String {
         let recursive = self.recursive ? " RECURSIVE" : ""
         let commonTableExpressions = self.commonTableExpressions.joined(separator: ", ")
         return "WITH\(recursive) \(commonTableExpressions)"

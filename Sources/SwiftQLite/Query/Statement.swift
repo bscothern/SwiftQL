@@ -13,9 +13,9 @@ import SQLite3
 #endif
 
 public protocol Statement {
-    var _statement: String { get }
+    var statementValue: String { get }
 }
 
 public protocol Substatement {
-    var _substatement: String { get }
+    var substatementValue: String { get }
 }

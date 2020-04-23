@@ -9,7 +9,7 @@
 @usableFromInline
 struct InsertOnConflict: InsertOnConflictWhereSubstatement {
     @usableFromInline
-    var _substatement: String {
+    var substatementValue: String {
         let columns = indexedColumns.isEmpty ? "" : " (\(indexedColumns.map(\.value).joined(separator: ", "))"
         return "\(base)\(columns)"
     }

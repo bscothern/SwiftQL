@@ -21,5 +21,5 @@ public enum ConflictClause: String, Substatement {
     case replace = "REPLACE"
 
     @inlinable
-    public var _substatement: String { "ON CONFLICT \(rawValue)" }
+    public var substatementValue: String { "ON CONFLICT \(rawValue)" }
 }

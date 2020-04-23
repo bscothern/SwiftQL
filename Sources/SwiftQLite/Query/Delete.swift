@@ -14,7 +14,7 @@ import SQLite3
 
 public struct Delete: Statement {
     @inlinable
-    public var _statement: String {
+    public var statementValue: String {
         let with = self.with.map { "\($0) " } ?? ""
         let tableName = self.tableName
         let `where` = self.where.map { " WHERE \($0)" } ?? ""

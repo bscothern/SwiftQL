@@ -10,7 +10,7 @@ public struct SchemaName: Name {
     public let value: String
 
     @inlinable
-    public var _substatement: String { value }
+    public var substatementValue: String { value }
 
     @inlinable
     public init(_ value: String) {

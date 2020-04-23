@@ -40,7 +40,9 @@ var targets: [Target] {
         ),
         .systemLibrary(
             name: "SwiftQLiteLinux",
-            providers: [.apt(["libsqlite3-dev"])]
+            providers: [
+                .apt(["libsqlite3-dev"])
+            ]
         )
     ]
     #else

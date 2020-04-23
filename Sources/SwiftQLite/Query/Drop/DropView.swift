@@ -14,7 +14,7 @@ import SQLite3
 
 public struct DropView {
     @inlinable
-    public var _statement: String { base._statement }
+    public var _statement: String { base.statementValue }
 
     @usableFromInline
     let base: DropStatementBase

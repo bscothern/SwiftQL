@@ -14,7 +14,7 @@ import SQLite3
 
 public struct DropTable: Statement {
     @inlinable
-    public var _statement: String { base._statement }
+    public var statementValue: String { base.statementValue }
 
     @usableFromInline
     let base: DropStatementBase
