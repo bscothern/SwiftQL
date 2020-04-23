@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -23,8 +23,10 @@ var dependencies: [Package.Dependency] {
 var targets: [Target] {
     let sharedTargets: [Target] = [
         .testTarget(
-            name: "SwiftQLiteTests",
-            dependencies: ["SwiftQLite"]
+            name: "SwiftQLiteSyntaxTests",
+            dependencies: [
+                .target(name: "SwiftQLite")
+            ]
         ),
     ]
 
@@ -33,7 +35,7 @@ var targets: [Target] {
         .target(
             name: "SwiftQLite",
             dependencies: [
-                "SwiftQLiteLinux"
+                .target(name: "SwiftQLiteLinux")
             ]
         ),
         .systemLibrary(
