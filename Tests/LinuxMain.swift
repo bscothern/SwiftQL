@@ -1,8 +1,8 @@
 import XCTest
 
-import SwiftQLiteTests
+import SwiftQLiteSyntaxTests
 
 var tests = [XCTestCaseEntry]()
-tests += SwiftQLiteTests.__allTests()
+tests += SwiftQLiteSyntaxTests.__allTests()
 
 XCTMain(tests)
