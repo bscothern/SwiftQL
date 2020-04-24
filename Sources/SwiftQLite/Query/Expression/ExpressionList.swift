@@ -13,7 +13,7 @@ struct ExpressionList: ExpressionSubstatement {
 
     @usableFromInline
     let list: [ExpressionSubstatement]
-    
+
     @usableFromInline
     init(_ list: [ExpressionSubstatement]) {
         precondition(!list.isEmpty)

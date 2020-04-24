@@ -16,9 +16,17 @@ public protocol ExpressionSubstatement: Substatement {}
 
 #warning("IMPLIMENT")
 public struct Expression: ExpressionSubstatement {
+    public enum TypeName: String {
+        case none = "NONE"
+        case text = "TEXT"
+        case real = "REAL"
+        case integer = "INTEGER"
+        case numeric = "NUMERIC"
+    }
+
     @inlinable
     public var substatementValue: String { "\(base)" }
-    
+
     @usableFromInline
     let base: ExpressionSubstatement
 
@@ -26,32 +34,71 @@ public struct Expression: ExpressionSubstatement {
     public init(literal: Literal) {
         base = ExpressionLiteral(literal)
     }
-    
+
     // TODO: Bind parameter
-    
+
     @inlinable
     public init(columnName: ColumnName) {
         base = ExpressionSchemaTableColumnName(schemaName: nil, tableName: nil, columnName: columnName)
     }
-    
+
     @inlinable
     public init(tableName: TableName, columnName: ColumnName) {
         base = ExpressionSchemaTableColumnName(schemaName: nil, tableName: tableName, columnName: columnName)
     }
-    
+
     @inlinable
     public init(schemaName: SchemaName, tableName: TableName, columnName: ColumnName) {
         base = ExpressionSchemaTableColumnName(schemaName: schemaName, tableName: tableName, columnName: columnName)
     }
-    
+
     // TODO: Unary-operator
 
     // TODO: binary operator
-    
+
     // TODO: function-name
-    
+
     @inlinable
     public init(@PassThroughBuilder<ExpressionSubstatement> list: () -> [ExpressionSubstatement]) {
         base = ExpressionList(list())
+    }
+
+    @inlinable
+    public func cast(as typeName: TypeName) -> ExpressionSubstatement {
+        ExpressionCast(self, as: typeName)
+    }
+
+    // TODO: COLLATE
+
+    // TODO: NOT
+
+    @inlinable
+    public func isNull() -> ExpressionSubstatement {
+        ExpressionNull(self, category: .isNull)
+    }
+
+    @inlinable
+    public func notNull() -> ExpressionSubstatement {
+        ExpressionNull(self, category: .notNull)
+    }
+
+    @inlinable
+    public func `is`(_ other: ExpressionSubstatement) -> ExpressionSubstatement {
+        ExpressionIs(self, category: .is, other)
+    }
+
+    @inlinable
+    public func isNot(_ other: ExpressionSubstatement) -> ExpressionSubstatement {
+        ExpressionIs(self, category: .isNot, other)
+    }
+
+    @inlinable
+    public func between(_ expression1: ExpressionSubstatement, _ expression2: ExpressionSubstatement) -> ExpressionSubstatement {
+        ExpressionBetween(self, category: .between, expression1, expression2)
+    }
+
+    @inlinable
+    public func notBetween(_ expression1: ExpressionSubstatement, _ expression2: ExpressionSubstatement) -> ExpressionSubstatement {
+        ExpressionBetween(self, category: .notBetween, expression1, expression2)
     }
 }

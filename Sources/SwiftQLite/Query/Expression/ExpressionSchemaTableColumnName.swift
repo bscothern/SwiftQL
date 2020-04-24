@@ -14,16 +14,16 @@ struct ExpressionSchemaTableColumnName: ExpressionSubstatement {
         let tableName = self.tableName.map { "\($0)." } ?? ""
         return "\(schemaName)\(tableName)\(columnName)"
     }
-    
+
     @usableFromInline
     let schemaName: SchemaName?
-    
+
     @usableFromInline
     let tableName: TableName?
-    
+
     @usableFromInline
     let columnName: ColumnName
-    
+
     @usableFromInline
     init(schemaName: SchemaName?, tableName: TableName?, columnName: ColumnName) {
         self.schemaName = schemaName

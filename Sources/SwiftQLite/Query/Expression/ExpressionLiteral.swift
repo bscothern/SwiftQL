@@ -10,10 +10,10 @@
 struct ExpressionLiteral: ExpressionSubstatement {
     @usableFromInline
     var substatementValue: String { "\(value)" }
-    
+
     @usableFromInline
     let value: Literal
-    
+
     @usableFromInline
     init(_ value: Literal) {
         self.value = value
