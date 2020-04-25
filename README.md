@@ -7,14 +7,14 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 * `base` the parent [sub]statement
 * `content` used a type is "generic" in the sense it has a value that conforms to a private protocol that is the actual value of the instance.
 
-### Needs Initial Implimentation (26/38 Complete)
+### Needs Initial Implimentation (30/38 Complete)
 [Documentation](https://www.sqlite.org/lang.html)
 * [ ] aggregate functions
 * [ ] ALTER TABLE
 * [X] ANALYZE
 * [X] ATTACH DATABASE
 * [X] BEGIN TRANSACTION
-* [ ] comment
+* [X] ~comment~ (Comments should live in the swift code building the queries instead of in the actual queries)
 * [X] COMMIT TRANSACTION
 * [ ] core functions
 * [X] CREATE INDEX
@@ -30,11 +30,11 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 * [X] DROP TRIGGER
 * [X] DROP VIEW
 * [X] END TRANSACTION
-* [ ] EXPLAIN
+* [X] EXPLAIN
 * [ ] expression
 * [X] INDEXED BY
 * [X] INSERT
-* [ ] keywords
+* [X] keywords
 * [X] ON CONFLICT clause
 * [ ] PRAGMA
 * [X] REINDEX
@@ -44,19 +44,59 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 * [X] SAVEPOINT
 * [ ] SELECT
 * [X] UPDATE
-* [ ] UPSERT
+* [X] UPSERT
 * [X] VACUUM
 * [X] WITH clause
 
 `*` items need extra clean up
 
-### Needs Test and Documentation (0/38 Complete)
+### Needs Test (3/38 Complete)
+* [ ] aggregate functions
+* [ ] ALTER TABLE
+* [X] ANALYZE
+* [ ] ATTACH DATABASE
+* [ ] BEGIN TRANSACTION
+* [X] ~comment~ (Comments should live in the swift code building the queries instead of in the actual queries)
+* [ ] COMMIT TRANSACTION
+* [ ] core functions
+* [ ] CREATE INDEX
+* [ ] CREATE TABLE
+* [ ] CREATE TRIGGER
+* [ ] CREATE VIEW
+* [ ] CREATE VIRTUAL TABLE
+* [ ] date and time functions
+* [ ] DELETE
+* [ ] DETACH DATABASE
+* [ ] DROP INDEX
+* [ ] DROP TABLE
+* [ ] DROP TRIGGER
+* [ ] DROP VIEW
+* [ ] END TRANSACTION
+* [ ] EXPLAIN
+* [ ] expression
+* [ ] INDEXED BY
+* [ ] INSERT
+* [X] keywords
+* [ ] ON CONFLICT clause
+* [ ] PRAGMA
+* [ ] REINDEX
+* [ ] RELEASE SAVEPOINT
+* [ ] REPLACE
+* [ ] ROLLBACK TRANSACTION
+* [ ] SAVEPOINT
+* [ ] SELECT
+* [ ] UPDATE
+* [ ] UPSERT
+* [ ] VACUUM
+* [ ] WITH clause
+
+### Needs Documentation (1/38 Complete)
 * [ ] aggregate functions
 * [ ] ALTER TABLE
 * [ ] ANALYZE
 * [ ] ATTACH DATABASE
 * [ ] BEGIN TRANSACTION
-* [ ] comment
+* [X] ~comment~ (Comments should live in the swift code building the queries instead of in the actual queries)
 * [ ] COMMIT TRANSACTION
 * [ ] core functions
 * [ ] CREATE INDEX

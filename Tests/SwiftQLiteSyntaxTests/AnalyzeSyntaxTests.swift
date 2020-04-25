@@ -1,3 +1,11 @@
+//
+//  AnalyzeSyntaxTests.swift
+//  SwiftQLite
+//
+//  Created by Braden Scothern on 4/24/20.
+//  Copyright © 2020 Braden Scothern. All rights reserved.
+//
+
 import SwiftQLite
 import XCTest
 
