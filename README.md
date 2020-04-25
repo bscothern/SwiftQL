@@ -7,10 +7,10 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 * `base` the parent [sub]statement
 * `content` used a type is "generic" in the sense it has a value that conforms to a private protocol that is the actual value of the instance.
 
-### Needs Initial Implimentation (30/38 Complete)
+### Needs Initial Implimentation (31/38 Complete)
 [Documentation](https://www.sqlite.org/lang.html)
 * [ ] aggregate functions
-* [ ] ALTER TABLE
+* [X] ALTER TABLE
 * [X] ANALYZE
 * [X] ATTACH DATABASE
 * [X] BEGIN TRANSACTION
@@ -52,7 +52,7 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 
 ### Needs Test (3/38 Complete)
 * [ ] aggregate functions
-* [ ] ALTER TABLE
+* [X] ALTER TABLE
 * [X] ANALYZE
 * [ ] ATTACH DATABASE
 * [ ] BEGIN TRANSACTION

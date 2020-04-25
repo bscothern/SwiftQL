@@ -38,6 +38,11 @@ public struct Column: Substatement {
         self.type = type
         self.constraints = constraints
     }
+    
+    @inlinable
+    public init(name: ColumnName, type: DataType) {
+        self.init(name: name, type: type, constraints: [])
+    }
 
     @inlinable
     public init(name: ColumnName, type: DataType, @PassThroughBuilder<ColumnConstraintSubstatement> constraints constraintsBuilder: () -> [ColumnConstraintSubstatement]) {
