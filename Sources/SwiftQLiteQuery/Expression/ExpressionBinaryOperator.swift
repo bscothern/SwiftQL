@@ -42,7 +42,7 @@ public func .|| (lhs: Expression, rhs: Expression) -> Expression {
 extension Expression {
     @inlinable
     public func concatenate(_ other: Expression) -> Expression {
-        .init(_lhs: self, binaryOperator: .concat, rhs: other)
+        .init(_lhs: self, binaryOperator: .concatenate, rhs: other)
     }
 }
 

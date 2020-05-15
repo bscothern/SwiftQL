@@ -43,7 +43,7 @@ public struct Expression: ExpressionSubstatement {
     public enum BinaryOperator: String {
         // These are grouped by order of precedence from highest to lowest
         
-        case concat = "||"
+        case concatenate = "||"
         
         case multiply = "*"
         case divide = "/"
