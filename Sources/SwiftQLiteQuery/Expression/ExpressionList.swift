@@ -16,7 +16,7 @@ struct ExpressionList: ExpressionSubstatement {
 
     @usableFromInline
     init(_ list: [ExpressionSubstatement]) {
-        precondition(!list.isEmpty)
+        assert(!list.isEmpty)
         self.list = list
     }
 }

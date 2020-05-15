@@ -12,6 +12,10 @@ var products: [Product] {
             name: "SwiftQLite",
             targets: ["SwiftQLite"]
         ),
+        .library(
+            name: "SwiftQLiteQuery",
+            targets: ["SwiftQLiteQuery"]
+        ),
     ]
     #endif
 }
@@ -22,10 +26,13 @@ var dependencies: [Package.Dependency] {
 
 var targets: [Target] {
     let sharedTargets: [Target] = [
+        .target(
+            name: "SwiftQLiteQuery"
+        ),
         .testTarget(
-            name: "SwiftQLiteSyntaxTests",
+            name: "SwiftQLiteQueryTests",
             dependencies: [
-                .target(name: "SwiftQLite")
+                .target(name: "SwiftQLiteQuery")
             ]
         ),
     ]

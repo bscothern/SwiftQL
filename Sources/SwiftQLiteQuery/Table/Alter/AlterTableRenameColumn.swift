@@ -10,16 +10,16 @@
 struct AlterTableRenameColumn: Statement {
     @usableFromInline
     var statementValue: String { "\(base) RENAME COLUMN \(column) to \(newColumnName)" }
-    
+
     @usableFromInline
     let base: AlterTableSubstatement
-    
+
     @usableFromInline
     let column: ColumnName
-    
+
     @usableFromInline
     let newColumnName: ColumnName
-    
+
     @usableFromInline
     init(_ base: AlterTableSubstatement, column: ColumnName, newColumnName: ColumnName) {
         self.base = base

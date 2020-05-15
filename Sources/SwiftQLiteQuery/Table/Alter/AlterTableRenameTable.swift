@@ -1,5 +1,5 @@
 //
-//  AlterTableAddColumn.swift
+//  AlterTableRenameTable.swift
 //  SwiftQLite
 //
 //  Created by Braden Scothern on 1/30/20.
@@ -7,19 +7,19 @@
 //
 
 @usableFromInline
-struct AlterTableAddColumn: Statement {
+struct AlterTableRenameTable: Statement {
     @usableFromInline
-    var statementValue: String { "\(base) ADD COLUMN \(column)" }
-    
+    var statementValue: String { "\(base) RENAME TO \(newTableName)" }
+
     @usableFromInline
     let base: AlterTableSubstatement
-    
+
     @usableFromInline
-    let column: Column
-    
+    let newTableName: TableName
+
     @usableFromInline
-    init(_ base: AlterTableSubstatement, column: Column) {
+    init(_ base: AlterTableSubstatement, newTableName: TableName) {
         self.base = base
-        self.column = column
+        self.newTableName = newTableName
     }
 }

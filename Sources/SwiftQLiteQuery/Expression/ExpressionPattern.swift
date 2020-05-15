@@ -16,10 +16,10 @@ struct ExpressionPattern: ExpressionPattenSubstatement {
 
     @usableFromInline
     let not: Bool
-    
+
     @usableFromInline
     let pattern: Expression.Pattern
-    
+
     @usableFromInline
     let other: ExpressionSubstatement
 

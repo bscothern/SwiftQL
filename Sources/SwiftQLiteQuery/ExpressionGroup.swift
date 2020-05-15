@@ -11,7 +11,7 @@ public struct ExpressionGroup {
 
     @inlinable
     public init(_ expressions: [Expression]) {
-        precondition(!expressions.isEmpty)
+        assert(!expressions.isEmpty)
         self.expressions = expressions
     }
 

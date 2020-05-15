@@ -16,14 +16,14 @@ import SQLite3
 public struct Explain: Statement {
     @inlinable
     public var statementValue: String { "EXPLAIN\(statement.map { " \($0)" } ?? "")" }
-    
+
     @usableFromInline
     let statement: Statement?
-    
+
     public init() {
         statement = nil
     }
-    
+
     public init(_ statement: Statement) {
         if let explain = statement as? Explain {
             self = explain

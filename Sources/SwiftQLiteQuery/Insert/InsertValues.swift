@@ -29,7 +29,7 @@ struct InsertValues: InsertStatement, UpsertableInsert {
 
     @usableFromInline
     init(_ base: InsertSubstatement, expressions: [ExpressionGroup]) {
-        precondition(!expressions.isEmpty)
+        assert(!expressions.isEmpty)
         self.base = base
         self.expressions = expressions
     }

@@ -25,7 +25,7 @@ public struct Expression: ExpressionSubstatement {
         case integer = "INTEGER"
         case numeric = "NUMERIC"
     }
-    
+
     public enum Pattern: String {
         case like = "LIKE"
         case glob = "GLOB"
@@ -78,14 +78,14 @@ public struct Expression: ExpressionSubstatement {
     }
 
     // TODO: COLLATE
-    
+
     // Should the pattern functions be broken down into their 8 cooresponding combos to help discoevability and consistancy with normal SQLite syntax?
 
     @inlinable
     public func patten(_ pattern: Pattern, _ other: ExpressionSubstatement) -> ExpressionPattenSubstatement {
         ExpressionPattern(self, not: false, pattern: pattern, other: other)
     }
-    
+
     @inlinable
     public func pattenNot(_ pattern: Pattern, _ other: ExpressionSubstatement) -> ExpressionPattenSubstatement {
         ExpressionPattern(self, not: true, pattern: pattern, other: other)
@@ -120,13 +120,13 @@ public struct Expression: ExpressionSubstatement {
     public func notBetween(_ expression1: ExpressionSubstatement, _ expression2: ExpressionSubstatement) -> ExpressionSubstatement {
         ExpressionBetween(self, category: .notBetween, expression1, expression2)
     }
-    
+
     // TODO: (NOT) In
-    
+
     // TODO: ((NOT) EXISTS) Select Statement
-    
+
     // TODO: Case
-    
+
     // TODO: raise-function
 }
 

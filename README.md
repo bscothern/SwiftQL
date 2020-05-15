@@ -2,6 +2,7 @@
 
 ## Development Notes
 Initial development will be `String` based APIs for simplicity and it will be needed to build type safety on top of since SQLite is a `String` based API anyways.
+This work is being done in the target `SwiftQLiteQuery`
 
 #### Nomenclature
 * `base` the parent [sub]statement
@@ -52,7 +53,7 @@ Initial development will be `String` based APIs for simplicity and it will be ne
 
 ### Needs Test (3/38 Complete)
 * [ ] aggregate functions
-* [X] ALTER TABLE
+* [X] ALTER TABLE	
 * [X] ANALYZE
 * [ ] ATTACH DATABASE
 * [ ] BEGIN TRANSACTION

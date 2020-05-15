@@ -6,7 +6,7 @@
 //  Copyright © 2020 Braden Scothern. All rights reserved.
 //
 
-import SwiftQLite
+import SwiftQLiteQuery
 import XCTest
 
 final class AnalyzeSyntaxTests: XCTestCase {
