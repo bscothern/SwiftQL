@@ -7,7 +7,7 @@
 //
 
 @usableFromInline
-struct AlterTableRenameColumn: Statement {
+struct AlterTableRenameColumn: AlterTableStatement {
     @usableFromInline
     var statementValue: String { "\(base) RENAME COLUMN \(column) to \(newColumnName)" }
 

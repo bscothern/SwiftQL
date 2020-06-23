@@ -18,5 +18,5 @@ struct SelectCoreSelectFrom: SelectCoreSelectFromExtendableStatement {
     var statementValue: String { "\(base)" }
 
     @usableFromInline
-    let base: SelectCoreSelect
+    let base: SelectCoreSelectStatement
 }

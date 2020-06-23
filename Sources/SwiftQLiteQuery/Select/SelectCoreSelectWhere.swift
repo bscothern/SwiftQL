@@ -15,8 +15,17 @@ import SQLite3
 @usableFromInline
 struct SelectCoreSelectWhere: SelectCoreSelectWhereExtendableStatement {
     @usableFromInline
-    var statementValue: String { "\(base)" }
+    var statementValue: String { "\(base) WHERE \(expression)" }
 
     @usableFromInline
-    let base: SelectCoreSelect
+    let base: SelectCoreSelectFromExtendableStatement
+    
+    @usableFromInline
+    let expression: Expression
+    
+    @usableFromInline
+    init(_ base: SelectCoreSelectFromExtendableStatement, expression: Expression) {
+        self.base = base
+        self.expression = expression
+    }
 }

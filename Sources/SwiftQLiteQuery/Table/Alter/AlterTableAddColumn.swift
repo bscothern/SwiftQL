@@ -7,7 +7,7 @@
 //
 
 @usableFromInline
-struct AlterTableAddColumn: Statement {
+struct AlterTableAddColumn: AlterTableStatement {
     @usableFromInline
     var statementValue: String { "\(base) ADD COLUMN \(column)" }
 

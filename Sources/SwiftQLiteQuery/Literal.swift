@@ -72,3 +72,44 @@ public struct Literal: Substatement {
     @inlinable
     public static var currentTimestamp: Self { .init("CURRENT_TIMESTAMP") }
 }
+
+// TODO: Should literal conform to these protocols?
+// This would be potentially very handy but it should only be done once it can be proven it won't cause other issues.
+// Adding things is always easy, taking them away is not.
+
+//extension Literal: ExpressibleByFloatLiteral {
+//    @inlinable
+//    public init(floatLiteral value: Double) {
+//        self = .numeric(value)
+//    }
+//}
+//
+//extension Literal: ExpressibleByIntegerLiteral {
+//    @inlinable
+//    public init(integerLiteral value: Int) {
+//        self = .numeric(value)
+//    }
+//}
+//
+//extension Literal: ExpressibleByStringLiteral {
+//    @inlinable
+//    public init(stringLiteral value: String) {
+//        self = .string(value)
+//    }
+//}
+//
+//
+//
+//extension Literal: ExpressibleByArrayLiteral {
+//    @inlinable
+//    public init(arrayLiteral value: UInt8...) {
+//        self = .blob(value)
+//    }
+//}
+//
+//extension Literal: ExpressibleByBooleanLiteral {
+//    @inlinable
+//    public init(booleanLiteral value: Bool) {
+//        self = value ? .true : .false
+//    }
+//}

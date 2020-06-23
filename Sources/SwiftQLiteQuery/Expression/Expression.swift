@@ -14,6 +14,8 @@ import SQLite3
 
 public protocol ExpressionSubstatement: Substatement {}
 public protocol ExpressionPattenSubstatement: ExpressionSubstatement {}
+public protocol ExpressionInSubstatement {}
+public typealias ExpressionNotInSubstatement = ExpressionInSubstatement
 
 #warning("IMPLIMENT")
 /// https://www.sqlite.org/lang_expr.html
@@ -135,7 +137,7 @@ public struct Expression: ExpressionSubstatement {
     }
 
     @inlinable
-    public func cast(as typeName: TypeName) -> ExpressionSubstatement {
+    public func cast(as typeName: TypeName) -> some ExpressionSubstatement {
         ExpressionCast(self, as: typeName)
     }
 
@@ -144,46 +146,56 @@ public struct Expression: ExpressionSubstatement {
     // Should the pattern functions be broken down into their 8 cooresponding combos to help discoevability and consistancy with normal SQLite syntax?
 
     @inlinable
-    public func patten(_ pattern: Pattern, _ other: ExpressionSubstatement) -> ExpressionPattenSubstatement {
+    public func patten(_ pattern: Pattern, _ other: ExpressionSubstatement) -> some ExpressionPattenSubstatement {
         ExpressionPattern(self, not: false, pattern: pattern, other: other)
     }
 
     @inlinable
-    public func pattenNot(_ pattern: Pattern, _ other: ExpressionSubstatement) -> ExpressionPattenSubstatement {
+    public func pattenNot(_ pattern: Pattern, _ other: ExpressionSubstatement) -> some ExpressionPattenSubstatement {
         ExpressionPattern(self, not: true, pattern: pattern, other: other)
     }
 
     @inlinable
-    public func isNull() -> ExpressionSubstatement {
+    public func isNull() -> some ExpressionSubstatement {
         ExpressionNull(self, category: .isNull)
     }
 
     @inlinable
-    public func notNull() -> ExpressionSubstatement {
+    public func notNull() -> some ExpressionSubstatement {
         ExpressionNull(self, category: .notNull)
     }
 
     @inlinable
-    public func `is`(_ other: ExpressionSubstatement) -> ExpressionSubstatement {
+    public func `is`(_ other: ExpressionSubstatement) -> some ExpressionSubstatement {
         ExpressionIs(self, category: .is, other)
     }
 
     @inlinable
-    public func isNot(_ other: ExpressionSubstatement) -> ExpressionSubstatement {
+    public func isNot(_ other: ExpressionSubstatement) -> some ExpressionSubstatement {
         ExpressionIs(self, category: .isNot, other)
     }
 
     @inlinable
-    public func between(_ expression1: ExpressionSubstatement, _ expression2: ExpressionSubstatement) -> ExpressionSubstatement {
+    public func between(_ expression1: ExpressionSubstatement, _ expression2: ExpressionSubstatement) -> some ExpressionSubstatement {
         ExpressionBetween(self, category: .between, expression1, expression2)
     }
 
     @inlinable
-    public func notBetween(_ expression1: ExpressionSubstatement, _ expression2: ExpressionSubstatement) -> ExpressionSubstatement {
+    public func notBetween(_ expression1: ExpressionSubstatement, _ expression2: ExpressionSubstatement) -> some ExpressionSubstatement {
         ExpressionBetween(self, category: .notBetween, expression1, expression2)
     }
 
-    // TODO: (NOT) In
+    @inlinable
+    public func `in`() -> ExpressionInSubstatement {
+        fatalError()
+//        ExpressionIn(self, category: .in, condition: )
+    }
+    
+    @inlinable
+    public func notIn() -> ExpressionNotInSubstatement {
+        fatalError()
+//        ExpressionIn(self, category: .notIn, condition: )
+    }
 
     // TODO: ((NOT) EXISTS) Select Statement
 
@@ -193,7 +205,7 @@ public struct Expression: ExpressionSubstatement {
 }
 
 extension ExpressionPattenSubstatement {
-    public func escape(_ expression: ExpressionSubstatement) -> ExpressionSubstatement {
+    public func escape(_ expression: ExpressionSubstatement) -> some ExpressionSubstatement {
         ExpressionPatternEscape(self, expression)
     }
 }

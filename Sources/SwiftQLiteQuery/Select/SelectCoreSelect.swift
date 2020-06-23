@@ -14,11 +14,21 @@ import SQLite3
 
 @usableFromInline
 struct SelectCoreSelect: SelectCoreSelectStatement {
-    @usableFromInline
-    var statementValue: String { "" }
+    public enum Category: String {
+        case all = "ALL"
+        case distinct = "DISTINCT"
+    }
 
     @usableFromInline
-    let category: Select.Category
+    var statementValue: String {
+        let resultColumns = self.resultColumns.lazy
+            .map(\.substatementValue)
+            .joined(separator: ", ")
+        return "SELECT \(category.rawValue) \(resultColumns)"
+    }
+
+    @usableFromInline
+    let category: Category
 
     @usableFromInline
     let resultColumns: [ColumnName]

@@ -12,6 +12,7 @@ import SwiftQLiteLinux
 import SQLite3
 #endif
 
+public protocol AlterTableStatement: Statement {}
 public protocol AlterTableSubstatement: Substatement {}
 
 /// https://www.sqlite.org/lang_altertable.html
@@ -40,17 +41,17 @@ public struct AlterTable: AlterTableSubstatement {
 
 extension AlterTableSubstatement {
     @inlinable
-    public func rename(to newTableName: TableName) -> Statement {
+    public func rename(to newTableName: TableName) -> some AlterTableStatement {
         AlterTableRenameTable(self, newTableName: newTableName)
     }
 
     @inlinable
-    public func rename(column: ColumnName, to newColumnName: ColumnName) -> Statement {
+    public func rename(column: ColumnName, to newColumnName: ColumnName) -> some AlterTableStatement {
         AlterTableRenameColumn(self, column: column, newColumnName: newColumnName)
     }
 
     @inlinable
-    public func addColumn(_ column: Column) -> Statement {
+    public func addColumn(_ column: Column) -> some AlterTableStatement {
         AlterTableAddColumn(self, column: column)
     }
 }

@@ -105,18 +105,18 @@ extension InsertStatement where Self: UpsertableInsert {
 
 extension InsertOnConflictWhereSubstatement {
     @inlinable
-    public func `where`(_ expression: Expression) -> InsertOnConflictSubstatement {
+    public func `where`(_ expression: Expression) -> some InsertOnConflictSubstatement {
         InsertOnConflictWhere(self, expression: expression)
     }
 }
 
 extension InsertOnConflictSubstatement {
     @inlinable
-    public func doNothing() -> InsertStatement {
+    public func doNothing() -> some InsertStatement {
         InsertUpsert(self, do: .nothing)
     }
 
-    @inlinable public func update() -> InsertStatement {
+    @inlinable public func update() -> some InsertStatement {
         InsertUpsert(self, do: .update)
     }
 }

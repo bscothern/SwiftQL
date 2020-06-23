@@ -15,8 +15,27 @@ import SQLite3
 @usableFromInline
 struct SelectCoreSelectGroup: SelectCoreSelectGroupExtendableStatement {
     @usableFromInline
-    var statementValue: String { "\(base)" }
+    var statementValue: String {
+        let expressions = self.expressions.lazy
+            .map(\.substatementValue)
+            .joined(separator: ", ")
+        let havingExpression = self.havingExpression.map { " HAVING \($0)" } ?? ""
+        return "\(base) GROUP BY \(expressions)\(havingExpression)"
+    }
 
     @usableFromInline
-    let base: SelectCoreSelect
+    let base: SelectCoreSelectWhereExtendableStatement
+    
+    @usableFromInline
+    let expressions: [Expression]
+    
+    @usableFromInline
+    let havingExpression: Expression?
+    
+    @usableFromInline
+    init(_ base: SelectCoreSelectWhereExtendableStatement, expressions: [Expression], havingExpression: Expression?) {
+        self.base = base
+        self.expressions = expressions
+        self.havingExpression = havingExpression
+    }
 }

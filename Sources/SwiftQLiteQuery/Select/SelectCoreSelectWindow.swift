@@ -18,5 +18,5 @@ struct SelectCoreSelectWindow: SelectCoreSelectWindowExtendableStatement {
     var statementValue: String { "\(base)" }
 
     @usableFromInline
-    let base: SelectCoreSelect
+    let base: SelectCoreSelectGroupExtendableStatement
 }

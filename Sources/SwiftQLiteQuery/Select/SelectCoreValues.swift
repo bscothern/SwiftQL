@@ -16,13 +16,14 @@ import SQLite3
 struct SelectCoreValues: SelectCoreStatement {
     @usableFromInline
     var statementValue: String {
-        let expressionLists = self.expressionLists
+        let expressionLists = self.expressionLists.lazy
             .map { expressions -> String in
-                let expressionList = expressions
+                let expressionList = expressions.lazy
                     .map(\.substatementValue)
                     .joined(separator: ", ")
                 return "(\(expressionList))"
-            }.joined(separator: ", ")
+            }
+            .joined(separator: ", ")
         return "VALUES \(expressionLists)"
     }
 
