@@ -17,7 +17,7 @@ public protocol CompoundableSelectStatement: SelectStatement {}
 public protocol OrderableSelectStatement: CompoundableSelectStatement {}
 public protocol LimitSelectStatement: CompoundableSelectStatement {}
 
-public protocol SelectCoreStatement: SelectStatement {}
+public protocol SelectCoreStatement: SelectOrderedByExtendableStatement {}
 // The heirarchy of these Select protocols starts more refiend and ends up less refined.
 // This makes it so functionality can be removed at each step as the flow allows you to do less things the further you have progressed.
 
@@ -26,6 +26,9 @@ public protocol SelectCoreSelectFromExtendableStatement: SelectCoreSelectWhereEx
 public protocol SelectCoreSelectWhereExtendableStatement: SelectCoreSelectGroupExtendableStatement {}
 public protocol SelectCoreSelectGroupExtendableStatement: SelectCoreSelectWindowExtendableStatement {}
 public protocol SelectCoreSelectWindowExtendableStatement: SelectCoreStatement {}
+
+public protocol SelectOrderedByExtendableStatement: SelectLimitExtendableStatement {}
+public protocol SelectLimitExtendableStatement: SelectStatement {}
 
 public struct Select: OrderableSelectStatement, LimitSelectStatement {
     @inlinable
@@ -88,3 +91,59 @@ extension SelectCoreSelectWhereExtendableStatement {
 //    func window() -> some SelectCoreSelectWindowExtendableStatement {
 //    }
 //}
+
+extension SelectCoreStatement {
+    @inlinable
+    public func union(_ select: SelectStatement) -> some SelectStatement {
+        SelectUnionOperator(self, operator: .union, with: select)
+    }
+    
+    @inlinable
+    public func unionAll(_ select: SelectStatement) -> some SelectStatement {
+        SelectUnionOperator(self, operator: .unionAll, with: select)
+    }
+    
+    @inlinable
+    public func intersect(_ select: SelectStatement) -> some SelectStatement {
+        SelectUnionOperator(self, operator: .interset, with: select)
+    }
+    
+    @inlinable
+    public func except(_ select: SelectStatement) -> some SelectStatement {
+        SelectUnionOperator(self, operator: .except, with: select)
+    }
+}
+
+extension SelectOrderedByExtendableStatement {
+    @inlinable
+    public func order(@PassThroughBuilder<Expression> by orderingTerms: () -> [OrderingTerm]) -> some SelectLimitExtendableStatement {
+        order(by: orderingTerms())
+    }
+    
+    @inlinable
+    public func order(by orderingTerms: OrderingTerm...) -> some SelectLimitExtendableStatement {
+        order(by: orderingTerms)
+    }
+    
+    @inlinable
+    public func order(by orderingTerms: [OrderingTerm]) -> some SelectLimitExtendableStatement {
+        SelectOrderBy(self, orderingTerms: orderingTerms)
+    }
+}
+
+extension SelectLimitExtendableStatement {
+    @inlinable
+    public func limit(_ expression: Expression) -> some SelectStatement {
+        SelectLimit(self, expression: expression, offset: false, expression2: nil)
+    }
+    
+    @inlinable
+    public func limit(_ expression: Expression, offset offsetExpression: Expression) -> some SelectStatement {
+        SelectLimit(self, expression: expression, offset: true, expression2: offsetExpression)
+    }
+    
+    @inlinable
+    public func limie(_ expression1: Expression, _ expression2: Expression) -> some SelectStatement {
+        SelectLimit(self, expression: expression2, offset: false, expression2: expression2)
+    }
+}
