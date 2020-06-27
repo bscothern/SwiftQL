@@ -55,32 +55,32 @@ extension SelectCoreSelectWhereExtendableStatement {
     public func group(@PassThroughBuilder<Expression> by expressions: () -> [Expression]) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions(), having: nil)
     }
-    
+
     @inlinable
     public func group(@PassThroughBuilder<Expression> by expressions: () -> [Expression], having havingExpression: () -> Expression) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions(), having: havingExpression())
     }
-    
+
     @inlinable
     public func group(@PassThroughBuilder<Expression> by expressions: () -> [Expression], having havingExpression: Expression) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions(), having: havingExpression)
     }
-        
+
     @inlinable
     public func group(by expressions: Expression...) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions, having: nil)
     }
-    
+
     @inlinable
     public func group(by expressions: Expression..., having havingExpression: Expression) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions, having: havingExpression)
     }
-    
+
     @inlinable
     public func group(by expressions: [Expression]) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions, having: nil)
     }
-    
+
     @inlinable
     public func group(by expressions: [Expression], having havingExpression: Expression?) -> some SelectCoreSelectGroupExtendableStatement {
         SelectCoreSelectGroup(self, expressions: expressions, havingExpression: havingExpression)
@@ -97,17 +97,17 @@ extension SelectCoreStatement {
     public func union(_ select: SelectStatement) -> some SelectStatement {
         SelectUnionOperator(self, operator: .union, with: select)
     }
-    
+
     @inlinable
     public func unionAll(_ select: SelectStatement) -> some SelectStatement {
         SelectUnionOperator(self, operator: .unionAll, with: select)
     }
-    
+
     @inlinable
     public func intersect(_ select: SelectStatement) -> some SelectStatement {
         SelectUnionOperator(self, operator: .interset, with: select)
     }
-    
+
     @inlinable
     public func except(_ select: SelectStatement) -> some SelectStatement {
         SelectUnionOperator(self, operator: .except, with: select)
@@ -119,12 +119,12 @@ extension SelectOrderedByExtendableStatement {
     public func order(@PassThroughBuilder<Expression> by orderingTerms: () -> [OrderingTerm]) -> some SelectLimitExtendableStatement {
         order(by: orderingTerms())
     }
-    
+
     @inlinable
     public func order(by orderingTerms: OrderingTerm...) -> some SelectLimitExtendableStatement {
         order(by: orderingTerms)
     }
-    
+
     @inlinable
     public func order(by orderingTerms: [OrderingTerm]) -> some SelectLimitExtendableStatement {
         SelectOrderBy(self, orderingTerms: orderingTerms)
@@ -136,12 +136,12 @@ extension SelectLimitExtendableStatement {
     public func limit(_ expression: Expression) -> some SelectStatement {
         SelectLimit(self, expression: expression, offset: false, expression2: nil)
     }
-    
+
     @inlinable
     public func limit(_ expression: Expression, offset offsetExpression: Expression) -> some SelectStatement {
         SelectLimit(self, expression: expression, offset: true, expression2: offsetExpression)
     }
-    
+
     @inlinable
     public func limie(_ expression1: Expression, _ expression2: Expression) -> some SelectStatement {
         SelectLimit(self, expression: expression2, offset: false, expression2: expression2)

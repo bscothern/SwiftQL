@@ -15,19 +15,19 @@ struct SelectUnionOperator: SelectStatement {
         case interset = "INTERSECT"
         case except = "EXCEPT"
     }
-    
+
     @usableFromInline
     var statementValue: String { "\(base) \(`operator`.rawValue) \(select)" }
-    
+
     @usableFromInline
     let base: SelectStatement
-    
+
     @usableFromInline
     let `operator`: Operator
-    
+
     @usableFromInline
     let select: SelectStatement
-    
+
     @usableFromInline
     init(_ base: SelectStatement, operator: Operator, with select: SelectStatement) {
         self.base = base

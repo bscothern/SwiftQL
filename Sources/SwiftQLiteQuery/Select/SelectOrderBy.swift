@@ -18,10 +18,10 @@ struct SelectOrderBy: SelectLimitExtendableStatement {
 
     @usableFromInline
     let base: SelectStatement
-    
+
     @usableFromInline
     let orderingTerms: [OrderingTerm]
-    
+
     @usableFromInline
     init(_ base: SelectStatement, orderingTerms: [OrderingTerm]) {
         self.base = base

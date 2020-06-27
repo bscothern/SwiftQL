@@ -10,7 +10,7 @@
 struct ExpressionUnaryPrefixOperator: ExpressionSubstatement {
     @usableFromInline
     var substatementValue: String { "\(prefixOperator.rawValue) \(expression)" }
-    
+
     @usableFromInline
     let prefixOperator: Expression.UnaryPrefixOperator
 
@@ -24,7 +24,7 @@ struct ExpressionUnaryPrefixOperator: ExpressionSubstatement {
     }
 }
 
-//MARK: Unary Prefix Operators
+// MARK: Unary Prefix Operators
 @inlinable
 public prefix func + (expression: Expression) -> Expression {
     .init(_prefixOperator: .positive, expression: expression)

@@ -34,19 +34,19 @@ struct DropStatementBase: Statement {
     let category: Category
 
     @usableFromInline
+    let schemaName: SchemaName?
+
+    @usableFromInline
     let name: Substatement
 
     @usableFromInline
     let ifExists: Bool
 
     @usableFromInline
-    let schemaName: SchemaName?
-
-    @usableFromInline
-    init(_ category: Category, name: Substatement, schemaName: SchemaName?, ifExists: Bool) {
+    init(_ category: Category, schemaName: SchemaName?, name: Substatement, ifExists: Bool) {
         self.category = category
+        self.schemaName = schemaName
         self.name = name
         self.ifExists = ifExists
-        self.schemaName = schemaName
     }
 }

@@ -55,19 +55,19 @@ This work is being done in the target `SwiftQLiteQuery`
 * [ ] aggregate functions
 * [X] ALTER TABLE	
 * [X] ANALYZE
-* [ ] ATTACH DATABASE
-* [ ] BEGIN TRANSACTION
+* [X] ATTACH DATABASE
+* [X] BEGIN TRANSACTION
 * [X] ~comment~ (Comments should live in the swift code building the queries instead of in the actual queries)
-* [ ] COMMIT TRANSACTION
+* [X] COMMIT TRANSACTION
 * [ ] core functions
-* [ ] CREATE INDEX
+* [X] CREATE INDEX
 * [ ] CREATE TABLE
 * [ ] CREATE TRIGGER
 * [ ] CREATE VIEW
 * [ ] CREATE VIRTUAL TABLE
 * [ ] date and time functions
 * [ ] DELETE
-* [ ] DETACH DATABASE
+* [X] DETACH DATABASE
 * [ ] DROP INDEX
 * [ ] DROP TABLE
 * [ ] DROP TRIGGER

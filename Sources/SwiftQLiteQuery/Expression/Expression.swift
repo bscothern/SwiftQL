@@ -34,38 +34,38 @@ public struct Expression: ExpressionSubstatement {
         case regexp = "REGEXP"
         case match = "MATCH"
     }
-    
+
     public enum UnaryPrefixOperator: String {
         case negative = "-"
         case positive = "+"
         case negated = "~"
         case not = "NOT"
     }
-    
+
     public enum BinaryOperator: String {
         // These are grouped by order of precedence from highest to lowest
-        
+
         case concatenate = "||"
-        
+
         case multiply = "*"
         case divide = "/"
         case mod = "%"
-        
+
         case bitShiftLeft = "<<"
         case bitShiftRight = ">>"
         case bitwiseAnd = "&"
         case bitwiseOr = "|"
-        
+
         case lessThan = "<"
         case lessThanOrEqual = "<="
         case greaterThan = ">"
         case greaterThanOrEqual = ">="
-        
+
         case assign = "="
         case equal = "=="
         case notEqual = "!="
         case notEqual2 = "<>"
-        
+
         case `is` = "IS"
         case isNot = "IS NOT"
         case `in` = "IN"
@@ -73,9 +73,9 @@ public struct Expression: ExpressionSubstatement {
         case glob = "GLOB"
         case match = "MATCH"
         case regexp = "REGEXP"
-        
+
         case and = "AND"
-        
+
         case or = "OR"
     }
 
@@ -106,7 +106,7 @@ public struct Expression: ExpressionSubstatement {
     public init(schemaName: SchemaName, tableName: TableName, columnName: ColumnName) {
         base = ExpressionSchemaTableColumnName(schemaName: schemaName, tableName: tableName, columnName: columnName)
     }
-    
+
     @inlinable
     @available(*, deprecated, message: "It is recomended to use prefix operators instead of this init")
     public init(prefixOperator: UnaryPrefixOperator, expression: Expression) {
@@ -117,13 +117,13 @@ public struct Expression: ExpressionSubstatement {
     init(_prefixOperator prefixOperator: UnaryPrefixOperator, expression: Expression) {
         base = ExpressionUnaryPrefixOperator(prefixOperator: prefixOperator, expression: expression)
     }
-    
+
     @inlinable
     @available(*, deprecated, message: "It is recomended to use infix operators and functions instead of this init")
     public init(lhs: Expression, binaryOperator: BinaryOperator, rhs: Expression) {
         self.init(_lhs: lhs, binaryOperator: binaryOperator, rhs: rhs)
     }
-    
+
     @usableFromInline
     init(_lhs lhs: Expression, binaryOperator: BinaryOperator, rhs: Expression) {
         base = ExpressionBinaryOperator(lhs: lhs, binaryOperator: binaryOperator, rhs: rhs)
@@ -187,13 +187,13 @@ public struct Expression: ExpressionSubstatement {
 
     @inlinable
     public func `in`() -> ExpressionInSubstatement {
-        fatalError()
+        fatalError("TODO")
 //        ExpressionIn(self, category: .in, condition: )
     }
-    
+
     @inlinable
     public func notIn() -> ExpressionNotInSubstatement {
-        fatalError()
+        fatalError("TODO")
 //        ExpressionIn(self, category: .notIn, condition: )
     }
 

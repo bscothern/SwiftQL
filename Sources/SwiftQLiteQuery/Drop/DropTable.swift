@@ -21,11 +21,11 @@ public struct DropTable: Statement {
 
     @inlinable
     public init(name: TableName, ifExists: Bool = true) {
-        base = .init(.table, name: name, schemaName: nil, ifExists: ifExists)
+        base = .init(.table, schemaName: nil, name: name, ifExists: ifExists)
     }
 
     @inlinable
-    public init(name: TableName, schemaName: SchemaName, ifExists: Bool = true) {
-        base = .init(.table, name: name, schemaName: schemaName, ifExists: ifExists)
+    public init(schemaName: SchemaName, name: TableName, ifExists: Bool = true) {
+        base = .init(.table, schemaName: schemaName, name: name, ifExists: ifExists)
     }
 }

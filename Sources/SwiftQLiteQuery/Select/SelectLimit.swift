@@ -21,19 +21,19 @@ struct SelectLimit: SelectStatement {
         let expression2 = self.expression2.map { " \($0.substatementValue)" } ?? ""
         return "\(base) LIMIT \(expression)\(offsetOrComma)\(expression2)"
     }
-    
+
     @usableFromInline
     let base: SelectStatement
-    
+
     @usableFromInline
     let expression: Expression
-    
+
     @usableFromInline
     let offset: Bool
-    
+
     @usableFromInline
     let expression2: Expression?
-    
+
     @usableFromInline
     init(_ base: SelectStatement, expression: Expression, offset: Bool, expression2: Expression?) {
         self.base = base

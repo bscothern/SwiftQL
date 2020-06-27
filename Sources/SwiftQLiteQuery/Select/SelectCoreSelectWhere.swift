@@ -19,10 +19,10 @@ struct SelectCoreSelectWhere: SelectCoreSelectWhereExtendableStatement {
 
     @usableFromInline
     let base: SelectCoreSelectFromExtendableStatement
-    
+
     @usableFromInline
     let expression: Expression
-    
+
     @usableFromInline
     init(_ base: SelectCoreSelectFromExtendableStatement, expression: Expression) {
         self.base = base

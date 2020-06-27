@@ -21,11 +21,11 @@ public struct DropTrigger: Statement {
 
     @inlinable
     public init(name: TriggerName, ifExists: Bool = true) {
-        base = .init(.trigger, name: name, schemaName: nil, ifExists: ifExists)
+        base = .init(.trigger, schemaName: nil, name: name, ifExists: ifExists)
     }
 
     @inlinable
     public init(name: TriggerName, schemaName: SchemaName, ifExists: Bool = true) {
-        base = .init(.trigger, name: name, schemaName: schemaName, ifExists: ifExists)
+        base = .init(.trigger, schemaName: schemaName, name: name, ifExists: ifExists)
     }
 }

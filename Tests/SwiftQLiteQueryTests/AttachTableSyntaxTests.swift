@@ -13,9 +13,9 @@ final class AttachTableSyntaxTests: XCTestCase {
     func testInit() {
         let expression: Expression = .init(literal: .string("FakeDatabaseName"))
         let schemaName: SchemaName = "TestInitSchemaName"
-        
+
         let attachDatabase = AttachDatabase(expression, as: schemaName)
-        
+
         XCTAssertEqual("ATTACH DATABASE 'FakeDatabaseName' AS TestInitSchemaName", attachDatabase.statementValue)
     }
 }

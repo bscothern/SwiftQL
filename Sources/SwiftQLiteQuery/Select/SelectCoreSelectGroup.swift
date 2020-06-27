@@ -25,13 +25,13 @@ struct SelectCoreSelectGroup: SelectCoreSelectGroupExtendableStatement {
 
     @usableFromInline
     let base: SelectCoreSelectWhereExtendableStatement
-    
+
     @usableFromInline
     let expressions: [Expression]
-    
+
     @usableFromInline
     let havingExpression: Expression?
-    
+
     @usableFromInline
     init(_ base: SelectCoreSelectWhereExtendableStatement, expressions: [Expression], havingExpression: Expression?) {
         self.base = base

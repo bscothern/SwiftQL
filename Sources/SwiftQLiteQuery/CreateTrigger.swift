@@ -115,8 +115,8 @@ extension CreateTrigger {
         }
 
         //FIXME: Don't be string based
-        public static func update(of columnNames: [String]) -> Self {
-            .init("UPDATE OF \(columnNames.joined(separator: ", "))")
+        public static func update(of columnNames: [ColumnName]) -> Self {
+            .init("UPDATE OF \(columnNames.lazy.map(\.substatementValue).joined(separator: ", "))")
         }
     }
 }

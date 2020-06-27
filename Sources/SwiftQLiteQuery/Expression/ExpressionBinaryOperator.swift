@@ -10,10 +10,10 @@
 struct ExpressionBinaryOperator: ExpressionSubstatement {
     @usableFromInline
     var substatementValue: String { "\(lhs) \(binaryOperator.rawValue) \(rhs)" }
-    
+
     @usableFromInline
     let lhs: Expression
-    
+
     @usableFromInline
     let binaryOperator: Expression.BinaryOperator
 
@@ -73,12 +73,12 @@ extension Expression {
     public func multiply(by other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .multiply, rhs: other)
     }
-    
+
     @inlinable
     public func divide(by other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .divide, rhs: other)
     }
-    
+
     @inlinable
     public func mod(by other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .mod, rhs: other)
@@ -114,11 +114,10 @@ public func .| (lhs: Expression, rhs: Expression) -> Expression {
 }
 
 extension Expression {
-    
     public enum BitShiftDirection {
         case left
         case right
-        
+
         @usableFromInline
         var `operator`: Expression.BinaryOperator {
             switch self {
@@ -129,17 +128,17 @@ extension Expression {
             }
         }
     }
-    
+
     @inlinable
     public func bitShift(_ direction: BitShiftDirection, by other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: direction.operator, rhs: other)
     }
-    
+
     @inlinable
     public func bitwiseAnd(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .bitwiseAnd, rhs: other)
     }
-    
+
     @inlinable
     public func bitwiseOr(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .bitwiseOr, rhs: other)
@@ -179,17 +178,17 @@ extension Expression {
     public func lessThan(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .lessThan, rhs: other)
     }
-    
+
     @inlinable
     public func lessThanOrEqual(to other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .lessThanOrEqual, rhs: other)
     }
-    
+
     @inlinable
     public func greaterThan(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .greaterThan, rhs: other)
     }
-    
+
     @inlinable
     public func greaterThanOrEqual(to other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .greaterThanOrEqual, rhs: other)
@@ -229,52 +228,52 @@ extension Expression {
     public func assign(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .assign, rhs: other)
     }
-    
+
     @inlinable
     public func equals(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .equal, rhs: other)
     }
-    
+
     @inlinable
     public func notEqual(to other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .notEqual, rhs: other)
     }
-    
+
     @inlinable
     public func notEqual2(to other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .notEqual2, rhs: other)
     }
-    
+
     @inlinable
     public func `is`(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .is, rhs: other)
     }
-    
+
     @inlinable
     public func isNot(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .isNot, rhs: other)
     }
-    
+
     @inlinable
     public func `in`(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .in, rhs: other)
     }
-    
+
     @inlinable
     public func like(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .like, rhs: other)
     }
-    
+
     @inlinable
     public func glob(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .glob, rhs: other)
     }
-    
+
     @inlinable
     public func match(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .match, rhs: other)
     }
-    
+
     @inlinable
     public func regexp(_ other: Expression) -> Expression {
         .init(_lhs: self, binaryOperator: .regexp, rhs: other)

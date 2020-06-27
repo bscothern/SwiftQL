@@ -11,12 +11,12 @@ public struct OrderingTerm: Substatement {
         case ascending = "ASC"
         case descending = "DESC"
     }
-    
+
     public enum Nulls: String {
         case first = "NULLS FIRST"
         case last = "NULLS LAST"
     }
-    
+
     @inlinable
     public var substatementValue: String {
         let collationName = self.collationName.map { " COLLATE \($0)" } ?? ""
@@ -27,16 +27,16 @@ public struct OrderingTerm: Substatement {
 
     @usableFromInline
     let expression: Expression
-    
+
     @usableFromInline
     let collationName: CollationName?
-    
+
     @usableFromInline
     let ordering: Ordering?
-    
+
     @usableFromInline
     let nulls: Nulls?
-    
+
     public init(expression: Expression, collate collationName: CollationName? = nil, ordering: Ordering? = nil, nulls: Nulls? = nil) {
         self.expression = expression
         self.collationName = collationName

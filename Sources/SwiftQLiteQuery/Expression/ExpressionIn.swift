@@ -15,19 +15,19 @@ struct ExpressionIn: ExpressionInSubstatement {
         case `in` = "IN"
         case notIn = "NOT IN"
     }
-    
+
     @usableFromInline
     var substatementValue: String { "\(expression) \(category) \(condition)" }
 
     @usableFromInline
     let expression: ExpressionSubstatement
-    
+
     @usableFromInline
     let category: Category
-    
+
     @usableFromInline
     let condition: ExpressionInCondition
-    
+
     @usableFromInline
     init(_ expression: Expression, category: Category, condition: ExpressionInCondition) {
         self.expression = expression
@@ -35,5 +35,3 @@ struct ExpressionIn: ExpressionInSubstatement {
         self.condition = condition
     }
 }
-
-
