@@ -12,9 +12,9 @@ import SwiftQLiteLinux
 import SQLite3
 #endif
 
-public struct DropView {
+public struct DropView: Statement {
     @inlinable
-    public var _statement: String { base.statementValue }
+    public var statementValue: String { base.statementValue }
 
     @usableFromInline
     let base: DropStatementBase
@@ -25,7 +25,7 @@ public struct DropView {
     }
 
     @inlinable
-    public init(name: ViewName, schemaName: SchemaName, ifExists: Bool = true) {
+    public init(schemaName: SchemaName, name: ViewName, ifExists: Bool = true) {
         base = .init(.view, schemaName: schemaName, name: name, ifExists: ifExists)
     }
 }

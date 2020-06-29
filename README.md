@@ -51,7 +51,7 @@ This work is being done in the target `SwiftQLiteQuery`
 
 `*` items need extra clean up
 
-### Needs Test (3/38 Complete)
+### Needs Test (14/38 Complete)
 * [ ] aggregate functions
 * [X] ALTER TABLE	
 * [X] ANALYZE
@@ -68,11 +68,11 @@ This work is being done in the target `SwiftQLiteQuery`
 * [ ] date and time functions
 * [ ] DELETE
 * [X] DETACH DATABASE
-* [ ] DROP INDEX
-* [ ] DROP TABLE
-* [ ] DROP TRIGGER
-* [ ] DROP VIEW
-* [ ] END TRANSACTION
+* [X] DROP INDEX
+* [X] DROP TABLE
+* [X] DROP TRIGGER
+* [X] DROP VIEW
+* [X] END TRANSACTION
 * [ ] EXPLAIN
 * [ ] expression
 * [ ] INDEXED BY

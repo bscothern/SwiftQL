@@ -15,19 +15,22 @@ import SQLite3
 /// https://www.sqlite.org/lang_explain.html
 public struct Explain: Statement {
     @inlinable
-    public var statementValue: String { "EXPLAIN\(statement.map { " \($0)" } ?? "")" }
-
-    @usableFromInline
-    let statement: Statement?
-
-    public init() {
-        statement = nil
+    public var statementValue: String {
+        let queryPlan = self.queryPlan ? "QUERY PLAN " : ""
+        return "EXPLAIN \(queryPlan)\(statement)"
     }
 
-    public init(_ statement: Statement) {
+    @usableFromInline
+    let queryPlan: Bool
+    
+    @usableFromInline
+    let statement: Statement
+
+    public init(queryPlan: Bool, _ statement: Statement) {
         if let explain = statement as? Explain {
             self = explain
         } else {
+            self.queryPlan = queryPlan
             self.statement = statement
         }
     }

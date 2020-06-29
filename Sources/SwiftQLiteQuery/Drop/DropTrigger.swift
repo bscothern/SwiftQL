@@ -25,7 +25,7 @@ public struct DropTrigger: Statement {
     }
 
     @inlinable
-    public init(name: TriggerName, schemaName: SchemaName, ifExists: Bool = true) {
+    public init(schemaName: SchemaName, name: TriggerName, ifExists: Bool = true) {
         base = .init(.trigger, schemaName: schemaName, name: name, ifExists: ifExists)
     }
 }
