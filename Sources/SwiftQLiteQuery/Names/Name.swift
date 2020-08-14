@@ -6,4 +6,13 @@
 //  Copyright © 2020 Braden Scothern. All rights reserved.
 //
 
-public protocol Name: Substatement, Hashable {}
+public protocol Name: Substatement, Hashable, ExpressibleByStringLiteral {
+    init(_ value: String)
+}
+
+extension Name {
+    @inlinable
+    public init(stringLiteral: String) {
+        self.init(stringLiteral)
+    }
+}

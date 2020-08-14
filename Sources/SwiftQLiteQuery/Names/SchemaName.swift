@@ -23,10 +23,3 @@ public struct SchemaName: Name {
         self.value = value
     }
 }
-
-extension SchemaName: ExpressibleByStringLiteral {
-    @inlinable
-    public init(stringLiteral: String) {
-        self.init(stringLiteral)
-    }
-}

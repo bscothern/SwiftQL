@@ -22,7 +22,7 @@ This work is being done in the target `SwiftQLiteQuery`
 * [X] CREATE TABLE
 * [X] CREATE TRIGGER*
 * [X] CREATE VIEW*
-* [ ] CREATE VIRTUAL TABLE
+* [X] CREATE VIRTUAL TABLE
 * [ ] date and time functions
 * [X] DELETE
 * [X] DETACH DATABASE

@@ -1,16 +1,16 @@
 //
-//  TableName.swift
+//  IndexName.swift
 //  SwiftQLite
 //
-//  Created by Braden Scothern on 3/19/20.
+//  Created by Braden Scothern on 8/14/20.
 //  Copyright © 2020 Braden Scothern. All rights reserved.
 //
 
-public struct TableName: Name {
-    public let value: String
-
+public struct ModuleName: Name {
     @inlinable
     public var substatementValue: String { value }
+
+    public let value: String
 
     @inlinable
     public init(_ value: String) {

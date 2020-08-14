@@ -17,10 +17,3 @@ public struct ViewName: Name {
         self.value = value
     }
 }
-
-extension ViewName: ExpressibleByStringLiteral {
-    @inlinable
-    public init(stringLiteral: String) {
-        self.init(stringLiteral)
-    }
-}

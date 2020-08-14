@@ -17,10 +17,3 @@ public struct TriggerName: Name {
         self.value = value
     }
 }
-
-extension TriggerName: ExpressibleByStringLiteral {
-    @inlinable
-    public init(stringLiteral: String) {
-        self.init(stringLiteral)
-    }
-}

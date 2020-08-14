@@ -18,13 +18,6 @@ public struct ColumnName: Name {
     }
 }
 
-extension ColumnName: ExpressibleByStringLiteral {
-    @inlinable
-    public init(stringLiteral: String) {
-        self.init(stringLiteral)
-    }
-}
-
 // TODO: Is this good enough or should there be more than just the typealias?
 
 /// A `ColumnName` that also is indexed in the database.

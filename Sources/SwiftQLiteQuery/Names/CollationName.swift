@@ -17,10 +17,3 @@ public struct CollationName: Name {
         self.value = value
     }
 }
-
-extension CollationName: ExpressibleByStringLiteral {
-    @inlinable
-    public init(stringLiteral: String) {
-        self.init(stringLiteral)
-    }
-}

@@ -17,10 +17,3 @@ public struct IndexName: Name {
         self.value = value
     }
 }
-
-extension IndexName: ExpressibleByStringLiteral {
-    @inlinable
-    public init(stringLiteral: String) {
-        self.init(stringLiteral)
-    }
-}
