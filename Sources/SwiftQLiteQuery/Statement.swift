@@ -19,3 +19,8 @@ public protocol Statement {
 public protocol Substatement {
     var substatementValue: String { get }
 }
+
+extension Substatement where Self: RawRepresentable, RawValue == String {
+    @inlinable
+    public var substatementValue: String { rawValue }
+}

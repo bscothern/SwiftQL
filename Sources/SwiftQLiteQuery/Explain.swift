@@ -22,7 +22,7 @@ public struct Explain: Statement {
 
     @usableFromInline
     let queryPlan: Bool
-    
+
     @usableFromInline
     let statement: Statement
 
