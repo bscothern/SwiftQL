@@ -130,3 +130,4 @@ This work is being done in the target `SwiftQLiteQuery`
 * [ ] UPSERT
 * [ ] VACUUM
 * [ ] WITH clause
+

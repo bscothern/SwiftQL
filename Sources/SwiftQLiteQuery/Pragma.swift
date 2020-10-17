@@ -12,7 +12,6 @@ import SwiftQLiteLinux
 import SQLite3
 #endif
 
-#warning("IMPLIMENT")
 public struct Pragma: Statement {
     @inlinable
     public var statementValue: String {
@@ -87,7 +86,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func applicationID(schema: SchemaName, id: Int32? = nil) -> Self {
+    public static func applicationID(schema: SchemaName? = nil, id: Int32? = nil) -> Self {
         .init(
             schema: schema,
             directive: "application_id",
@@ -96,7 +95,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func autoVacuum(schema: SchemaName) -> Self {
+    public static func autoVacuum(schema: SchemaName? = nil) -> Self {
         .init(
             schema: schema,
             directive: "auto_vacuum"
@@ -110,7 +109,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func autoVacuum(schema: SchemaName, mode: AutoVacuumMode) -> Self {
+    public static func autoVacuum(schema: SchemaName? = nil, mode: AutoVacuumMode) -> Self {
         .init(
             schema: schema,
             directive: "auto_vacuum",
@@ -135,9 +134,21 @@ extension Pragma {
     }
 
     @inlinable
-    public static func cacheSize() -> Self {
-        #warning("TODO")
-        fatalError("TODO")
+    public static func cacheSize(schema: SchemaName? = nil, pages: Int32? = nil) -> Self {
+        .init(
+            schema: schema,
+            directive: "cache_size",
+            equals: pages
+        )
+    }
+    
+    @inlinable
+    public static func cacheSize(schema: SchemaName? = nil, kibibytes: Int32) -> Self {
+        .init(
+            schema: schema,
+            directive: "cache_size",
+            equals: -kibibytes
+        )
     }
 
     @inlinable
@@ -149,7 +160,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func cacheSpill(schema: SchemaName, threshold: Int32) -> Self {
+    public static func cacheSpill(schema: SchemaName? = nil, threshold: Int32) -> Self {
         .init(
             schema: schema,
             directive: "cache_spill",
@@ -210,7 +221,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func dataVersion(schema: SchemaName) -> Self {
+    public static func dataVersion(schema: SchemaName? = nil) -> Self {
         .init(
             schema: schema,
             directive: "data_version"
@@ -224,7 +235,7 @@ extension Pragma {
 
     @inlinable
     @available(*, deprecated, message: "This pragma is deprecated and exists for backwards compatibility only. New applications should avoid using this pragma. Older applications should discontinue use of this pragma at the earliest opportunity. This pragma may be omitted from the build when SQLite is compiled using SQLITE_OMIT_DEPRECATED.")
-    public static func defaultCacheSize(schema: SchemaName, numberOfPages: Int32? = nil) -> Self {
+    public static func defaultCacheSize(schema: SchemaName? = nil, numberOfPages: Int32? = nil) -> Self {
         .init(
             schema: schema,
             directive: "default_cache_size",
@@ -265,7 +276,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func foreignKeyCheck(schema: SchemaName, table: TableName? = nil) -> Self {
+    public static func foreignKeyCheck(schema: SchemaName? = nil, table: TableName? = nil) -> Self {
         .init(
             schema: schema,
             directive: "foreign_key_check",
@@ -290,7 +301,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func freelistCount(schema: SchemaName) -> Self {
+    public static func freelistCount(schema: SchemaName? = nil) -> Self {
         .init(
             schema: schema,
             directive: "freelist_count"
@@ -336,7 +347,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func incrementalVacuum(schema: SchemaName, numberOfPages: Int64) -> Self {
+    public static func incrementalVacuum(schema: SchemaName? = nil, numberOfPages: Int64) -> Self {
         .init(
             schema: schema,
             directive: "incremental_vacuum",
@@ -345,7 +356,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func indexInfo(schema: SchemaName, index: IndexName) -> Self {
+    public static func indexInfo(schema: SchemaName? = nil, index: IndexName) -> Self {
         .init(
             schema: schema,
             directive: "index_info",
@@ -354,7 +365,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func indexList(schema: SchemaName, table: TableName) -> Self {
+    public static func indexList(schema: SchemaName? = nil, table: TableName) -> Self {
         .init(
             schema: schema,
             directive: "index_list",
@@ -363,7 +374,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func indexXInfo(schema: SchemaName, index: IndexName) -> Self {
+    public static func indexXInfo(schema: SchemaName? = nil, index: IndexName) -> Self {
         .init(
             schema: schema,
             directive: "index_xinfo",
@@ -372,7 +383,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func integrityCheck(schema: SchemaName) -> Self {
+    public static func integrityCheck(schema: SchemaName? = nil) -> Self {
         .init(
             schema: schema,
             directive: "integrity_check"
@@ -380,7 +391,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func integrityCheck(schema: SchemaName, maximumNumberOfErrors: Int64) -> Self {
+    public static func integrityCheck(schema: SchemaName? = nil, maximumNumberOfErrors: Int64) -> Self {
         .init(
             schema: schema,
             directive: "integrity_check",
@@ -389,7 +400,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func integrityCheck(schema: SchemaName, table: TableName) -> Self {
+    public static func integrityCheck(schema: SchemaName? = nil, table: TableName) -> Self {
         .init(
             schema: schema,
             directive: "integrity_check",
@@ -407,7 +418,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func journalMode(schema: SchemaName, mode: JournalMode? = nil) -> Self {
+    public static func journalMode(schema: SchemaName? = nil, mode: JournalMode? = nil) -> Self {
         .init(
             schema: schema,
             directive: "journal_mode",
@@ -442,7 +453,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func lockingMode(schema: SchemaName, mode: LockingMode? = nil) -> Self {
+    public static func lockingMode(schema: SchemaName? = nil, mode: LockingMode? = nil) -> Self {
         .init(
             schema: schema,
             directive: "locking_mode",
@@ -451,7 +462,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func maxPageCount(schema: SchemaName, count: Int64? = nil) -> Self {
+    public static func maxPageCount(schema: SchemaName? = nil, count: Int64? = nil) -> Self {
         .init(
             schema: schema,
             directive: "max_page_count",
@@ -460,7 +471,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func mmapSize(schema: SchemaName, size: Int64? = nil) -> Self {
+    public static func mmapSize(schema: SchemaName? = nil, size: Int64? = nil) -> Self {
         .init(
             schema: schema,
             directive: "mmap_size",
@@ -503,7 +514,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func pageCount(schema: SchemaName) -> Self {
+    public static func pageCount(schema: SchemaName? = nil) -> Self {
         .init(
             schema: schema,
             directive: "page_count"
@@ -511,7 +522,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func pageSize(schema: SchemaName, bytes: Int) -> Self {
+    public static func pageSize(schema: SchemaName? = nil, bytes: Int) -> Self {
         .init(
             schema: schema,
             directive: "page_size",
@@ -520,7 +531,7 @@ extension Pragma {
     }
 
     @inlinable
-    @available(*, deprecated, message: "This pragma is intended for use when debugging SQLite itself. It is only available when the SQLITE_DEBUG compile-time option is used.")
+    @_spi(SQLiteDebugging)
     public static func parserTrace(enabled: Bool) -> Self {
         .init(
             directive: "parser_trace",
@@ -542,7 +553,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func quickCheck(schema: SchemaName) -> Self {
+    public static func quickCheck(schema: SchemaName? = nil) -> Self {
         .init(
             schema: schema,
             directive: "quick_check"
@@ -550,7 +561,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func quickCheck(schema: SchemaName, maximumNumberOfErrors: Int64) -> Self {
+    public static func quickCheck(schema: SchemaName? = nil, maximumNumberOfErrors: Int64) -> Self {
         .init(
             schema: schema,
             directive: "quick_check",
@@ -559,7 +570,7 @@ extension Pragma {
     }
 
     @inlinable
-    public static func quickCheck(schema: SchemaName, table: TableName) -> Self {
+    public static func quickCheck(schema: SchemaName? = nil, table: TableName) -> Self {
         .init(
             schema: schema,
             directive: "quick_check",
@@ -571,6 +582,235 @@ extension Pragma {
     public static func readUncommited(enabled: Bool? = nil) -> Self {
         .init(
             directive: "read_uncommited",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    public static func recursiveTriggers(enabled: Bool? = nil) -> Self {
+        .init(
+            directive: "recursive_triggers",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    public static func reverseUnorderedSelects(enabled: Bool? = nil) -> Self {
+        .init(
+            directive: "reverse_unordered_selects",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    public static func schemaVersion(schema: SchemaName? = nil, number: Int32? = nil) -> Self {
+        .init(
+            schema: schema,
+            directive: "schema_version",
+            equals: number
+        )
+    }
+    
+    public enum SecureDeleteMode: String {
+        case on
+        case off
+        case fast
+        
+        @inlinable
+        public var rawValue: String {
+            switch self {
+            case .on:
+                return "\(true)"
+            case .off:
+                return "\(false)"
+            case .fast:
+                return "FAST"
+            }
+        }
+    }
+
+    @inlinable
+    public static func secureDelete(schema: SchemaName? = nil, mode: SecureDeleteMode? = nil) -> Self {
+        .init(
+            schema: schema,
+            directive: "schema_version",
+            equals: mode?.rawValue
+        )
+    }
+    
+    @inlinable
+    @available(*, deprecated, message: "This pragma is deprecated and exists for backwards compatibility only. New applications should avoid using this pragma. Older applications should discontinue use of this pragma at the earliest opportunity. This pragma may be omitted from the build when SQLite is compiled using SQLITE_OMIT_DEPRECATED.")
+    public static func shortColumnNames(enabled: Bool? = nil) -> Self {
+        .init(
+            directive: "short_column_names",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    public static func shrinkMemory() -> Self {
+        .init(directive: "shrink_memory")
+    }
+    
+    @inlinable
+    public static func softHeapLimit(size: Int64? = nil) -> Self {
+        .init(
+            directive: "soft_heap_limit",
+            equals: size
+        )
+    }
+    
+    @inlinable
+    public static func stats() -> Self {
+        .init(directive: "stats")
+    }
+    
+    public enum SynchronousMode: String {
+        case off = "OFF"
+        case normal = "NORMAL"
+        case full = "FULL"
+        case extra = "EXTRA"
+    }
+    
+    @inlinable
+    public static func synchronous(schema: SchemaName? = nil, mode: SynchronousMode? = nil) -> Self {
+        .init(
+            schema: schema,
+            directive: "synchronous",
+            equals: mode?.rawValue
+        )
+    }
+    
+    @inlinable
+    public static func tableInfo(schema: SchemaName? = nil, table: TableName) -> Self {
+        .init(
+            schema: schema,
+            directive: "table_info",
+            parenthesis: table.substatementValue
+        )
+    }
+    
+    @inlinable
+    public static func tableXInfo(schema: SchemaName? = nil, table: TableName) -> Self {
+        .init(
+            schema: schema,
+            directive: "table_xinfo",
+            parenthesis: table.substatementValue
+        )
+    }
+    
+    public enum TempStoreMode: String {
+        case `default` = "DEFAULT"
+        case file = "FILE"
+        case memory = "MEMORY"
+    }
+    
+    @inlinable
+    public static func tempStore(mode: TempStoreMode? = nil) -> Self {
+        .init(
+            directive: "temp_store",
+            equals: mode?.rawValue
+        )
+    }
+    
+    @inlinable
+    @available(*, deprecated, message: "This pragma is deprecated and exists for backwards compatibility only. New applications should avoid using this pragma. Older applications should discontinue use of this pragma at the earliest opportunity. This pragma may be omitted from the build when SQLite is compiled using SQLITE_OMIT_DEPRECATED.")
+    public static func tempStoreDirectory(_ directory: String? = nil) -> Self {
+        .init(
+            directive: "temp_store_directory",
+            equals: directory
+        )
+    }
+    
+    @inlinable
+    public static func threads(count: Int32) -> Self {
+        .init(
+            directive: "threads",
+            equals: count
+        )
+    }
+    
+    @inlinable
+    public static func trustedSchema(enabled: Bool? = nil) -> Self {
+        .init(
+            directive: "trusted_schema",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    public static func userVersion(schema: SchemaName? = nil, number: Int32? = nil) -> Self {
+        .init(
+            schema: schema,
+            directive: "user_version",
+            equals: number
+        )
+    }
+    
+    @inlinable
+    @_spi(SQLiteDebugging)
+    public static func vdbeAddoptrace(enabled: Bool) -> Self {
+        .init(
+            directive: "vdbe_addoptrace",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    @_spi(SQLiteDebugging)
+    public static func vdbeDebug(enabled: Bool) -> Self {
+        .init(
+            directive: "vdbe_debug",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    @_spi(SQLiteDebugging)
+    public static func vdbeListinge(enabled: Bool) -> Self {
+        .init(
+            directive: "vdbe_listing",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    @_spi(SQLiteDebugging)
+    public static func vdbeTrace(enabled: Bool) -> Self {
+        .init(
+            directive: "vdbe_trace",
+            equals: enabled
+        )
+    }
+    
+    @inlinable
+    public static func walAutoCheckpoint(size: Int32) -> Self {
+        .init(
+            directive: "wal_autocheckpoint",
+            equals: size
+        )
+    }
+    
+    public enum WALCheckpointMode: String {
+        case passive = "PASSIVE"
+        case full = "FULL"
+        case restart = "RESTART"
+        case truncate = "TRUNCATE"
+    }
+    
+    @inlinable
+    public static func walCheckpoint(schema: SchemaName? = nil, mode: WALCheckpointMode? = nil) -> Self {
+        .init(
+            schema: schema,
+            directive: "wal_checkpoint",
+            equals: mode?.rawValue
+        )
+    }
+    
+    @inlinable
+    public static func writableSchema(enabled: Bool) -> Self {
+        .init(
+            directive: "writable_schema",
             equals: enabled
         )
     }
