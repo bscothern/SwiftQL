@@ -37,7 +37,7 @@ This work is being done in the target `SwiftQLiteQuery`
 * [X] INSERT
 * [X] keywords
 * [X] ON CONFLICT clause
-* [ ] PRAGMA
+* [X] PRAGMA
 * [X] REINDEX
 * [X] RELEASE SAVEPOINT
 * [X] REPLACE

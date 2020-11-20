@@ -1,5 +1,5 @@
 //
-//  SelectCoreSelectFrom.swift
+//  SelectCoreSelectFromTableOrSubquery.swift
 //  SwiftQLite
 //
 //  Created by Braden Scothern on 4/26/20.
@@ -13,7 +13,7 @@ import SQLite3
 #endif
 
 @usableFromInline
-struct SelectCoreSelectFrom: SelectCoreSelectFromExtendableStatement {
+struct SelectCoreSelectFromTableOrSubquery: SelectCoreSelectFromExtendableStatement {
     @usableFromInline
     var statementValue: String { "\(base)" }
 

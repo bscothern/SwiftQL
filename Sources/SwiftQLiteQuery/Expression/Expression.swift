@@ -132,7 +132,7 @@ public struct Expression: ExpressionSubstatement {
     // TODO: function-name
 
     @inlinable
-    public init(@PassThroughBuilder<ExpressionSubstatement> list: () -> [ExpressionSubstatement]) {
+    public init(@ArrayBuilder<ExpressionSubstatement> list: () -> [ExpressionSubstatement]) {
         base = ExpressionList(list())
     }
 

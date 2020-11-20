@@ -38,7 +38,7 @@ public struct Update: UpdateStatement {
     let set: [(name: String, to: Literal)]
 
     @inlinable
-    public init(tableName: TableName, with: With?, or: Or?, @PassThroughBuilder<(name: String, to: Literal)> set: () -> [(name: String, to: Literal)]) {
+    public init(tableName: TableName, with: With?, or: Or?, @ArrayBuilder<(name: String, to: Literal)> set: () -> [(name: String, to: Literal)]) {
         self.tableName = tableName
         self.with = with
         self.or = or

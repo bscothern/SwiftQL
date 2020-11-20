@@ -42,7 +42,7 @@ public struct CreateVirtualTable: Statement {
     }
 
     @inlinable
-    init(ifNotExists: Bool = true, schemaName: SchemaName? = nil, tableName: TableName, using moduleName: ModuleName, @PassThroughBuilder<String> moduleArguments: () -> [String]) {
+    init(ifNotExists: Bool = true, schemaName: SchemaName? = nil, tableName: TableName, using moduleName: ModuleName, @ArrayBuilder<String> moduleArguments: () -> [String]) {
         self.init(ifNotExists: ifNotExists, schemaName: schemaName, tableName: tableName, using: moduleName, moduleArguments: moduleArguments())
     }
 

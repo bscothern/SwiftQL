@@ -27,7 +27,7 @@ public struct With: Substatement {
     let commonTableExpressions: [String]
 
     @inlinable
-    public init(recursive: Bool = false, @PassThroughBuilder<String> commonTableExpressions: () -> [String]) {
+    public init(recursive: Bool = false, @ArrayBuilder<String> commonTableExpressions: () -> [String]) {
         self.recursive = recursive
         self.commonTableExpressions = commonTableExpressions()
     }

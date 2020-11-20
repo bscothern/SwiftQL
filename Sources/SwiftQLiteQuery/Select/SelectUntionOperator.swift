@@ -7,7 +7,7 @@
 //
 
 @usableFromInline
-struct SelectUnionOperator: SelectStatement {
+struct SelectCompoundOperator: SelectStatement {
     @usableFromInline
     enum Operator: String {
         case union = "UNION"

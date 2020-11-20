@@ -52,17 +52,17 @@ extension SelectCoreSelectFromExtendableStatement {
 // TODO: Should these be called groupBy because the first trailing closure is removed in Swift 5.3?
 extension SelectCoreSelectWhereExtendableStatement {
     @inlinable
-    public func group(@PassThroughBuilder<Expression> by expressions: () -> [Expression]) -> some SelectCoreSelectGroupExtendableStatement {
+    public func group(@ArrayBuilder<Expression> by expressions: () -> [Expression]) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions(), having: nil)
     }
 
     @inlinable
-    public func group(@PassThroughBuilder<Expression> by expressions: () -> [Expression], having havingExpression: () -> Expression) -> some SelectCoreSelectGroupExtendableStatement {
+    public func group(@ArrayBuilder<Expression> by expressions: () -> [Expression], having havingExpression: () -> Expression) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions(), having: havingExpression())
     }
 
     @inlinable
-    public func group(@PassThroughBuilder<Expression> by expressions: () -> [Expression], having havingExpression: Expression) -> some SelectCoreSelectGroupExtendableStatement {
+    public func group(@ArrayBuilder<Expression> by expressions: () -> [Expression], having havingExpression: Expression) -> some SelectCoreSelectGroupExtendableStatement {
         group(by: expressions(), having: havingExpression)
     }
 
@@ -87,36 +87,37 @@ extension SelectCoreSelectWhereExtendableStatement {
     }
 }
 
-//extension SelectCoreSelectGroupExtendableStatement {
-//    func window() -> some SelectCoreSelectWindowExtendableStatement {
-//    }
-//}
+extension SelectCoreSelectGroupExtendableStatement {
+    func window(name: WindowName, @ArrayBuilder<Expression> partitionBy: () -> [Expression] = {[]}, @ArrayBuilder<OrderingTerm> orderBy: () -> [OrderingTerm] = {[]}, frameSpec: FrameSpec? = nil) -> some SelectCoreSelectWindowExtendableStatement {
+        SelectCoreSelectWindow(self, name: name, partitionBy: partitionBy(), orderBy: orderBy(), frameSpec: frameSpec)
+    }
+}
 
 extension SelectCoreStatement {
     @inlinable
     public func union(_ select: SelectStatement) -> some SelectStatement {
-        SelectUnionOperator(self, operator: .union, with: select)
+        SelectCompoundOperator(self, operator: .union, with: select)
     }
 
     @inlinable
     public func unionAll(_ select: SelectStatement) -> some SelectStatement {
-        SelectUnionOperator(self, operator: .unionAll, with: select)
+        SelectCompoundOperator(self, operator: .unionAll, with: select)
     }
 
     @inlinable
     public func intersect(_ select: SelectStatement) -> some SelectStatement {
-        SelectUnionOperator(self, operator: .interset, with: select)
+        SelectCompoundOperator(self, operator: .interset, with: select)
     }
 
     @inlinable
     public func except(_ select: SelectStatement) -> some SelectStatement {
-        SelectUnionOperator(self, operator: .except, with: select)
+        SelectCompoundOperator(self, operator: .except, with: select)
     }
 }
 
 extension SelectOrderedByExtendableStatement {
     @inlinable
-    public func order(@PassThroughBuilder<Expression> by orderingTerms: () -> [OrderingTerm]) -> some SelectLimitExtendableStatement {
+    public func order(@ArrayBuilder<Expression> by orderingTerms: () -> [OrderingTerm]) -> some SelectLimitExtendableStatement {
         order(by: orderingTerms())
     }
 

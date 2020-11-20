@@ -57,7 +57,7 @@ public struct Insert: ColumnEditableInsert {
 
 extension ColumnEditableInsert {
     @inlinable
-    public func columns(@PassThroughBuilder<ColumnName> names: () -> [ColumnName]) -> some InsertSubstatement {
+    public func columns(@ArrayBuilder<ColumnName> names: () -> [ColumnName]) -> some InsertSubstatement {
         InsertColumns(self, names: names())
     }
 }
@@ -71,12 +71,12 @@ extension With {
 
 extension InsertSubstatement {
     @inlinable
-    public func values(@PassThroughBuilder<Expression> expressions: @escaping () -> [Expression]) -> some (InsertStatement & UpsertableInsert) {
+    public func values(@ArrayBuilder<Expression> expressions: @escaping () -> [Expression]) -> some (InsertStatement & UpsertableInsert) {
         InsertValues(self, expressions: [.init(expressions())])
     }
 
     @inlinable
-    public func values(@PassThroughBuilder<ExpressionGroup> expressions: @escaping () -> [ExpressionGroup]) -> some (InsertStatement & UpsertableInsert) {
+    public func values(@ArrayBuilder<ExpressionGroup> expressions: @escaping () -> [ExpressionGroup]) -> some (InsertStatement & UpsertableInsert) {
         InsertValues(self, expressions: expressions())
     }
 
@@ -98,7 +98,7 @@ extension InsertStatement where Self: UpsertableInsert {
     }
 
     @inlinable
-    public func onConflict(@PassThroughBuilder<IndexedColumnName> indexedColumns: () -> [IndexedColumnName]) -> some InsertOnConflictWhereSubstatement {
+    public func onConflict(@ArrayBuilder<IndexedColumnName> indexedColumns: () -> [IndexedColumnName]) -> some InsertOnConflictWhereSubstatement {
         InsertOnConflict(self, indexedColumns: indexedColumns())
     }
 }

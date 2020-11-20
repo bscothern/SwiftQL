@@ -50,13 +50,13 @@ public struct CreateTable: Statement {
     }
 
     @inlinable
-    public init(name: TableName, schemaName: SchemaName? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column]) {
+    public init(name: TableName, schemaName: SchemaName? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, withoutRowID: Bool = false, @ArrayBuilder<Column> columns columnBuilder: () -> [Column]) {
         //swiftlint:disable:previous attributes
         self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder(), constraints: []))
     }
 
     @inlinable
-    public init(name: TableName, schemaName: SchemaName? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, withoutRowID: Bool = false, @PassThroughBuilder<Column> columns columnBuilder: () -> [Column], @PassThroughBuilder<TableConstraintSubstatement> constraints constraintsBuilder: () -> [TableConstraintSubstatement]) {
+    public init(name: TableName, schemaName: SchemaName? = nil, isTemporary: Bool = false, ifNotExists: Bool = true, withoutRowID: Bool = false, @ArrayBuilder<Column> columns columnBuilder: () -> [Column], @ArrayBuilder<TableConstraintSubstatement> constraints constraintsBuilder: () -> [TableConstraintSubstatement]) {
         //swiftlint:disable:previous attributes
         self.init(name: name, schemaName: schemaName, isTemporary: isTemporary, ifNotExists: ifNotExists, content: CreateTableWithColumnDefinitions(withoutRowID: withoutRowID, columns: columnBuilder(), constraints: constraintsBuilder()))
     }

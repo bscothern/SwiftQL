@@ -16,7 +16,7 @@ public struct ExpressionGroup {
     }
 
     @inlinable
-    public init(@PassThroughBuilder<Expression> expressions: () -> [Expression]) {
+    public init(@ArrayBuilder<Expression> expressions: () -> [Expression]) {
         self.init(expressions())
     }
 }

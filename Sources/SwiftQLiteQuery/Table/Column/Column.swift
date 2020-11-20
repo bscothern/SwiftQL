@@ -45,7 +45,7 @@ public struct Column: Substatement {
     }
 
     @inlinable
-    public init(name: ColumnName, type: DataType, @PassThroughBuilder<ColumnConstraintSubstatement> constraints constraintsBuilder: () -> [ColumnConstraintSubstatement]) {
+    public init(name: ColumnName, type: DataType, @ArrayBuilder<ColumnConstraintSubstatement> constraints constraintsBuilder: () -> [ColumnConstraintSubstatement]) {
         self.init(name: name, type: type, constraints: constraintsBuilder())
     }
 }
